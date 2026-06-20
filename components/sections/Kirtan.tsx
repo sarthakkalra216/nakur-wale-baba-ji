@@ -98,7 +98,7 @@ export default function Kirtan() {
         >
           {/* Main frame */}
           <div
-            className="relative rounded-3xl overflow-hidden"
+            className="relative aspect-video rounded-3xl overflow-hidden"
             style={{
               boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,168,67,0.14)",
             }}
@@ -112,7 +112,7 @@ export default function Kirtan() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.42, ease: "easeOut" }}
-                className="relative aspect-video bg-black"
+                className="absolute inset-0 bg-black"
               >
                 {playing ? (
                   /* ── Embedded YouTube player ── */

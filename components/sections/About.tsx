@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { MapPin } from "lucide-react"
 import { gurujiProfile } from "@/data/guruji-profile"
 
@@ -55,23 +56,14 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             {/* Image tile */}
-            {/* TODO: Replace gradient placeholder with real Guruji portrait photo.
-                Suggested: <Image src="/gallery/photo4.jpeg" alt="Guruji Nakur Wale Baba Ji" fill className="object-cover" />
-                inside a relative container. Update aspect ratio to match photo. */}
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a0232 0%, #3b0764 35%, #581c87 65%, #1a0232 100%)",
-                }}
+              <Image
+                src="/gallery/photo2.jpeg"
+                alt="Guruji Nakur Wale Baba Ji"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 448px"
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                <span className="text-8xl">🕉</span>
-                <p className="text-amber-400/50 text-xs uppercase tracking-widest">
-                  Guruji's Photo
-                </p>
-              </div>
               {/* Gold border */}
               <div
                 className="absolute inset-0 rounded-3xl pointer-events-none"
