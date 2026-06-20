@@ -26,7 +26,7 @@ function TypingDots() {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="typing-dot w-2 h-2 rounded-full bg-amber-400"
+          className="typing-dot w-2 h-2 rounded-full bg-saffron"
           style={{ animationDelay: `${i * 0.2}s` }}
         />
       ))}
@@ -45,10 +45,10 @@ function MessageBubble({ msg }: { msg: Message }) {
     >
       {isGuruji && (
         <div
-          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-base mt-0.5"
+          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-base mt-0.5 text-paper"
           style={{
-            background: "linear-gradient(135deg,#d4a843,#7c3aed)",
-            boxShadow: "0 0 16px rgba(212,168,67,0.3)",
+            background: "linear-gradient(135deg,#e07a1e,#7b1e2b)",
+            boxShadow: "0 8px 18px -8px rgba(123,30,43,0.5)",
           }}
         >
           🕉
@@ -56,24 +56,22 @@ function MessageBubble({ msg }: { msg: Message }) {
       )}
       <div
         className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-line ${
-          isGuruji
-            ? "rounded-tl-sm"
-            : "rounded-tr-sm"
+          isGuruji ? "rounded-tl-sm" : "rounded-tr-sm"
         }`}
         style={{
           background: isGuruji
-            ? "rgba(212,168,67,0.08)"
-            : "linear-gradient(135deg,rgba(124,58,237,0.25),rgba(88,28,135,0.2))",
+            ? "rgba(224,122,30,0.08)"
+            : "linear-gradient(135deg,#e07a1e,#c2410c)",
           border: isGuruji
-            ? "1px solid rgba(212,168,67,0.2)"
-            : "1px solid rgba(124,58,237,0.3)",
-          color: isGuruji ? "#fde68a" : "#e9d5ff",
+            ? "1px solid rgba(224,122,30,0.22)"
+            : "1px solid rgba(194,65,12,0.4)",
+          color: isGuruji ? "#571220" : "#fffdf8",
         }}
       >
         {msg.content}
         <div
-          className="text-[10px] mt-1.5 opacity-40 text-right"
-          style={{ color: isGuruji ? "#d4a843" : "#a78bfa" }}
+          className="text-[10px] mt-1.5 opacity-50 text-right"
+          style={{ color: isGuruji ? "#b45309" : "#fde8c8" }}
           suppressHydrationWarning
         >
           {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -169,17 +167,10 @@ export default function AskGuruji() {
   }
 
   return (
-    <section id="ask-guruji" className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(88,28,135,0.15), transparent)",
-        }}
-      />
+    <section id="ask-guruji" className="relative py-24 sm:py-32 overflow-hidden bg-paper-2">
+      <div className="absolute inset-x-0 top-0 hairline" />
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-4xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -187,17 +178,17 @@ export default function AskGuruji() {
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-10"
         >
-          <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
-            AI-Powered
-          </span>
-          <h2 className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50">
-            Ask <span className="gold-text">Guruji</span>
+          <span className="eyebrow">AI-Powered</span>
+          <h2 className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink">
+            Ask <span className="accent-text">Guruji</span>
           </h2>
-          <p className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="mt-4 text-ink-soft max-w-xl mx-auto text-sm leading-relaxed">
             Ask any question about Guruji&apos;s life, teachings, seva, or spiritual
             guidance. Answers are drawn exclusively from Guruji&apos;s knowledge base.
           </p>
-          <div className="section-divider" />
+          <div className="ornament">
+            <span>✦</span>
+          </div>
         </motion.div>
 
         {/* Chat window */}
@@ -206,41 +197,33 @@ export default function AskGuruji() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-3xl overflow-hidden"
-          style={{
-            background: "rgba(255,255,255,0.02)",
-            border: "1px solid rgba(212,168,67,0.18)",
-            boxShadow: "0 0 60px rgba(88,28,135,0.2), 0 0 120px rgba(212,168,67,0.05)",
-          }}
+          className="paper-card rounded-3xl overflow-hidden"
         >
           {/* Window header */}
-          <div
-            className="px-5 py-4 flex items-center justify-between border-b"
-            style={{ borderColor: "rgba(255,255,255,0.07)" }}
-          >
+          <div className="px-5 py-4 flex items-center justify-between border-b border-maroon/10 bg-paper/60">
             <div className="flex items-center gap-3">
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center"
+                className="w-10 h-10 rounded-full flex items-center justify-center text-paper"
                 style={{
-                  background: "linear-gradient(135deg,#d4a843,#7c3aed)",
-                  boxShadow: "0 0 20px rgba(212,168,67,0.35)",
+                  background: "linear-gradient(135deg,#e07a1e,#7b1e2b)",
+                  boxShadow: "0 8px 20px -8px rgba(123,30,43,0.5)",
                 }}
               >
                 🕉
               </div>
               <div>
-                <div className="text-sm font-semibold text-amber-50">
+                <div className="text-sm font-semibold text-ink">
                   Guruji Nakur Wale Baba Ji
                 </div>
-                <div className="flex items-center gap-1.5 text-xs text-amber-400/70">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+                <div className="flex items-center gap-1.5 text-xs text-ink-soft">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block" />
                   Available for guidance
                 </div>
               </div>
             </div>
             <button
               onClick={reset}
-              className="p-2 rounded-lg text-amber-400/50 hover:text-amber-400 hover:bg-white/5 transition-colors cursor-pointer"
+              className="p-2 rounded-lg text-ink-faint hover:text-maroon hover:bg-maroon/[0.05] transition-colors cursor-pointer"
               title="Reset conversation"
             >
               <RotateCcw size={16} />
@@ -262,16 +245,16 @@ export default function AskGuruji() {
                   className="flex gap-3 justify-start"
                 >
                   <div
-                    className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-base"
-                    style={{ background: "linear-gradient(135deg,#d4a843,#7c3aed)" }}
+                    className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-base text-paper"
+                    style={{ background: "linear-gradient(135deg,#e07a1e,#7b1e2b)" }}
                   >
                     🕉
                   </div>
                   <div
                     className="rounded-2xl rounded-tl-sm"
                     style={{
-                      background: "rgba(212,168,67,0.08)",
-                      border: "1px solid rgba(212,168,67,0.2)",
+                      background: "rgba(224,122,30,0.08)",
+                      border: "1px solid rgba(224,122,30,0.22)",
                     }}
                   >
                     <TypingDots />
@@ -282,11 +265,8 @@ export default function AskGuruji() {
           </div>
 
           {/* Suggested questions */}
-          <div
-            className="px-4 sm:px-6 pb-3 pt-1 border-t"
-            style={{ borderColor: "rgba(255,255,255,0.05)" }}
-          >
-            <p className="text-[10px] text-amber-400/40 uppercase tracking-wider mb-2">
+          <div className="px-4 sm:px-6 pb-3 pt-1 border-t border-maroon/[0.08]">
+            <p className="text-[10px] text-ink-faint uppercase tracking-wider mb-2">
               Suggested Questions
             </p>
             <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -295,7 +275,7 @@ export default function AskGuruji() {
                   key={i}
                   onClick={() => sendQuestion(q.question)}
                   disabled={loading}
-                  className="shrink-0 px-3 py-1.5 rounded-full text-xs border border-amber-400/20 text-amber-300/70 hover:border-amber-400/50 hover:text-amber-400 transition-all duration-200 whitespace-nowrap disabled:opacity-40 cursor-pointer"
+                  className="shrink-0 px-3 py-1.5 rounded-full text-xs border border-maroon/20 text-ink-soft hover:border-saffron hover:text-saffron-deep transition-all duration-200 whitespace-nowrap disabled:opacity-40 cursor-pointer"
                 >
                   {q.question}
                 </button>
@@ -304,18 +284,15 @@ export default function AskGuruji() {
           </div>
 
           {/* Input */}
-          <form
-            onSubmit={handleSubmit}
-            className="px-4 sm:px-6 pb-5 pt-2"
-          >
+          <form onSubmit={handleSubmit} className="px-4 sm:px-6 pb-5 pt-2">
             <div
               className="flex items-center gap-3 rounded-2xl px-4 py-3"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(212,168,67,0.2)",
+                background: "rgba(255,253,248,0.9)",
+                border: "1px solid rgba(184,137,59,0.3)",
               }}
             >
-              <Sparkles size={16} className="text-amber-400/50 shrink-0" />
+              <Sparkles size={16} className="text-saffron shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -323,7 +300,7 @@ export default function AskGuruji() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask Guruji anything…"
                 disabled={loading}
-                className="flex-1 bg-transparent text-amber-50 text-sm placeholder:text-amber-200/30 outline-none min-w-0 disabled:opacity-50"
+                className="flex-1 bg-transparent text-ink text-sm placeholder:text-ink-faint outline-none min-w-0 disabled:opacity-50"
               />
               <button
                 type="submit"
@@ -331,14 +308,14 @@ export default function AskGuruji() {
                 className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 disabled:opacity-40 cursor-pointer"
                 style={{
                   background: input.trim() && !loading
-                    ? "linear-gradient(135deg,#f59e0b,#d4a843)"
-                    : "rgba(212,168,67,0.1)",
+                    ? "linear-gradient(135deg,#f1a93a,#e07a1e)"
+                    : "rgba(123,30,43,0.08)",
                 }}
               >
-                <Send size={15} className={input.trim() && !loading ? "text-slate-900" : "text-amber-400/40"} />
+                <Send size={15} className={input.trim() && !loading ? "text-paper" : "text-ink-faint"} />
               </button>
             </div>
-            <p className="text-center text-[10px] text-amber-200/25 mt-2">
+            <p className="text-center text-[10px] text-ink-faint mt-2">
               Answers sourced exclusively from Guruji&apos;s knowledge base.
             </p>
           </form>

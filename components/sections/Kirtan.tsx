@@ -56,16 +56,10 @@ export default function Kirtan() {
   const k = kirtanPlaylist[current]
 
   return (
-    <section id="kirtan" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 45% at 0% 50%, rgba(212,168,67,0.06), transparent), radial-gradient(ellipse 55% 45% at 100% 50%, rgba(88,28,135,0.1), transparent)",
-        }}
-      />
+    <section id="kirtan" className="relative py-24 sm:py-32 overflow-hidden bg-paper-2">
+      <div className="absolute inset-x-0 top-0 hairline" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
 
         {/* ── Header ── */}
         <motion.div
@@ -75,17 +69,19 @@ export default function Kirtan() {
           variants={stagger}
           className="text-center mb-12"
         >
-          <motion.span variants={fadeUp} className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
+          <motion.span variants={fadeUp} className="eyebrow">
             Devotional Music
           </motion.span>
-          <motion.h2 variants={fadeUp} className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50">
-            Sacred <span className="gold-text">Kirtan</span>
+          <motion.h2 variants={fadeUp} className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink">
+            Sacred <span className="accent-text">Kirtan</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm">
+          <motion.p variants={fadeUp} className="mt-4 text-ink-soft max-w-xl mx-auto text-[0.95rem]">
             Let the vibration of divine music penetrate your heart. Click any
             video to watch it right here — no redirects.
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* ── Carousel player ── */}
@@ -98,11 +94,12 @@ export default function Kirtan() {
         >
           {/* Main frame */}
           <div
-            className="relative rounded-3xl overflow-hidden"
+            className="relative rounded-3xl overflow-hidden p-2 bg-card"
             style={{
-              boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,168,67,0.14)",
+              boxShadow: "0 40px 90px -45px rgba(87,18,32,0.5), 0 0 0 1px rgba(184,137,59,0.2)",
             }}
           >
+            <div className="relative rounded-[1.35rem] overflow-hidden">
             <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={current}
@@ -112,7 +109,7 @@ export default function Kirtan() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.42, ease: "easeOut" }}
-                className="relative aspect-video bg-black"
+                className="relative aspect-video bg-maroon-deep"
               >
                 {playing ? (
                   /* ── Embedded YouTube player ── */
@@ -136,7 +133,7 @@ export default function Kirtan() {
                       priority={current === 0}
                     />
                     {/* Dark overlay */}
-                    <div className="absolute inset-0 bg-black/30" />
+                    <div className="absolute inset-0 bg-maroon-deep/25" />
 
                     {/* Centre play button */}
                     <button
@@ -147,42 +144,42 @@ export default function Kirtan() {
                       <motion.div
                         whileHover={{ scale: 1.12 }}
                         whileTap={{ scale: 0.93 }}
-                        className="w-18 h-18 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shadow-2xl shadow-amber-400/40 transition-colors duration-200"
-                        style={{ background: "rgba(212,168,67,0.92)", width: 72, height: 72 }}
+                        className="rounded-full flex items-center justify-center shadow-2xl transition-colors duration-200"
+                        style={{ background: "rgba(255,253,248,0.94)", width: 72, height: 72 }}
                       >
-                        <Play size={28} className="text-slate-900 ml-1" fill="currentColor" />
+                        <Play size={28} className="text-maroon ml-1" fill="currentColor" />
                       </motion.div>
                     </button>
 
                     {/* Info overlay bottom */}
                     <div
                       className="absolute bottom-0 inset-x-0 px-5 pb-5 pt-20 pointer-events-none"
-                      style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), transparent)" }}
+                      style={{ background: "linear-gradient(to top, rgba(43,24,18,0.85), transparent)" }}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <Music size={12} className="text-amber-400" />
-                        <span className="text-amber-400/80 text-[10px] uppercase tracking-widest font-semibold">
+                        <Music size={12} className="text-marigold" />
+                        <span className="text-marigold text-[10px] uppercase tracking-widest font-semibold">
                           Kirtan / Bhajan
                         </span>
                         {k.featured && (
                           <span
-                            className="text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider"
-                            style={{ background: "rgba(239,68,68,0.8)", color: "#fff" }}
+                            className="text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider text-paper"
+                            style={{ background: "rgba(159,18,57,0.9)" }}
                           >
                             Featured
                           </span>
                         )}
                       </div>
-                      <h3 className="font-serif text-lg sm:text-2xl font-bold text-amber-50 leading-snug line-clamp-2">
+                      <h3 className="font-display text-lg sm:text-2xl font-bold text-paper leading-snug line-clamp-2">
                         {k.title}
                       </h3>
-                      <p className="text-amber-200/55 text-xs mt-0.5 line-clamp-1">{k.description}</p>
+                      <p className="text-paper/65 text-xs mt-0.5 line-clamp-1">{k.description}</p>
                     </div>
 
                     {/* Counter top-left */}
                     <div
-                      className="absolute top-4 left-4 text-amber-400/60 text-xs font-mono px-2.5 py-1 rounded-full pointer-events-none"
-                      style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }}
+                      className="absolute top-4 left-4 text-paper text-xs font-mono px-2.5 py-1 rounded-full pointer-events-none"
+                      style={{ background: "rgba(43,24,18,0.5)", backdropFilter: "blur(8px)" }}
                     >
                       {String(current + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(N).padStart(2, "0")}
                     </div>
@@ -196,10 +193,10 @@ export default function Kirtan() {
                     aria-label="Close player"
                     className="absolute top-3 right-3 z-10 px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all duration-200 hover:scale-105"
                     style={{
-                      background: "rgba(0,0,0,0.7)",
+                      background: "rgba(43,24,18,0.7)",
                       backdropFilter: "blur(8px)",
-                      border: "1px solid rgba(255,255,255,0.2)",
-                      color: "#fff",
+                      border: "1px solid rgba(255,253,248,0.2)",
+                      color: "#fffdf8",
                     }}
                   >
                     ✕ Close
@@ -214,12 +211,11 @@ export default function Kirtan() {
               aria-label="Previous kirtan"
               className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95"
               style={{
-                background: "rgba(0,0,0,0.55)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(212,168,67,0.25)",
+                background: "rgba(255,253,248,0.92)",
+                border: "1px solid rgba(184,137,59,0.3)",
               }}
             >
-              <ChevronLeft size={20} className="text-amber-300" />
+              <ChevronLeft size={20} className="text-maroon" />
             </button>
 
             {/* → Next arrow */}
@@ -228,20 +224,19 @@ export default function Kirtan() {
               aria-label="Next kirtan"
               className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95"
               style={{
-                background: "rgba(0,0,0,0.55)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(212,168,67,0.25)",
+                background: "rgba(255,253,248,0.92)",
+                border: "1px solid rgba(184,137,59,0.3)",
               }}
             >
-              <ChevronRight size={20} className="text-amber-300" />
+              <ChevronRight size={20} className="text-maroon" />
             </button>
+            </div>
           </div>
 
           {/* ── Thumbnail strip ── */}
           <div
             ref={thumbsRef}
-            className="flex gap-3 mt-5 overflow-x-auto pb-1"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="flex gap-3 mt-5 overflow-x-auto pb-1 scrollbar-hide"
           >
             {kirtanPlaylist.map((item, i) => (
               <button
@@ -252,10 +247,10 @@ export default function Kirtan() {
                 style={{
                   width: 120,
                   height: 68,
-                  outline: i === current ? "2px solid #d4a843" : "2px solid rgba(255,255,255,0.07)",
+                  outline: i === current ? "2px solid #e07a1e" : "2px solid rgba(123,30,43,0.12)",
                   outlineOffset: 2,
-                  opacity: i === current ? 1 : 0.45,
-                  boxShadow: i === current ? "0 4px 16px rgba(212,168,67,0.3)" : "none",
+                  opacity: i === current ? 1 : 0.5,
+                  boxShadow: i === current ? "0 6px 16px -6px rgba(224,122,30,0.5)" : "none",
                 }}
               >
                 <Image
@@ -266,18 +261,14 @@ export default function Kirtan() {
                   sizes="120px"
                   unoptimized
                 />
-                {/* Active shimmer */}
-                {i === current && (
-                  <div className="absolute inset-0" style={{ background: "rgba(212,168,67,0.08)" }} />
-                )}
                 {/* Play icon on inactive thumbnails */}
                 {i !== current && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
                       className="w-6 h-6 rounded-full flex items-center justify-center"
-                      style={{ background: "rgba(0,0,0,0.55)" }}
+                      style={{ background: "rgba(43,24,18,0.55)" }}
                     >
-                      <Play size={10} className="text-white ml-0.5" fill="currentColor" />
+                      <Play size={10} className="text-paper ml-0.5" fill="currentColor" />
                     </div>
                   </div>
                 )}
@@ -297,8 +288,8 @@ export default function Kirtan() {
                   width:  i === current ? 24 : 5,
                   height: 5,
                   background: i === current
-                    ? "linear-gradient(90deg, #d4a843, #f59e0b)"
-                    : "rgba(255,255,255,0.18)",
+                    ? "linear-gradient(90deg, #e07a1e, #f1a93a)"
+                    : "rgba(123,30,43,0.18)",
                 }}
               />
             ))}
@@ -310,7 +301,7 @@ export default function Kirtan() {
               href={PLAYLIST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-red-500/40 text-red-400 hover:bg-red-500/10 hover:border-red-400 transition-all duration-300 text-sm font-medium"
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-maroon/30 text-maroon hover:bg-maroon/[0.06] hover:border-maroon transition-all duration-300 text-sm font-medium"
             >
               <Tv size={16} /> View Full Playlist on YouTube
             </a>

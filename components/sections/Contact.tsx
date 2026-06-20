@@ -45,23 +45,17 @@ export default function Contact() {
   }
 
   const inputClass =
-    "w-full rounded-xl px-4 py-3 text-sm text-amber-50 placeholder:text-amber-200/30 outline-none transition-all duration-200 focus:ring-1 focus:ring-amber-400/40"
+    "w-full rounded-xl px-4 py-3 text-sm text-ink placeholder:text-ink-faint outline-none transition-all duration-200 focus:ring-2 focus:ring-saffron/30 focus:border-saffron"
   const inputStyle = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.1)",
+    background: "rgba(255,253,248,0.95)",
+    border: "1px solid rgba(123,30,43,0.15)",
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 0% 100%, rgba(212,168,67,0.07), transparent), radial-gradient(ellipse 50% 45% at 100% 0%, rgba(88,28,135,0.1), transparent)",
-        }}
-      />
+    <section id="contact" className="relative py-24 sm:py-32 overflow-hidden bg-paper-2">
+      <div className="absolute inset-x-0 top-0 hairline" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -70,26 +64,25 @@ export default function Contact() {
           variants={stagger}
           className="text-center mb-14"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
+          <motion.span variants={fadeUp} className="eyebrow">
             Get in Touch
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            Connect with <span className="gold-text">Us</span>
+            Connect with <span className="accent-text">Us</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm"
+            className="mt-4 text-ink-soft max-w-xl mx-auto text-sm"
           >
             Reach out for satsang schedules, seva opportunities, donations, or
             any question. We are here to serve.
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
@@ -102,25 +95,22 @@ export default function Contact() {
           >
             {submitted ? (
               <div
-                className="h-full flex flex-col items-center justify-center text-center gap-5 p-10 rounded-3xl"
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(16,185,129,0.3)",
-                }}
+                className="h-full flex flex-col items-center justify-center text-center gap-5 p-10 rounded-3xl bg-card"
+                style={{ border: "1px solid rgba(74,107,63,0.35)" }}
               >
-                <CheckCircle size={52} className="text-emerald-400" />
+                <CheckCircle size={52} className="text-emerald-600" />
                 <div>
-                  <h3 className="font-serif text-xl font-bold text-amber-50 mb-2">
+                  <h3 className="font-display text-xl font-bold text-ink mb-2">
                     Message Received!
                   </h3>
-                  <p className="text-amber-100/60 text-sm leading-relaxed">
+                  <p className="text-ink-soft text-sm leading-relaxed">
                     Jai Guruji! Thank you for reaching out. We will get back to
                     you very soon. May Guruji&apos;s blessings be with you. 🙏
                   </p>
                 </div>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }) }}
-                  className="px-6 py-2.5 rounded-full border border-amber-400/30 text-amber-400 text-sm hover:bg-amber-400/10 transition-all cursor-pointer"
+                  className="btn-ghost px-6 py-2.5 rounded-full text-sm cursor-pointer"
                 >
                   Send Another Message
                 </button>
@@ -128,15 +118,11 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="space-y-4 p-6 sm:p-8 rounded-3xl"
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
+                className="paper-card space-y-4 p-6 sm:p-8 rounded-3xl"
               >
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-amber-400/70 text-xs mb-1.5 uppercase tracking-wide">
+                    <label className="block text-saffron-deep text-xs mb-1.5 uppercase tracking-wide font-semibold">
                       Full Name *
                     </label>
                     <input
@@ -151,7 +137,7 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <label className="block text-amber-400/70 text-xs mb-1.5 uppercase tracking-wide">
+                    <label className="block text-saffron-deep text-xs mb-1.5 uppercase tracking-wide font-semibold">
                       Email
                     </label>
                     <input
@@ -167,7 +153,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-amber-400/70 text-xs mb-1.5 uppercase tracking-wide">
+                  <label className="block text-saffron-deep text-xs mb-1.5 uppercase tracking-wide font-semibold">
                     Phone
                   </label>
                   <input
@@ -182,7 +168,7 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-amber-400/70 text-xs mb-1.5 uppercase tracking-wide">
+                  <label className="block text-saffron-deep text-xs mb-1.5 uppercase tracking-wide font-semibold">
                     Message *
                   </label>
                   <textarea
@@ -200,11 +186,11 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={submitting || !form.name || !form.message}
-                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 font-bold text-sm hover:from-amber-300 hover:to-yellow-400 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-amber-400/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 cursor-pointer"
+                  className="btn-primary w-full py-3.5 rounded-full font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {submitting ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-slate-900/30 border-t-slate-900 rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-paper/40 border-t-paper rounded-full animate-spin" />
                       Sending…
                     </>
                   ) : (
@@ -227,14 +213,8 @@ export default function Contact() {
             className="space-y-6"
           >
             {/* Contact details */}
-            <div
-              className="p-6 rounded-2xl space-y-5"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(212,168,67,0.13)",
-              }}
-            >
-              <h3 className="font-serif text-lg font-semibold text-amber-50">
+            <div className="paper-card p-6 rounded-2xl space-y-5">
+              <h3 className="font-display text-lg font-semibold text-ink">
                 Ashram Contact
               </h3>
 
@@ -245,19 +225,16 @@ export default function Contact() {
               ].map((item) => (
                 <div key={item.label} className="flex gap-3">
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                    style={{
-                      background: "rgba(212,168,67,0.1)",
-                      color: "#d4a843",
-                    }}
+                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-saffron-deep"
+                    style={{ background: "rgba(224,122,30,0.1)" }}
                   >
                     {item.icon}
                   </div>
                   <div>
-                    <div className="text-amber-400/60 text-[10px] uppercase tracking-widest mb-0.5">
+                    <div className="text-ink-faint text-[10px] uppercase tracking-widest mb-0.5">
                       {item.label}
                     </div>
-                    <div className="text-amber-100/80 text-sm">{item.value}</div>
+                    <div className="text-ink text-sm">{item.value}</div>
                   </div>
                 </div>
               ))}
@@ -270,8 +247,8 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-5 rounded-2xl transition-all duration-300 hover:scale-[1.02] group"
               style={{
-                background: "linear-gradient(135deg,rgba(37,211,102,0.1),rgba(18,140,126,0.1))",
-                border: "1px solid rgba(37,211,102,0.2)",
+                background: "rgba(37,211,102,0.08)",
+                border: "1px solid rgba(37,211,102,0.3)",
               }}
             >
               <div
@@ -281,11 +258,11 @@ export default function Contact() {
                 <MessageCircle size={22} className="text-white" />
               </div>
               <div>
-                <div className="text-emerald-400 font-semibold text-sm">
+                <div className="text-emerald-700 font-semibold text-sm">
                   Chat on WhatsApp
                 </div>
-                <div className="text-amber-100/50 text-xs">
-                  Instant response for seva & satsang queries
+                <div className="text-ink-soft text-xs">
+                  Instant response for seva &amp; satsang queries
                 </div>
               </div>
             </a>
@@ -294,16 +271,16 @@ export default function Contact() {
             <div
               className="rounded-2xl overflow-hidden aspect-video relative"
               style={{
-                background: "linear-gradient(135deg,#0d0520,#1e0531,#0d0520)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "linear-gradient(135deg,#f5ecda,#efe3cd,#f5ecda)",
+                border: "1px solid rgba(123,30,43,0.12)",
               }}
             >
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <MapPin size={28} className="text-amber-400/50" />
-                <p className="text-amber-200/40 text-xs text-center px-4">
+                <MapPin size={28} className="text-saffron" />
+                <p className="text-ink-soft text-xs text-center px-4">
                   Nakur, Saharanpur, Uttar Pradesh
                   <br />
-                  <span className="text-[10px] text-amber-200/25">
+                  <span className="text-[10px] text-ink-faint">
                     (Embed Google Map here)
                   </span>
                 </p>
@@ -314,11 +291,11 @@ export default function Contact() {
             <div
               className="p-5 rounded-2xl"
               style={{
-                background: "rgba(212,168,67,0.05)",
-                border: "1px solid rgba(212,168,67,0.13)",
+                background: "rgba(224,122,30,0.05)",
+                border: "1px solid rgba(184,137,59,0.25)",
               }}
             >
-              <h4 className="text-amber-400 font-semibold text-sm mb-3">
+              <h4 className="font-display text-maroon font-semibold text-sm mb-3">
                 🕉 Daily Satsang Timings
               </h4>
               {[
@@ -329,13 +306,13 @@ export default function Contact() {
               ].map((t) => (
                 <div
                   key={t.time}
-                  className="flex items-center justify-between py-1.5 border-b border-white/[0.04] last:border-0"
+                  className="flex items-center justify-between py-1.5 border-b border-maroon/[0.07] last:border-0"
                 >
-                  <span className="text-amber-200/50 text-xs">{t.event}</span>
-                  <span className="text-amber-400 text-xs font-semibold">{t.time}</span>
+                  <span className="text-ink-soft text-xs">{t.event}</span>
+                  <span className="text-saffron-deep text-xs font-semibold">{t.time}</span>
                 </div>
               ))}
-              <p className="text-amber-200/30 text-[10px] mt-2">
+              <p className="text-ink-faint text-[10px] mt-2">
                 * Timings may vary during special events. Please confirm before visiting.
               </p>
             </div>

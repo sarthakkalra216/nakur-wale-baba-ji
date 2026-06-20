@@ -37,16 +37,8 @@ export default function Teachings() {
   const filtered = active ? teachings.filter((t) => t.categoryId === active) : teachings
 
   return (
-    <section id="teachings" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 100%, rgba(212,168,67,0.06), transparent), radial-gradient(ellipse 40% 40% at 0% 0%, rgba(88,28,135,0.1), transparent)",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="teachings" className="relative py-24 sm:py-32 overflow-hidden bg-paper">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -55,26 +47,25 @@ export default function Teachings() {
           variants={stagger}
           className="text-center mb-12"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
+          <motion.span variants={fadeUp} className="eyebrow">
             Spiritual Wisdom
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            Guruji&apos;s <span className="gold-text">Teachings</span>
+            Guruji&apos;s <span className="accent-text">Teachings</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm leading-relaxed"
+            className="mt-4 text-ink-soft max-w-xl mx-auto text-[0.95rem] leading-relaxed"
           >
             Timeless wisdom across six pillars of spiritual life — explore and be
             transformed.
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* Category filters */}
@@ -89,8 +80,8 @@ export default function Teachings() {
             onClick={() => setActive(null)}
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
               active === null
-                ? "bg-amber-400 text-slate-900 shadow-lg shadow-amber-400/25"
-                : "border border-amber-400/25 text-amber-200/70 hover:border-amber-400/50 hover:text-amber-300"
+                ? "btn-primary"
+                : "border border-maroon/25 text-ink-soft hover:border-maroon/50 hover:text-maroon"
             }`}
           >
             All Teachings
@@ -101,8 +92,8 @@ export default function Teachings() {
               onClick={() => setActive(active === cat.id ? null : cat.id)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
                 active === cat.id
-                  ? "bg-amber-400 text-slate-900 shadow-lg shadow-amber-400/25"
-                  : "border border-amber-400/25 text-amber-200/70 hover:border-amber-400/50 hover:text-amber-300"
+                  ? "btn-primary"
+                  : "border border-maroon/25 text-ink-soft hover:border-maroon/50 hover:text-maroon"
               }`}
             >
               {cat.label}
@@ -126,12 +117,7 @@ export default function Teachings() {
                   key={teaching.id}
                   variants={fadeUp}
                   whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                  className="rounded-2xl p-6 flex flex-col gap-4 cursor-default"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(16px)",
-                  }}
+                  className="paper-card rounded-2xl p-6 flex flex-col gap-4 cursor-default"
                 >
                   {/* Icon + category */}
                   <div className="flex items-center gap-3">
@@ -141,35 +127,28 @@ export default function Teachings() {
                         background: cat
                           ? gradientMap[cat.color] ?? "linear-gradient(135deg,#f59e0b,#d97706)"
                           : "linear-gradient(135deg,#f59e0b,#d97706)",
-                        boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+                        boxShadow: "0 8px 20px -8px rgba(87,18,32,0.45)",
                       }}
                     >
                       {iconMap[cat?.icon ?? "Sparkles"]}
                     </div>
-                    <span
-                      className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                      style={{
-                        background: "rgba(212,168,67,0.1)",
-                        color: "#fde68a",
-                        border: "1px solid rgba(212,168,67,0.2)",
-                      }}
-                    >
+                    <span className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full text-maroon bg-maroon/[0.06] border border-maroon/12">
                       {cat?.label}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-serif text-lg font-semibold text-amber-50 leading-snug">
+                  <h3 className="font-display text-lg font-semibold text-ink leading-snug">
                     {teaching.title}
                   </h3>
 
                   {/* Quote */}
-                  <p className="text-sm text-amber-300/80 italic leading-relaxed border-l-2 border-amber-400/30 pl-3">
+                  <p className="text-sm text-maroon italic leading-relaxed border-l-2 border-saffron pl-3 font-display">
                     {teaching.quote}
                   </p>
 
                   {/* Explanation */}
-                  <p className="text-amber-100/55 text-sm leading-relaxed flex-1">
+                  <p className="text-ink-soft text-sm leading-relaxed flex-1">
                     {teaching.explanation}
                   </p>
 
@@ -178,12 +157,7 @@ export default function Teachings() {
                     {teaching.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] px-2 py-0.5 rounded-full"
-                        style={{
-                          background: "rgba(124,58,237,0.15)",
-                          color: "#c4b5fd",
-                          border: "1px solid rgba(124,58,237,0.2)",
-                        }}
+                        className="text-[10px] px-2 py-0.5 rounded-full text-saffron-deep bg-saffron/[0.1] border border-saffron/20"
                       >
                         #{tag}
                       </span>

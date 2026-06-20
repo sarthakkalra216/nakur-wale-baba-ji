@@ -9,7 +9,6 @@ interface SevaItem {
   title: string
   description: string
   impact: string
-  gradient: string
   iconBg: string
 }
 
@@ -21,7 +20,6 @@ const SEVAS: SevaItem[] = [
     description:
       "Serve free meals daily at the ashram's community kitchen. Thousands of devotees and visitors are fed every day — no one leaves hungry.",
     impact: "500+ meals / day",
-    gradient: "linear-gradient(135deg,rgba(245,158,11,0.08),rgba(212,168,67,0.04))",
     iconBg: "linear-gradient(135deg,#f59e0b,#d97706)",
   },
   {
@@ -31,7 +29,6 @@ const SEVAS: SevaItem[] = [
     description:
       "Support underprivileged children with books, stationery, and scholarships. Help the next generation access quality education.",
     impact: "200+ students helped",
-    gradient: "linear-gradient(135deg,rgba(59,130,246,0.08),rgba(37,99,235,0.04))",
     iconBg: "linear-gradient(135deg,#3b82f6,#2563eb)",
   },
   {
@@ -41,7 +38,6 @@ const SEVAS: SevaItem[] = [
     description:
       "Participate in free medical camps providing health check-ups, medicines, and specialist consultations to rural communities.",
     impact: "4 camps / year",
-    gradient: "linear-gradient(135deg,rgba(239,68,68,0.08),rgba(185,28,28,0.04))",
     iconBg: "linear-gradient(135deg,#ef4444,#b91c1c)",
   },
   {
@@ -51,8 +47,7 @@ const SEVAS: SevaItem[] = [
     description:
       "Help maintain the ashram premises — cleaning, decorating, and preparing for satsangs, kirtans, and special events.",
     impact: "Daily opportunity",
-    gradient: "linear-gradient(135deg,rgba(124,58,237,0.08),rgba(91,33,182,0.04))",
-    iconBg: "linear-gradient(135deg,#7c3aed,#5b21b6)",
+    iconBg: "linear-gradient(135deg,#8b5cf6,#6d28d9)",
   },
   {
     id: 5,
@@ -61,7 +56,6 @@ const SEVAS: SevaItem[] = [
     description:
       "Join tree-plantation drives, river-cleaning yatras, and eco-friendly festival initiatives led by the ashram sangat.",
     impact: "1000+ trees planted",
-    gradient: "linear-gradient(135deg,rgba(16,185,129,0.08),rgba(5,150,105,0.04))",
     iconBg: "linear-gradient(135deg,#10b981,#059669)",
   },
   {
@@ -71,8 +65,7 @@ const SEVAS: SevaItem[] = [
     description:
       "Contribute financially to sustain all seva activities. Every rupee donated goes directly toward feeding, healing, and educating.",
     impact: "100% transparent",
-    gradient: "linear-gradient(135deg,rgba(212,168,67,0.08),rgba(180,83,9,0.04))",
-    iconBg: "linear-gradient(135deg,#d4a843,#b45309)",
+    iconBg: "linear-gradient(135deg,#e07a1e,#b45309)",
   },
 ]
 
@@ -84,16 +77,8 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
 
 export default function Seva() {
   return (
-    <section id="seva" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 55% at 50% 100%, rgba(16,185,129,0.06), transparent), radial-gradient(ellipse 40% 35% at 100% 0%, rgba(88,28,135,0.1), transparent)",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="seva" className="relative py-24 sm:py-32 overflow-hidden bg-paper">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -102,26 +87,25 @@ export default function Seva() {
           variants={stagger}
           className="text-center mb-12"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
+          <motion.span variants={fadeUp} className="eyebrow">
             Selfless Service
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            Join <span className="gold-text">Seva</span>
+            Join <span className="accent-text">Seva</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-amber-100/60 max-w-2xl mx-auto text-sm leading-relaxed"
+            className="mt-4 text-ink-soft max-w-2xl mx-auto text-[0.95rem] leading-relaxed"
           >
             &ldquo;Seva se badi koi pooja nahi.&rdquo; — Guruji. Discover ways to serve and
             experience the transformative joy of selfless giving.
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* Cards */}
@@ -138,19 +122,14 @@ export default function Seva() {
               variants={fadeUp}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.25 }}
-              className="group rounded-2xl p-6 flex flex-col gap-4"
-              style={{
-                background: seva.gradient,
-                border: "1px solid rgba(255,255,255,0.07)",
-                backdropFilter: "blur(16px)",
-              }}
+              className="group paper-card rounded-2xl p-6 flex flex-col gap-4"
             >
               {/* Icon */}
               <div
                 className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shrink-0"
                 style={{
                   background: seva.iconBg,
-                  boxShadow: "0 6px 24px rgba(0,0,0,0.4)",
+                  boxShadow: "0 10px 24px -10px rgba(87,18,32,0.5)",
                 }}
               >
                 {seva.icon}
@@ -159,21 +138,21 @@ export default function Seva() {
               {/* Title + impact */}
               <div>
                 <div className="flex items-center justify-between gap-2 mb-1">
-                  <h3 className="font-serif text-lg font-semibold text-amber-50">
+                  <h3 className="font-display text-lg font-semibold text-ink">
                     {seva.title}
                   </h3>
                   <span
                     className="shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full"
                     style={{
-                      background: "rgba(16,185,129,0.15)",
-                      color: "#6ee7b7",
-                      border: "1px solid rgba(16,185,129,0.2)",
+                      background: "rgba(74,107,63,0.1)",
+                      color: "#3f6212",
+                      border: "1px solid rgba(74,107,63,0.22)",
                     }}
                   >
                     {seva.impact}
                   </span>
                 </div>
-                <p className="text-amber-100/60 text-sm leading-relaxed">
+                <p className="text-ink-soft text-sm leading-relaxed">
                   {seva.description}
                 </p>
               </div>
@@ -185,7 +164,7 @@ export default function Seva() {
                     .querySelector("#contact")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors group/btn cursor-pointer"
+                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-saffron-deep hover:text-maroon transition-colors group/btn cursor-pointer"
               >
                 Join this Seva
                 <ArrowRight
@@ -204,11 +183,11 @@ export default function Seva() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <blockquote className="font-serif text-xl sm:text-2xl text-amber-300/80 italic max-w-2xl mx-auto">
+          <blockquote className="font-display text-2xl sm:text-3xl text-maroon italic max-w-2xl mx-auto leading-snug">
             &ldquo;When you serve others without expectation of reward, you serve God
             Himself.&rdquo;
           </blockquote>
-          <p className="mt-3 text-amber-200/40 text-sm">— Guruji Nakur Wale Baba Ji</p>
+          <p className="mt-4 eyebrow">— Guruji Nakur Wale Baba Ji</p>
         </motion.div>
       </div>
     </section>

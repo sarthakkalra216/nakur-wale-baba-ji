@@ -43,7 +43,7 @@ export default function Header() {
         className={cn(
           "fixed top-0 inset-x-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-slate-950/90 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/30"
+            ? "bg-paper/85 backdrop-blur-xl border-b border-maroon/10 shadow-[0_8px_30px_-12px_rgba(87,18,32,0.18)]"
             : "bg-transparent"
         )}
       >
@@ -53,10 +53,14 @@ export default function Header() {
             onClick={() => scrollTo("#hero")}
             className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <span className="text-2xl" aria-hidden>🕉</span>
+            <span className="text-2xl text-saffron" aria-hidden>
+              🕉
+            </span>
             <div className="text-left leading-none">
-              <div className="text-sm font-bold text-amber-400 tracking-wide">Guruji</div>
-              <div className="text-[10px] text-amber-200/50 tracking-widest uppercase">
+              <div className="font-display text-base font-bold text-maroon tracking-wide">
+                Guruji
+              </div>
+              <div className="text-[10px] text-ink-soft tracking-[0.18em] uppercase mt-0.5">
                 Nakur Wale Baba Ji
               </div>
             </div>
@@ -68,7 +72,7 @@ export default function Header() {
               <li key={link.href}>
                 <button
                   onClick={() => scrollTo(link.href)}
-                  className="px-3 py-2 text-sm text-amber-100/70 hover:text-amber-400 transition-colors rounded-lg hover:bg-white/5 cursor-pointer"
+                  className="px-3 py-2 text-sm text-ink-soft hover:text-maroon transition-colors rounded-lg hover:bg-maroon/[0.05] cursor-pointer"
                 >
                   {link.label}
                 </button>
@@ -79,15 +83,15 @@ export default function Header() {
           {/* CTA */}
           <button
             onClick={() => scrollTo("#ask-guruji")}
-            className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 font-semibold text-sm px-5 py-2 rounded-full hover:from-amber-400 hover:to-yellow-300 transition-all duration-300 shadow-lg shadow-amber-500/20 hover:scale-105 cursor-pointer"
+            className="btn-primary hidden lg:inline-flex items-center gap-2 font-semibold text-sm px-5 py-2 rounded-full cursor-pointer"
           >
-            ✨ Ask Guruji
+            ✦ Ask Guruji
           </button>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="lg:hidden p-2 text-amber-400 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+            className="lg:hidden p-2 text-maroon rounded-lg hover:bg-maroon/[0.06] transition-colors cursor-pointer"
             aria-label="Toggle navigation"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -115,7 +119,7 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-maroon-deep/30 backdrop-blur-sm lg:hidden"
               onClick={() => setMenuOpen(false)}
             />
             <motion.aside
@@ -124,13 +128,15 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-72 bg-slate-950 border-l border-white/10 flex flex-col lg:hidden"
+              className="fixed right-0 top-0 bottom-0 z-50 w-72 bg-paper border-l border-maroon/10 flex flex-col lg:hidden"
             >
-              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-                <span className="text-amber-400 font-semibold text-sm">🕉 Navigation</span>
+              <div className="flex items-center justify-between px-5 py-4 border-b border-maroon/10">
+                <span className="font-display text-maroon font-semibold text-sm">
+                  🕉 Navigation
+                </span>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="p-1.5 text-amber-200/50 hover:text-amber-400 transition-colors cursor-pointer"
+                  className="p-1.5 text-ink-soft hover:text-maroon transition-colors cursor-pointer"
                 >
                   <X size={18} />
                 </button>
@@ -144,19 +150,19 @@ export default function Header() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04 }}
                     onClick={() => scrollTo(link.href)}
-                    className="w-full text-left px-4 py-3 text-amber-100/80 hover:text-amber-400 hover:bg-white/5 rounded-xl transition-all duration-200 text-sm cursor-pointer"
+                    className="w-full text-left px-4 py-3 text-ink hover:text-maroon hover:bg-maroon/[0.05] rounded-xl transition-all duration-200 text-sm cursor-pointer"
                   >
                     {link.label}
                   </motion.button>
                 ))}
               </nav>
 
-              <div className="p-4 border-t border-white/10">
+              <div className="p-4 border-t border-maroon/10">
                 <button
                   onClick={() => scrollTo("#ask-guruji")}
-                  className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-900 font-semibold py-3 rounded-full hover:from-amber-400 hover:to-yellow-300 transition-all text-sm cursor-pointer"
+                  className="btn-primary w-full font-semibold py-3 rounded-full text-sm cursor-pointer"
                 >
-                  ✨ Ask Guruji
+                  ✦ Ask Guruji
                 </button>
               </div>
             </motion.aside>

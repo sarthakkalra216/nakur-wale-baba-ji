@@ -1,15 +1,38 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Luminous Editorial — design tokens
+   Warm ivory canvas · saffron + deep maroon · fine gold detailing
+   ────────────────────────────────────────────────────────────────────────── */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-paper: #fbf6ec;        /* base warm ivory */
+  --color-paper-2: #f5ecda;      /* alternating section wash */
+  --color-paper-3: #efe3cd;      /* deeper sand */
+  --color-card: #fffdf8;         /* raised card surface */
+
+  --color-ink: #2a1812;          /* primary warm near-black text */
+  --color-ink-soft: #7a6453;     /* muted brown body text */
+  --color-ink-faint: #a8917b;    /* faint captions */
+
+  --color-maroon: #7b1e2b;       /* deep maroon — headlines & accents */
+  --color-maroon-deep: #571220;  /* darkest maroon */
+  --color-saffron: #e07a1e;      /* primary saffron */
+  --color-saffron-deep: #be610d; /* pressed / hover saffron */
+  --color-marigold: #f1a93a;     /* bright marigold */
+  --color-gold: #b8893b;         /* fine gold detailing */
+  --color-leaf: #4a6b3f;         /* sparing botanical green */
+
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-playfair);
 }
 
 :root {
-  --background: #04000c;
-  --foreground: #fef9f0;
+  --background: #fbf6ec;
+  --foreground: #2a1812;
 }
 
 html {
@@ -20,63 +43,130 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  font-feature-settings: "liga" 1, "calt" 1;
 }
 
-/* Custom scrollbar */
+::selection {
+  background: rgba(224, 122, 30, 0.22);
+  color: #571220;
+}
+
+/* Custom scrollbar — warm, slim */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #04000c;
+  background: #f0e6d3;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #d4a843, #7c3aed);
+  background: linear-gradient(to bottom, #e07a1e, #b8893b);
   border-radius: 999px;
+  border: 2px solid #f0e6d3;
 }
 
-/* Reusable glass card */
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Hide scrollbar where we manage our own affordances */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
-/* Gold gradient text */
-.gold-text {
-  background: linear-gradient(135deg, #fde68a 0%, #f59e0b 45%, #d4a843 100%);
+/* ── Type & decorative helpers ────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+/* Saffron → maroon gradient text for emphasis words */
+.accent-text {
+  background: linear-gradient(120deg, #e07a1e 0%, #c2410c 48%, #7b1e2b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Purple gradient text */
-.purple-text {
-  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 50%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Small uppercase section label */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-saffron-deep);
 }
 
-/* Section divider */
-.section-divider {
+/* Centered ornament divider: hairline · diamond · hairline */
+.ornament {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
-.section-divider::before,
-.section-divider::after {
+.ornament::before,
+.ornament::after {
   content: "";
   height: 1px;
   width: 3rem;
-  background: rgba(212, 168, 67, 0.4);
+  background: linear-gradient(90deg, transparent, rgba(184, 137, 59, 0.6), transparent);
+}
+.ornament span {
+  color: var(--color-gold);
+  font-size: 0.85rem;
 }
 
-/* Typing dots animation */
+/* Raised paper card */
+.paper-card {
+  background: var(--color-card);
+  border: 1px solid rgba(123, 30, 43, 0.1);
+  box-shadow: 0 1px 2px rgba(87, 18, 32, 0.04),
+    0 22px 48px -28px rgba(87, 18, 32, 0.28);
+}
+
+/* Hairline rule */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123, 30, 43, 0.18), transparent);
+}
+
+/* Primary saffron pill button */
+.btn-primary {
+  background: linear-gradient(135deg, #f1a93a 0%, #e07a1e 55%, #c2410c 100%);
+  color: #fffdf8;
+  box-shadow: 0 12px 28px -10px rgba(194, 65, 12, 0.55);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px -10px rgba(194, 65, 12, 0.6);
+  filter: brightness(1.04);
+}
+
+/* Maroon outline pill button */
+.btn-ghost {
+  border: 1px solid rgba(123, 30, 43, 0.35);
+  color: var(--color-maroon);
+  transition: all 0.25s ease;
+}
+.btn-ghost:hover {
+  background: rgba(123, 30, 43, 0.06);
+  border-color: var(--color-maroon);
+  transform: translateY(-2px);
+}
+
+/* Faint paper texture overlay (use on hero / feature panels) */
+.grain {
+  background-image:
+    radial-gradient(circle at 25% 15%, rgba(224, 122, 30, 0.05), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(123, 30, 43, 0.045), transparent 45%);
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+
+/* Typing dots */
 @keyframes typing-dot {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.35; }
   40% { transform: scale(1); opacity: 1; }
 }
 .typing-dot {
@@ -94,5 +184,23 @@ body {
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
-.marquee-left { animation: marquee-left 35s linear infinite; }
-.marquee-right { animation: marquee-right 35s linear infinite; }
+.marquee-left { animation: marquee-left 38s linear infinite; }
+.marquee-right { animation: marquee-right 38s linear infinite; }
+.marquee-pause:hover .marquee-left,
+.marquee-pause:hover .marquee-right {
+  animation-play-state: paused;
+}
+
+/* Slow drift for decorative seals */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+.float-slow { animation: float-slow 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-left, .marquee-right, .float-slow, .typing-dot {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}

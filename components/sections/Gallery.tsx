@@ -101,16 +101,10 @@ export default function Gallery() {
   const photo = PHOTOS[current]
 
   return (
-    <section id="gallery" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 50% 10%, rgba(88,28,135,0.14), transparent)",
-        }}
-      />
+    <section id="gallery" className="relative py-24 sm:py-32 overflow-hidden bg-paper-2">
+      <div className="absolute inset-x-0 top-0 hairline" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Section header */}
         <motion.div
           initial="hidden"
@@ -119,25 +113,24 @@ export default function Gallery() {
           variants={headerStagger}
           className="text-center mb-12"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
+          <motion.span variants={fadeUp} className="eyebrow">
             Sacred Moments
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            Divine <span className="gold-text">Gallery</span>
+            Divine <span className="accent-text">Gallery</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm leading-relaxed"
+            className="mt-4 text-ink-soft max-w-xl mx-auto text-[0.95rem] leading-relaxed"
           >
-            Moments of Spiritual Grace, Seva, and Divine Blessings
+            Moments of spiritual grace, seva, and divine blessings
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* ── Carousel ── */}
@@ -149,14 +142,15 @@ export default function Gallery() {
         >
           {/* Main stage */}
           <div
-            className="relative w-full aspect-[3/4] sm:aspect-[16/9] rounded-3xl overflow-hidden select-none"
+            className="relative w-full aspect-[3/4] sm:aspect-[16/9] rounded-3xl overflow-hidden select-none p-2 bg-card"
             onMouseEnter={() => setAutoPlaying(false)}
             onMouseLeave={() => setAutoPlaying(true)}
             style={{
               boxShadow:
-                "0 32px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(212,168,67,0.13)",
+                "0 40px 90px -45px rgba(87,18,32,0.5), 0 0 0 1px rgba(184,137,59,0.2)",
             }}
           >
+            <div className="relative w-full h-full rounded-[1.35rem] overflow-hidden bg-maroon-deep/90">
             {/* Blurred bokeh background — crossfades with each slide */}
             <AnimatePresence mode="sync">
               <motion.div
@@ -172,11 +166,11 @@ export default function Gallery() {
                   alt=""
                   fill
                   className="object-cover scale-110"
-                  style={{ filter: "blur(28px)", opacity: 0.45 }}
+                  style={{ filter: "blur(28px)", opacity: 0.5 }}
                   aria-hidden
                   sizes="10vw"
                 />
-                <div className="absolute inset-0 bg-black/55" />
+                <div className="absolute inset-0 bg-maroon-deep/45" />
               </motion.div>
             </AnimatePresence>
 
@@ -229,12 +223,11 @@ export default function Gallery() {
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center"
                     style={{
-                      background: "rgba(0,0,0,0.45)",
-                      backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(212,168,67,0.3)",
+                      background: "rgba(255,253,248,0.9)",
+                      border: "1px solid rgba(184,137,59,0.4)",
                     }}
                   >
-                    <ZoomIn size={22} className="text-amber-400" />
+                    <ZoomIn size={22} className="text-maroon" />
                   </div>
                 </div>
               </motion.div>
@@ -245,27 +238,25 @@ export default function Gallery() {
               className="absolute bottom-0 inset-x-0 z-20 p-4 sm:p-6 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
+                  "linear-gradient(to top, rgba(43,24,18,0.85) 0%, rgba(43,24,18,0.3) 60%, transparent 100%)",
               }}
             >
               <div className="flex items-end justify-between gap-4">
                 <div>
                   <span
-                    className="inline-flex items-center text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2"
+                    className="inline-flex items-center text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2 text-paper"
                     style={{
-                      background: "rgba(212,168,67,0.18)",
-                      color: "#fde68a",
-                      border: "1px solid rgba(212,168,67,0.3)",
+                      background: "rgba(224,122,30,0.85)",
                     }}
                   >
                     {photo.category}
                   </span>
-                  <h3 className="font-serif text-base sm:text-xl font-bold text-amber-50 leading-snug">
+                  <h3 className="font-display text-base sm:text-xl font-bold text-paper leading-snug">
                     {photo.title}
                   </h3>
-                  <p className="text-amber-200/55 text-xs mt-0.5">{photo.subtitle}</p>
+                  <p className="text-paper/65 text-xs mt-0.5">{photo.subtitle}</p>
                 </div>
-                <div className="text-amber-400/50 text-sm font-mono shrink-0">
+                <div className="text-marigold text-sm font-mono shrink-0">
                   {String(current + 1).padStart(2, "0")}&thinsp;/&thinsp;{String(N).padStart(2, "0")}
                 </div>
               </div>
@@ -277,7 +268,7 @@ export default function Gallery() {
                 key={`progress-${current}`}
                 className="absolute bottom-0 left-0 h-[3px] z-30 rounded-full"
                 style={{
-                  background: "linear-gradient(90deg, #d4a843, #f59e0b, #fde68a)",
+                  background: "linear-gradient(90deg, #b8893b, #e07a1e, #f1a93a)",
                 }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
@@ -294,12 +285,11 @@ export default function Gallery() {
               aria-label="Previous photo"
               className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
               style={{
-                background: "rgba(0,0,0,0.48)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(212,168,67,0.22)",
+                background: "rgba(255,253,248,0.92)",
+                border: "1px solid rgba(184,137,59,0.3)",
               }}
             >
-              <ChevronLeft size={20} className="text-amber-300" />
+              <ChevronLeft size={20} className="text-maroon" />
             </button>
 
             {/* →  Next arrow */}
@@ -311,12 +301,11 @@ export default function Gallery() {
               aria-label="Next photo"
               className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
               style={{
-                background: "rgba(0,0,0,0.48)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(212,168,67,0.22)",
+                background: "rgba(255,253,248,0.92)",
+                border: "1px solid rgba(184,137,59,0.3)",
               }}
             >
-              <ChevronRight size={20} className="text-amber-300" />
+              <ChevronRight size={20} className="text-maroon" />
             </button>
 
             {/* Play / Pause */}
@@ -325,17 +314,17 @@ export default function Gallery() {
               aria-label={autoPlaying ? "Pause autoplay" : "Resume autoplay"}
               className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
               style={{
-                background: "rgba(0,0,0,0.48)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,253,248,0.85)",
+                border: "1px solid rgba(123,30,43,0.18)",
               }}
             >
               {autoPlaying ? (
-                <Pause size={12} className="text-white/65" />
+                <Pause size={12} className="text-maroon" />
               ) : (
-                <Play size={12} className="text-white/65 ml-0.5" />
+                <Play size={12} className="text-maroon ml-0.5" />
               )}
             </button>
+            </div>
           </div>
 
           {/* Thumbnail strip */}
@@ -355,13 +344,13 @@ export default function Gallery() {
                   height: 42,
                   outline:
                     i === current
-                      ? "2px solid #d4a843"
-                      : "2px solid rgba(255,255,255,0.08)",
+                      ? "2px solid #e07a1e"
+                      : "2px solid rgba(123,30,43,0.12)",
                   outlineOffset: 2,
-                  opacity: i === current ? 1 : 0.4,
+                  opacity: i === current ? 1 : 0.5,
                   boxShadow:
                     i === current
-                      ? "0 4px 18px rgba(212,168,67,0.35)"
+                      ? "0 6px 18px -6px rgba(224,122,30,0.5)"
                       : "none",
                 }}
                 aria-label={`View ${p.title}`}
@@ -373,15 +362,6 @@ export default function Gallery() {
                   className="object-cover"
                   sizes="56px"
                 />
-                {i === current && (
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(212,168,67,0.15), transparent)",
-                    }}
-                  />
-                )}
               </motion.button>
             ))}
           </div>
@@ -402,8 +382,8 @@ export default function Gallery() {
                   height: 6,
                   background:
                     i === current
-                      ? "linear-gradient(90deg, #d4a843, #f59e0b)"
-                      : "rgba(255,255,255,0.18)",
+                      ? "linear-gradient(90deg, #e07a1e, #f1a93a)"
+                      : "rgba(123,30,43,0.18)",
                 }}
               />
             ))}
@@ -420,7 +400,7 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-10"
-            style={{ background: "rgba(0,0,0,0.93)", backdropFilter: "blur(24px)" }}
+            style={{ background: "rgba(43,24,18,0.92)", backdropFilter: "blur(24px)" }}
             onClick={() => setLightbox(false)}
           >
             <motion.div
@@ -439,7 +419,7 @@ export default function Gallery() {
                 className="w-full h-auto rounded-3xl block"
                 style={{
                   boxShadow:
-                    "0 48px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,168,67,0.18)",
+                    "0 48px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(184,137,59,0.25)",
                 }}
                 priority
               />
@@ -449,13 +429,13 @@ export default function Gallery() {
                 className="absolute bottom-0 inset-x-0 p-5 rounded-b-3xl"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(0,0,0,0.85), transparent)",
+                    "linear-gradient(to top, rgba(43,24,18,0.85), transparent)",
                 }}
               >
-                <div className="font-serif text-lg sm:text-xl font-bold text-amber-50">
+                <div className="font-display text-lg sm:text-xl font-bold text-paper">
                   {photo.title}
                 </div>
-                <div className="text-amber-300/65 text-sm mt-0.5">
+                <div className="text-marigold text-sm mt-0.5">
                   {photo.subtitle}
                 </div>
               </div>
@@ -465,33 +445,30 @@ export default function Gallery() {
                 onClick={() => paginate(-1)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
                 style={{
-                  background: "rgba(0,0,0,0.6)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(212,168,67,0.25)",
+                  background: "rgba(255,253,248,0.92)",
+                  border: "1px solid rgba(184,137,59,0.35)",
                 }}
               >
-                <ChevronLeft size={18} className="text-amber-300" />
+                <ChevronLeft size={18} className="text-maroon" />
               </button>
               <button
                 onClick={() => paginate(1)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
                 style={{
-                  background: "rgba(0,0,0,0.6)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(212,168,67,0.25)",
+                  background: "rgba(255,253,248,0.92)",
+                  border: "1px solid rgba(184,137,59,0.35)",
                 }}
               >
-                <ChevronRight size={18} className="text-amber-300" />
+                <ChevronRight size={18} className="text-maroon" />
               </button>
 
               {/* Close */}
               <button
                 onClick={() => setLightbox(false)}
-                className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-white/70 hover:text-amber-400 transition-colors cursor-pointer"
+                className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-paper hover:text-marigold transition-colors cursor-pointer"
                 style={{
-                  background: "rgba(0,0,0,0.6)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(43,24,18,0.6)",
+                  border: "1px solid rgba(255,253,248,0.2)",
                 }}
               >
                 <X size={16} />

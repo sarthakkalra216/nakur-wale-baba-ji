@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${playfairDisplay.variable} antialiased`}
     >
-      <body className="min-h-screen bg-[#04000c] text-amber-50 overflow-x-hidden">
+      <body className="min-h-screen bg-paper text-ink overflow-x-hidden">
         {children}
       </body>
     </html>

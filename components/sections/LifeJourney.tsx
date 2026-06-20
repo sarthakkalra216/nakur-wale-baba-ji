@@ -22,8 +22,8 @@ interface SceneData {
   quote: string
   description: string
   icon: string
-  gradient: string
-  accentColor: string
+  wash: string // light radial tint painted over the ivory canvas
+  accentColor: string // deep, readable on ivory
   glowColor: string
 }
 
@@ -35,8 +35,8 @@ const SCENES: SceneData[] = [
     quote: "\"The soil of Nakur was chosen to receive his blessed footsteps.\"",
     description: "In the sacred land of Nakur, Saharanpur, a child was born whose very presence would transform thousands of lives. From his earliest years, Guruji displayed an extraordinary stillness — an inexplicable light in his eyes and a compassion that seemed ageless, as though his soul had arrived with a mission already inscribed within it.",
     icon: "🌅",
-    gradient: "radial-gradient(ellipse 110% 90% at 50% 0%, rgba(109,40,217,0.55) 0%, rgba(4,0,12,0.97) 70%)",
-    accentColor: "#a78bfa", glowColor: "rgba(124,58,237,0.35)",
+    wash: "radial-gradient(ellipse 120% 95% at 50% 0%, rgba(241,169,58,0.20) 0%, rgba(251,246,236,0) 62%)",
+    accentColor: "#c2630f", glowColor: "rgba(241,169,58,0.30)",
   },
   {
     chapter: "02", era: "Awakening",
@@ -45,8 +45,8 @@ const SCENES: SceneData[] = [
     quote: "\"When the Guru awakens, the entire universe takes notice.\"",
     description: "As Guruji grew, he was drawn into deep states of meditation and prayer that would last for hours. Visions, revelations, and an unshakeable sense of divine purpose became the compass of his life. The eternal flame that burned within him began to radiate outward — and those near him could feel its warmth and transforming power.",
     icon: "🔥",
-    gradient: "radial-gradient(ellipse 110% 90% at 50% 15%, rgba(217,119,6,0.52) 0%, rgba(4,0,12,0.97) 68%)",
-    accentColor: "#fbbf24", glowColor: "rgba(217,119,6,0.38)",
+    wash: "radial-gradient(ellipse 120% 95% at 50% 12%, rgba(217,119,6,0.18) 0%, rgba(251,246,236,0) 62%)",
+    accentColor: "#b45309", glowColor: "rgba(217,119,6,0.26)",
   },
   {
     chapter: "03", era: "Wisdom",
@@ -55,8 +55,8 @@ const SCENES: SceneData[] = [
     quote: "\"The truth he spoke needed no translation — the heart understood.\"",
     description: "Guruji began to share his wisdom — first in intimate gatherings, then in satsangs that drew hundreds. His teachings were not mere philosophy; they were living truth, delivered with a warmth that bypassed the mind and spoke directly to the heart. Seva, faith, and boundless love became the three pillars of his eternal message.",
     icon: "📿",
-    gradient: "radial-gradient(ellipse 110% 90% at 50% 15%, rgba(15,118,110,0.48) 0%, rgba(4,0,12,0.97) 68%)",
-    accentColor: "#34d399", glowColor: "rgba(15,118,110,0.35)",
+    wash: "radial-gradient(ellipse 120% 95% at 50% 12%, rgba(74,107,63,0.18) 0%, rgba(251,246,236,0) 62%)",
+    accentColor: "#3f6212", glowColor: "rgba(74,107,63,0.24)",
   },
   {
     chapter: "04", era: "Service",
@@ -65,8 +65,8 @@ const SCENES: SceneData[] = [
     quote: "\"He saw the face of God in every hungry child, every weeping mother.\"",
     description: "Guruji established a life of selfless service — langars that fed thousands, medical camps, and shelter for the vulnerable. The ashram at Nakur became a sanctuary where no one was turned away. He taught that God is most clearly seen in the face of one who suffers — and he embodied that truth with every breath he took.",
     icon: "🙏",
-    gradient: "radial-gradient(ellipse 110% 90% at 50% 20%, rgba(190,18,60,0.42) 0%, rgba(4,0,12,0.97) 68%)",
-    accentColor: "#fb7185", glowColor: "rgba(190,18,60,0.33)",
+    wash: "radial-gradient(ellipse 120% 95% at 50% 16%, rgba(159,18,57,0.16) 0%, rgba(251,246,236,0) 62%)",
+    accentColor: "#9f1239", glowColor: "rgba(159,18,57,0.22)",
   },
   {
     chapter: "05", era: "Presence",
@@ -75,8 +75,8 @@ const SCENES: SceneData[] = [
     quote: "\"In his presence, even the deepest doubt dissolves and faith is reborn.\"",
     description: "Word of Guruji's grace spread far and wide. Devotees arrived from across India — each carrying their burdens, each leaving lighter. His darshan was not merely a meeting; it was a transformation. Through personal guidance, Guruji became the shelter that thousands had long been searching for, without knowing exactly what they sought.",
     icon: "🕊️",
-    gradient: "radial-gradient(ellipse 110% 90% at 50% 15%, rgba(212,168,67,0.48) 0%, rgba(4,0,12,0.97) 68%)",
-    accentColor: "#d4a843", glowColor: "rgba(212,168,67,0.4)",
+    wash: "radial-gradient(ellipse 120% 95% at 50% 12%, rgba(184,137,59,0.20) 0%, rgba(251,246,236,0) 62%)",
+    accentColor: "#92710f", glowColor: "rgba(184,137,59,0.30)",
   },
   {
     chapter: "06", era: "Legacy",
@@ -85,8 +85,8 @@ const SCENES: SceneData[] = [
     quote: "\"His story is not the past — it is the living present, and the path forward.\"",
     description: "Today, Guruji's mission burns brighter than ever. His teachings ripple across generations; his love is a lighthouse for all who seek meaning. The ashram at Nakur remains a living sanctuary of devotion, seva, and divine light. His path is not a historical record — it is a living invitation extended to every searching soul, in every age.",
     icon: "✨",
-    gradient: "radial-gradient(ellipse 130% 110% at 50% 25%, rgba(88,28,135,0.52) 0%, rgba(212,168,67,0.1) 50%, rgba(4,0,12,0.97) 72%)",
-    accentColor: "#d4a843", glowColor: "rgba(212,168,67,0.45)",
+    wash: "radial-gradient(ellipse 130% 110% at 50% 22%, rgba(123,30,43,0.18) 0%, rgba(241,169,58,0.08) 48%, rgba(251,246,236,0) 70%)",
+    accentColor: "#7b1e2b", glowColor: "rgba(123,30,43,0.26)",
   },
 ]
 
@@ -98,14 +98,8 @@ const TOTAL = SCENES.length
 
 function MobileLifeJourney() {
   return (
-    <section id="life-journey" className="relative py-20 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(88,28,135,0.18), transparent)",
-        }}
-      />
+    <section id="life-journey" className="relative py-20 overflow-hidden bg-paper">
+      <div className="absolute inset-x-0 top-0 hairline" />
 
       <div className="relative max-w-lg mx-auto px-5">
         {/* Header */}
@@ -116,24 +110,26 @@ function MobileLifeJourney() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]">
-            Spiritual Journey
-          </span>
-          <h2 className="mt-3 font-serif text-3xl font-bold text-amber-50">
-            Life <span className="gold-text">Journey</span>
+          <span className="eyebrow">Spiritual Journey</span>
+          <h2 className="mt-3 font-display text-3xl font-bold text-ink">
+            Life <span className="accent-text">Journey</span>
           </h2>
-          <p className="mt-3 text-amber-200/45 text-sm leading-relaxed">
+          <p className="mt-3 text-ink-soft text-sm leading-relaxed">
             Six chapters of grace, wisdom, and divine service
           </p>
-          <div className="section-divider mt-4" />
+          <div className="ornament">
+            <span>✦</span>
+          </div>
         </motion.div>
 
         {/* Cards */}
         <div className="relative">
-          {/* Vertical connector line */}
           <div
             className="absolute left-5 top-0 bottom-0 w-px"
-            style={{ background: "linear-gradient(to bottom, transparent, rgba(212,168,67,0.25), transparent)" }}
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, rgba(184,137,59,0.4), transparent)",
+            }}
           />
 
           <div className="space-y-8 pl-14">
@@ -145,26 +141,20 @@ function MobileLifeJourney() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: 0.05 * i }}
               >
-                {/* Dot on the line */}
                 <div
-                  className="absolute left-[14px] w-3 h-3 rounded-full border-2 mt-4"
+                  className="absolute left-[14px] w-3 h-3 rounded-full border-2"
                   style={{
                     borderColor: s.accentColor,
-                    background: "#04000c",
-                    boxShadow: `0 0 8px ${s.accentColor}60`,
+                    background: "#fbf6ec",
+                    boxShadow: `0 0 8px ${s.accentColor}55`,
                     marginTop: "1.25rem",
                   }}
                 />
 
-                {/* Card */}
                 <div
-                  className="rounded-2xl p-5"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: `1px solid ${s.accentColor}22`,
-                  }}
+                  className="paper-card rounded-2xl p-5"
+                  style={{ borderColor: `${s.accentColor}26` }}
                 >
-                  {/* Chapter + era */}
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-2xl">{s.icon}</span>
                     <span
@@ -175,24 +165,21 @@ function MobileLifeJourney() {
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-serif font-bold leading-tight mb-1">
-                    <span className="block text-lg text-amber-50">{s.titleLine1}</span>
+                  <h3 className="font-display font-bold leading-tight mb-1">
+                    <span className="block text-lg text-ink">{s.titleLine1}</span>
                     <span className="block text-lg" style={{ color: s.accentColor }}>
                       {s.titleLine2}
                     </span>
                   </h3>
 
-                  {/* Quote */}
                   <p
-                    className="text-xs italic mt-3 mb-2 leading-relaxed"
-                    style={{ color: `${s.accentColor}cc` }}
+                    className="text-xs italic mt-3 mb-2 leading-relaxed font-display"
+                    style={{ color: s.accentColor }}
                   >
                     {s.quote}
                   </p>
 
-                  {/* Description */}
-                  <p className="text-amber-100/55 text-xs leading-relaxed">
+                  <p className="text-ink-soft text-xs leading-relaxed">
                     {s.description}
                   </p>
                 </div>
@@ -206,7 +193,7 @@ function MobileLifeJourney() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// DESKTOP VERSION — full Apple-style sticky scroll (unchanged)
+// DESKTOP VERSION — full sticky scroll
 // ═══════════════════════════════════════════════════════════════════════════════
 
 interface Pt {
@@ -215,22 +202,22 @@ interface Pt {
 }
 
 const PT_COLORS = [
-  "rgba(212,168,67,0.65)",
-  "rgba(167,139,250,0.5)",
-  "rgba(255,255,255,0.4)",
-  "rgba(251,191,36,0.55)",
-  "rgba(196,181,253,0.45)",
+  "rgba(224,122,30,0.40)",
+  "rgba(184,137,59,0.40)",
+  "rgba(123,30,43,0.28)",
+  "rgba(241,169,58,0.45)",
+  "rgba(74,107,63,0.30)",
 ]
 
 function ParticleField() {
   const [pts, setPts] = useState<Pt[]>([])
   useEffect(() => {
     setPts(
-      Array.from({ length: 18 }, () => ({   // reduced from 26 → 18
+      Array.from({ length: 18 }, () => ({
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: 1.5 + Math.random() * 3,
-        opacity: 0.1 + Math.random() * 0.4,
+        size: 2 + Math.random() * 4,
+        opacity: 0.15 + Math.random() * 0.4,
         dur: 4 + Math.random() * 5,
         delay: Math.random() * 4,
         color: PT_COLORS[Math.floor(Math.random() * PT_COLORS.length)],
@@ -267,12 +254,12 @@ function ProgressIndicator({ progress }: { progress: MotionValue<number> }) {
         {SCENES.map((_, i) => (
           <motion.div
             key={i}
-            animate={{ height: i === active ? 30 : 6, opacity: i === active ? 1 : 0.28 }}
+            animate={{ height: i === active ? 30 : 6, opacity: i === active ? 1 : 0.3 }}
             transition={{ duration: 0.38 }}
             className="rounded-full"
             style={{
               width: 3,
-              background: i === active ? "linear-gradient(to bottom, #f59e0b, #d4a843)" : "rgba(255,255,255,0.45)",
+              background: i === active ? "linear-gradient(to bottom, #e07a1e, #b8893b)" : "rgba(123,30,43,0.3)",
             }}
           />
         ))}
@@ -281,12 +268,12 @@ function ProgressIndicator({ progress }: { progress: MotionValue<number> }) {
         {SCENES.map((_, i) => (
           <motion.div
             key={i}
-            animate={{ width: i === active ? 22 : 6, opacity: i === active ? 1 : 0.28 }}
+            animate={{ width: i === active ? 22 : 6, opacity: i === active ? 1 : 0.3 }}
             transition={{ duration: 0.38 }}
             className="rounded-full"
             style={{
               height: 3,
-              background: i === active ? "linear-gradient(90deg, #f59e0b, #d4a843)" : "rgba(255,255,255,0.45)",
+              background: i === active ? "linear-gradient(90deg, #e07a1e, #b8893b)" : "rgba(123,30,43,0.3)",
             }}
           />
         ))}
@@ -323,7 +310,7 @@ function Scene({ data, progress, index }: { data: SceneData; progress: MotionVal
         zIndex: 10,
       }}
     >
-      <div className="absolute inset-0" style={{ background: data.gradient }} />
+      <div className="absolute inset-0" style={{ background: data.wash }} />
 
       <motion.div
         style={{ y: glowY, opacity: glowOp }}
@@ -331,23 +318,18 @@ function Scene({ data, progress, index }: { data: SceneData; progress: MotionVal
       >
         <div
           className="w-[55vw] h-[55vh] rounded-full"
-          style={{ background: data.glowColor, filter: "blur(80px)" }}
+          style={{ background: data.glowColor, filter: "blur(90px)" }}
         />
       </motion.div>
-
-      <div
-        className="absolute inset-x-0 top-0 h-64 pointer-events-none"
-        style={{ background: `linear-gradient(to bottom, ${data.glowColor.replace(/[\d.]+\)$/, "0.1)")}, transparent)` }}
-      />
 
       <motion.div
         style={{ y: numY }}
         aria-hidden
-        className="absolute bottom-12 sm:bottom-16 right-2 sm:right-6 pointer-events-none select-none font-serif font-black leading-none"
+        className="absolute bottom-12 sm:bottom-16 right-2 sm:right-6 pointer-events-none select-none font-display font-black leading-none"
       >
         <span
           className="text-[28vw] sm:text-[18vw] lg:text-[15vw]"
-          style={{ color: data.accentColor, opacity: 0.045 }}
+          style={{ color: data.accentColor, opacity: 0.07 }}
         >
           {data.chapter}
         </span>
@@ -362,7 +344,7 @@ function Scene({ data, progress, index }: { data: SceneData; progress: MotionVal
                 {data.chapter}&ensp;/&ensp;{data.era}
               </span>
               <div className="flex-1 h-px overflow-hidden" style={{ maxWidth: 56 }}>
-                <motion.div style={{ width: lineW, background: `${data.accentColor}55`, height: 1 }} />
+                <motion.div style={{ width: lineW, background: `${data.accentColor}66`, height: 1 }} />
               </div>
             </div>
 
@@ -374,8 +356,8 @@ function Scene({ data, progress, index }: { data: SceneData; progress: MotionVal
               {data.icon}
             </motion.span>
 
-            <h3 className="font-serif font-bold leading-[1.06] mb-4">
-              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl" style={{ color: "#fef9f0" }}>
+            <h3 className="font-display font-bold leading-[1.06] mb-4">
+              <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-ink">
                 {data.titleLine1}
               </span>
               <span className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl" style={{ color: data.accentColor }}>
@@ -383,32 +365,29 @@ function Scene({ data, progress, index }: { data: SceneData; progress: MotionVal
               </span>
             </h3>
 
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.32em]" style={{ color: `${data.accentColor}70` }}>
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.32em]" style={{ color: `${data.accentColor}b0` }}>
               {data.subtitle}
             </p>
           </motion.div>
 
           <motion.div style={{ x: cardX, opacity: cardOp }}>
             <div
-              className="rounded-3xl p-6 sm:p-8 lg:p-9"
+              className="rounded-3xl p-6 sm:p-8 lg:p-9 bg-card"
               style={{
-                background: "rgba(255,255,255,0.032)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
                 border: `1px solid ${data.accentColor}26`,
-                boxShadow: `0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07)`,
+                boxShadow: `0 40px 80px -40px rgba(87,18,32,0.4), inset 0 1px 0 rgba(255,255,255,0.6)`,
               }}
             >
-              <blockquote className="font-serif text-sm sm:text-base lg:text-lg italic leading-relaxed mb-5" style={{ color: data.accentColor }}>
+              <blockquote className="font-display text-base sm:text-lg lg:text-xl italic leading-relaxed mb-5" style={{ color: data.accentColor }}>
                 {data.quote}
               </blockquote>
               <div className="h-px mb-5" style={{ background: `linear-gradient(90deg, ${data.accentColor}40, transparent)` }} />
-              <p className="text-amber-100/62 text-sm sm:text-[0.95rem] leading-[1.88]">{data.description}</p>
-              <div className="flex items-center justify-between mt-5 pt-4" style={{ borderTop: `1px solid ${data.accentColor}15` }}>
-                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.32em] opacity-35" style={{ color: data.accentColor }}>
+              <p className="text-ink-soft text-sm sm:text-[0.95rem] leading-[1.88]">{data.description}</p>
+              <div className="flex items-center justify-between mt-5 pt-4" style={{ borderTop: `1px solid ${data.accentColor}1a` }}>
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.32em]" style={{ color: data.accentColor, opacity: 0.55 }}>
                   Chapter {data.chapter} of {TOTAL}
                 </span>
-                <span className="text-amber-400/20 text-lg">✦</span>
+                <span className="text-lg" style={{ color: `${data.accentColor}40` }}>✦</span>
               </div>
             </div>
           </motion.div>
@@ -438,21 +417,23 @@ function DesktopLifeJourney() {
   return (
     <section id="life-journey" ref={containerRef} className="relative" style={{ height: "600vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden" style={{ transform: "translateZ(0)" }}>
-        <div className="absolute inset-0 bg-[#04000c]" />
+        <div className="absolute inset-0 bg-paper" />
         <ParticleField />
 
         <motion.div
           style={{ opacity: headerOp, y: headerY }}
           className="absolute inset-x-0 top-[15vh] z-20 text-center px-6 pointer-events-none"
         >
-          <span className="text-amber-400 text-xs font-semibold uppercase tracking-[0.3em]">Spiritual Journey</span>
-          <h2 className="mt-3 font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-amber-50">
-            Life <span className="gold-text">Journey</span>
+          <span className="eyebrow">Spiritual Journey</span>
+          <h2 className="mt-3 font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-ink">
+            Life <span className="accent-text">Journey</span>
           </h2>
-          <p className="mt-3 text-amber-200/45 text-sm max-w-sm mx-auto leading-relaxed">
+          <p className="mt-3 text-ink-soft text-sm max-w-sm mx-auto leading-relaxed">
             Six chapters of grace, wisdom, and divine service
           </p>
-          <div className="section-divider mt-5" />
+          <div className="ornament">
+            <span>✦</span>
+          </div>
         </motion.div>
 
         {SCENES.map((scene, i) => (
@@ -465,8 +446,8 @@ function DesktopLifeJourney() {
           style={{ opacity: hintOp }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none"
         >
-          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-amber-400/45">Scroll to journey</span>
-          <motion.div animate={{ y: [0, 7, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="text-amber-400/35 text-base">
+          <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-ink-faint">Scroll to journey</span>
+          <motion.div animate={{ y: [0, 7, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="text-saffron text-base">
             ↓
           </motion.div>
         </motion.div>

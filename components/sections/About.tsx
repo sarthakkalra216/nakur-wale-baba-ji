@@ -1,27 +1,26 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { MapPin } from "lucide-react"
 import { gurujiProfile } from "@/data/guruji-profile"
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 36 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
 }
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.11 } } }
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 55% at 100% 50%, rgba(88,28,135,0.13), transparent), radial-gradient(ellipse 40% 40% at 0% 50%, rgba(212,168,67,0.05), transparent)",
-        }}
-      />
+    <section
+      id="about"
+      className="relative py-24 sm:py-32 overflow-hidden bg-paper-2"
+    >
+      {/* Top hairline */}
+      <div className="absolute inset-x-0 top-0 hairline" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -30,58 +29,52 @@ export default function About() {
           variants={stagger}
           className="text-center mb-16"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
-            Life & Legacy
+          <motion.span variants={fadeUp} className="eyebrow">
+            Life &amp; Legacy
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            About <span className="gold-text">Guruji</span>
+            About <span className="accent-text">Guruji</span>
           </motion.h2>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* Bio grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-24">
-          {/* Left – image placeholder + values */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          {/* Left — portrait + values */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            {/* Image tile */}
-            {/* TODO: Replace gradient placeholder with real Guruji portrait photo.
-                Suggested: <Image src="/gallery/photo4.jpeg" alt="Guruji Nakur Wale Baba Ji" fill className="object-cover" />
-                inside a relative container. Update aspect ratio to match photo. */}
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #1a0232 0%, #3b0764 35%, #581c87 65%, #1a0232 100%)",
-                }}
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                <span className="text-8xl">🕉</span>
-                <p className="text-amber-400/50 text-xs uppercase tracking-widest">
-                  Guruji's Photo
+            <div className="relative max-w-md mx-auto lg:mx-0">
+              <div className="relative rounded-[1.5rem] p-2 bg-card border border-gold/25 shadow-[0_36px_72px_-40px_rgba(87,18,32,0.4)]">
+                <div className="relative rounded-[1.1rem] overflow-hidden aspect-[4/5]">
+                  <Image
+                    src="/gallery/photo1.jpeg"
+                    alt="Shri Guruji Nakur Wale Baba Ji — morning satsang at Nakur ashram"
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 40vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              {/* Floating quote seal */}
+              <div className="absolute -bottom-5 -right-3 px-4 py-2.5 rounded-2xl bg-maroon text-paper shadow-lg max-w-[60%]">
+                <p className="font-display text-sm italic leading-snug">
+                  &ldquo;Sab mein Ishwar hai.&rdquo;
                 </p>
               </div>
-              {/* Gold border */}
-              <div
-                className="absolute inset-0 rounded-3xl pointer-events-none"
-                style={{ border: "1px solid rgba(212,168,67,0.2)" }}
-              />
             </div>
 
             {/* Location */}
-            <div className="mt-6 flex items-center gap-2 text-amber-200/55 text-sm">
-              <MapPin size={14} className="text-amber-400 shrink-0" />
+            <div className="mt-9 flex items-center gap-2 text-sm text-ink-soft">
+              <MapPin size={15} className="text-saffron shrink-0" />
               {gurujiProfile.location}
             </div>
 
@@ -90,12 +83,7 @@ export default function About() {
               {gurujiProfile.values.map((v) => (
                 <span
                   key={v}
-                  className="px-4 py-1.5 rounded-full text-xs font-medium"
-                  style={{
-                    background: "rgba(212,168,67,0.08)",
-                    border: "1px solid rgba(212,168,67,0.2)",
-                    color: "#fde68a",
-                  }}
+                  className="px-4 py-1.5 rounded-full text-xs font-medium text-maroon bg-card border border-maroon/12"
                 >
                   {v}
                 </span>
@@ -103,7 +91,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right – bio text */}
+          {/* Right — bio text */}
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -112,54 +100,36 @@ export default function About() {
           >
             <motion.blockquote
               variants={fadeUp}
-              className="font-serif text-lg sm:text-xl text-amber-300/90 font-medium italic leading-relaxed mb-8 border-l-2 border-amber-400/40 pl-5"
+              className="font-display text-xl sm:text-2xl text-maroon font-medium leading-relaxed mb-8 pl-5 border-l-2 border-saffron"
             >
-              &ldquo;{gurujiProfile.shortBio}&rdquo;
+              {gurujiProfile.shortBio}
             </motion.blockquote>
 
-            {/* TODO: Replace gurujiProfile.longBio paragraphs with real biography text from Guruji's life story.
-                Update data/guruji-profile.ts → longBio array with authentic content.
-                Current placeholders describe the spiritual journey — replace with verified dates and events. */}
             {gurujiProfile.longBio.slice(1, 4).map((para, i) => (
               <motion.p
                 key={i}
                 variants={fadeUp}
-                className="text-amber-100/65 leading-8 mb-4 text-[0.95rem]"
+                className="text-ink-soft leading-8 mb-4 text-[0.97rem]"
               >
                 {para}
               </motion.p>
             ))}
 
             {/* Mission / Vision */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 grid sm:grid-cols-2 gap-4"
-            >
+            <motion.div variants={fadeUp} className="mt-8 grid sm:grid-cols-2 gap-4">
               {[
                 { emoji: "🎯", label: "Mission", text: gurujiProfile.mission },
                 { emoji: "🌟", label: "Vision", text: gurujiProfile.vision },
               ].map((item) => (
-                <div
-                  key={item.label}
-                  className="p-5 rounded-2xl"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(212,168,67,0.14)",
-                  }}
-                >
+                <div key={item.label} className="paper-card p-5 rounded-2xl">
                   <div className="text-2xl mb-2">{item.emoji}</div>
-                  <div className="text-amber-400 font-semibold text-xs mb-2 uppercase tracking-widest">
-                    {item.label}
-                  </div>
-                  <p className="text-amber-100/60 text-sm leading-relaxed">
-                    {item.text}
-                  </p>
+                  <div className="eyebrow !text-[0.65rem] mb-2">{item.label}</div>
+                  <p className="text-ink-soft text-sm leading-relaxed">{item.text}</p>
                 </div>
               ))}
             </motion.div>
           </motion.div>
         </div>
-
       </div>
     </section>
   )

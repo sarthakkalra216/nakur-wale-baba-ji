@@ -1,58 +1,41 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { ChevronDown, Sparkles, Volume2, VolumeX } from "lucide-react"
+import Image from "next/image"
+import { ChevronDown, Play, Pause, Volume2, VolumeX, MapPin } from "lucide-react"
 import { gurujiProfile } from "@/data/guruji-profile"
 
-interface Particle {
-  id: number
-  left: string
-  top: string
-  size: number
-  color: string
-  duration: number
-  delay: number
-  blur: number
-  range: number
-}
-
-const COLORS = [
-  "rgba(212,168,67,0.7)",
-  "rgba(124,58,237,0.6)",
-  "rgba(255,255,255,0.5)",
-  "rgba(251,191,36,0.6)",
-  "rgba(167,139,250,0.5)",
-  "rgba(244,114,182,0.4)",
+const STATS = [
+  { value: "50+", label: "Years of Seva" },
+  { value: "100K+", label: "Devotees" },
+  { value: "∞", label: "Divine Love" },
 ]
 
 export default function Hero() {
-  const [particles, setParticles] = useState<Particle[]>([])
-  const [isMuted, setIsMuted] = useState(true)
-  const [videoError, setVideoError] = useState(false)
+  const [playing, setPlaying] = useState(false)
+  const [muted, setMuted] = useState(true)
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
-    setParticles(
-      Array.from({ length: 22 }, (_, i) => ({
-        id: i,
-        left: `${2 + Math.random() * 96}%`,
-        top: `${5 + Math.random() * 88}%`,
-        size: 2 + Math.random() * 6,
-        color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        duration: 2.5 + Math.random() * 3,
-        delay: Math.random() * 3,
-        blur: 1 + Math.random() * 3,
-        range: 12 + Math.random() * 20,
-      }))
-    )
-  }, [])
+  const togglePlay = () => {
+    const v = videoRef.current
+    if (!v) return
+    if (playing) {
+      v.pause()
+      setPlaying(false)
+    } else {
+      v.muted = muted
+      v.play().catch(() => setPlaying(false))
+      setPlaying(true)
+    }
+  }
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted
-      setIsMuted(videoRef.current.muted)
-    }
+    const v = videoRef.current
+    if (!v) return
+    const next = !v.muted
+    v.muted = next
+    setMuted(next)
   }
 
   const scrollTo = (id: string) =>
@@ -61,221 +44,270 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden grain pt-24 pb-16 lg:pt-20 lg:pb-0"
     >
-      {/* Base background */}
-      <div className="absolute inset-0 bg-[#04000c]" />
-
-      {/* Video background */}
-      {!videoError && (
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/gallery/photo3.jpeg"
-          onError={() => setVideoError(true)}
-        >
-          <source src="/gallery/video1.mp4" type="video/mp4" />
-          <source src="/gallery/video2.mp4" type="video/mp4" />
-        </video>
-      )}
-
-      {/* Fallback: photo when video can't load */}
-      {videoError && (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/gallery/photo3.jpeg')" }}
-        />
-      )}
-
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/65" />
-
-      {/* Radial glows on top of video */}
+      {/* Soft warm washes */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `
-            radial-gradient(ellipse 110% 65% at 50% -5%, rgba(88,28,135,0.45), transparent),
-            radial-gradient(ellipse 55% 45% at 85% 60%, rgba(212,168,67,0.07), transparent),
-            radial-gradient(ellipse 55% 45% at 15% 55%, rgba(88,28,135,0.14), transparent)
-          `,
+          background:
+            "radial-gradient(ellipse 60% 50% at 12% 8%, rgba(241,169,58,0.16), transparent 60%), radial-gradient(ellipse 55% 50% at 92% 85%, rgba(123,30,43,0.08), transparent 60%)",
         }}
       />
-
-      {/* Subtle grid */}
+      {/* Faint giant Om watermark */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.018]"
+        aria-hidden
+        className="absolute select-none pointer-events-none font-display leading-none"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      {/* Decorative Om */}
-      <div
-        className="absolute select-none pointer-events-none text-[28rem] font-bold leading-none opacity-[0.015]"
-        style={{
-          fontFamily: "serif",
+          fontSize: "34rem",
           top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -52%)",
-          color: "#d4a843",
+          right: "-4%",
+          transform: "translateY(-50%)",
+          color: "rgba(184,137,59,0.05)",
         }}
       >
         ॐ
       </div>
 
-      {/* Particles */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            left: p.left,
-            top: p.top,
-            width: p.size,
-            height: p.size,
-            backgroundColor: p.color,
-            filter: `blur(${p.blur}px)`,
-          }}
-          animate={{ y: [-p.range, p.range], opacity: [0.3, 0.85, 0.3] }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-            delay: p.delay,
-          }}
-        />
-      ))}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+          {/* ── Left: editorial copy ── */}
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full border border-gold/30 bg-card/70 backdrop-blur-sm"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-saffron animate-pulse" />
+              <span className="eyebrow !tracking-[0.2em] text-maroon">
+                Jai Guruji · Nakur Wale Baba Ji
+              </span>
+            </motion.div>
 
-      {/* Mute/Unmute button */}
-      {!videoError && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8 }}
-          onClick={toggleMute}
-          aria-label={isMuted ? "Unmute video" : "Mute video"}
-          className="absolute top-24 right-4 sm:right-6 z-20 w-10 h-10 rounded-full flex items-center justify-center border border-white/20 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-amber-400/50 transition-all duration-300 cursor-pointer"
-        >
-          {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        </motion.button>
-      )}
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+              className="font-display font-bold leading-[1.04] tracking-tight text-[2.7rem] sm:text-6xl lg:text-7xl"
+            >
+              <span className="block text-maroon">Shri Guruji</span>
+              <span className="block text-ink">Nakur Wale</span>
+              <span className="block accent-text">Baba Ji</span>
+            </motion.h1>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-16">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 mb-8 px-5 py-2 rounded-full border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 text-sm font-medium"
-        >
-          <Sparkles size={13} className="animate-pulse" />
-          <span>Jai Guruji — Nakur Wale Baba Ji</span>
-          <Sparkles size={13} className="animate-pulse" />
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.35 }}
+              className="ornament lg:justify-start mt-6"
+            >
+              <span>✦</span>
+            </motion.div>
 
-        {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
-          className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6"
-        >
-          <span className="gold-text">Shri Guruji</span>
-          <br />
-          <span className="text-amber-50">Nakur Wale</span>
-          <br />
-          <span className="purple-text">Baba Ji</span>
-        </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mt-6 text-lg sm:text-xl text-ink-soft max-w-xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              {gurujiProfile.tagline}
+            </motion.p>
 
-        {/* Ornament divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.4 }}
-          className="flex items-center justify-center gap-3 mb-8"
-        >
-          <div className="h-px w-20 bg-gradient-to-r from-transparent to-amber-400/50" />
-          <span className="text-amber-400 text-xl">✦</span>
-          <div className="h-px w-20 bg-gradient-to-l from-transparent to-amber-400/50" />
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="mt-5 flex items-center justify-center lg:justify-start gap-2 text-sm text-ink-faint"
+            >
+              <MapPin size={14} className="text-saffron" />
+              {gurujiProfile.location}
+            </motion.div>
 
-        {/* Subheading */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-lg sm:text-xl lg:text-2xl text-amber-200/80 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          {gurujiProfile.tagline}
-        </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.55 }}
+              className="mt-9 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center"
+            >
+              <button
+                onClick={() => scrollTo("#about")}
+                className="btn-primary w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-base cursor-pointer"
+              >
+                Discover Guruji
+              </button>
+              <button
+                onClick={() => scrollTo("#ask-guruji")}
+                className="btn-ghost w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-base cursor-pointer"
+              >
+                ✦ Ask Guruji
+              </button>
+            </motion.div>
 
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.55 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-        >
-          <button
-            onClick={() => scrollTo("#about")}
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 font-bold text-base hover:from-amber-300 hover:to-yellow-400 transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-400/45 hover:scale-105 cursor-pointer"
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="mt-12 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0"
+            >
+              {STATS.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`text-center lg:text-left ${
+                    i > 0 ? "border-l border-maroon/12 pl-4" : ""
+                  }`}
+                >
+                  <div className="font-display text-3xl sm:text-4xl font-bold text-maroon">
+                    {s.value}
+                  </div>
+                  <div className="text-[11px] text-ink-faint mt-1 uppercase tracking-[0.12em]">
+                    {s.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── Right: framed media ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.25 }}
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            Discover Guruji
-          </button>
-          <button
-            onClick={() => scrollTo("#ask-guruji")}
-            className="w-full sm:w-auto px-8 py-4 rounded-full border border-amber-400/40 text-amber-300 font-bold text-base hover:bg-amber-400/10 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 backdrop-blur-sm cursor-pointer"
-          >
-            ✨ Ask Guruji
-          </button>
-        </motion.div>
+            {/* Floating gold Om medallion */}
+            <div
+              className="float-slow absolute -top-5 -left-5 z-20 w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg"
+              style={{
+                background: "linear-gradient(135deg,#f1a93a,#be610d)",
+                color: "#fffdf8",
+                boxShadow: "0 14px 30px -10px rgba(194,65,12,0.55)",
+              }}
+            >
+              🕉
+            </div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          className="grid grid-cols-3 gap-6 max-w-sm mx-auto"
-        >
-          {[
-            { value: "50+", label: "Years of Seva" },
-            { value: "100K+", label: "Devotees" },
-            { value: "∞", label: "Divine Love" },
-          ].map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="font-serif text-2xl sm:text-3xl font-bold text-amber-400">
-                {s.value}
-              </div>
-              <div className="text-xs text-amber-200/50 mt-1 uppercase tracking-wide">
-                {s.label}
+            {/* Outer frame */}
+            <div className="relative rounded-[1.75rem] p-2.5 bg-card border border-gold/25 shadow-[0_40px_80px_-40px_rgba(87,18,32,0.45)]">
+              <div className="relative rounded-[1.35rem] overflow-hidden aspect-[4/5]">
+                {/* Still image */}
+                <Image
+                  src="/gallery/photo4.jpeg"
+                  alt="Blessed darshan of Shri Guruji Nakur Wale Baba Ji"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  className={`object-cover transition-opacity duration-500 ${
+                    playing ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+
+                {/* Inline video (revealed on play) */}
+                <video
+                  ref={videoRef}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    playing ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+                  loop
+                  playsInline
+                  poster="/gallery/photo4.jpeg"
+                  onEnded={() => setPlaying(false)}
+                >
+                  <source src="/gallery/video1.mp4" type="video/mp4" />
+                  <source src="/gallery/video2.mp4" type="video/mp4" />
+                </video>
+
+                {/* Bottom gradient + caption */}
+                <div
+                  className="absolute inset-x-0 bottom-0 p-5 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(43,24,18,0.78), transparent)",
+                  }}
+                >
+                  <div className="font-display text-lg font-bold text-paper">
+                    Blessed Darshan
+                  </div>
+                  <div className="text-[11px] text-paper/70 tracking-wide uppercase mt-0.5">
+                    Nakur Ashram
+                  </div>
+                </div>
+
+                {/* Play / Pause */}
+                <button
+                  onClick={togglePlay}
+                  aria-label={playing ? "Pause video" : "Play video"}
+                  className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+                >
+                  {!playing && (
+                    <motion.span
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.94 }}
+                      className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl"
+                      style={{ background: "rgba(255,253,248,0.92)" }}
+                    >
+                      <Play size={26} className="text-maroon ml-1" fill="currentColor" />
+                    </motion.span>
+                  )}
+                </button>
+
+                {/* Controls when playing */}
+                {playing && (
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    <button
+                      onClick={toggleMute}
+                      aria-label={muted ? "Unmute" : "Mute"}
+                      className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-110"
+                      style={{
+                        background: "rgba(43,24,18,0.55)",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      {muted ? (
+                        <VolumeX size={15} className="text-paper/80" />
+                      ) : (
+                        <Volume2 size={15} className="text-marigold" />
+                      )}
+                    </button>
+                    <button
+                      onClick={togglePlay}
+                      aria-label="Pause"
+                      className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-transform hover:scale-110"
+                      style={{
+                        background: "rgba(43,24,18,0.55)",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      <Pause size={15} className="text-paper" fill="currentColor" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
-          ))}
-        </motion.div>
+
+            {/* Decorative caption tag */}
+            <div className="hidden lg:flex absolute -bottom-5 right-6 z-20 items-center gap-2 px-4 py-2 rounded-full bg-card border border-gold/30 shadow-md">
+              <span className="text-saffron text-sm">✦</span>
+              <span className="text-xs font-medium text-maroon">
+                Watch a moment of grace
+              </span>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll cue */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
+        transition={{ delay: 1.4 }}
         onClick={() => scrollTo("#about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-amber-400/50 hover:text-amber-400 transition-colors cursor-pointer"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-1.5 text-ink-faint hover:text-maroon transition-colors cursor-pointer"
       >
-        <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
         <motion.div
-          animate={{ y: [0, 7, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity }}
         >
           <ChevronDown size={18} />

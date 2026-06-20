@@ -37,7 +37,7 @@ interface VideoData {
   label: string
 }
 
-function VideoCard({ video, index }: { video: VideoData; index: number }) {
+function VideoCard({ video }: { video: VideoData }) {
   const [playing, setPlaying] = useState(false)
   const [muted, setMuted]     = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -75,15 +75,10 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
       variants={fadeUp}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.25 }}
-      className="flex flex-col rounded-3xl overflow-hidden"
-      style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(212,168,67,0.16)",
-        boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
-      }}
+      className="paper-card flex flex-col rounded-3xl overflow-hidden"
     >
       {/* ── Video area — fixed aspect ratio so both cards are always equal ── */}
-      <div className="relative aspect-video bg-black overflow-hidden">
+      <div className="relative aspect-video bg-maroon-deep overflow-hidden">
         {/* Video — NO muted prop */}
         <video
           ref={videoRef}
@@ -101,16 +96,16 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
         {!playing && (
           <div
             className="absolute inset-0 flex items-center justify-center"
-            style={{ background: "rgba(0,0,0,0.35)" }}
+            style={{ background: "rgba(43,24,18,0.3)" }}
             onClick={handlePlay}
           >
             <motion.div
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.93 }}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center cursor-pointer shadow-2xl shadow-amber-400/35"
-              style={{ background: "rgba(212,168,67,0.92)" }}
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center cursor-pointer shadow-xl"
+              style={{ background: "rgba(255,253,248,0.94)" }}
             >
-              <Play size={28} className="text-slate-900 ml-1" fill="currentColor" />
+              <Play size={28} className="text-maroon ml-1" fill="currentColor" />
             </motion.div>
           </div>
         )}
@@ -118,12 +113,9 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
         {/* Top bar: label + pause button (only when playing) */}
         <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
           <span
-            className="text-[11px] font-bold tabular-nums px-2.5 py-1 rounded-full"
+            className="text-[11px] font-bold tabular-nums px-2.5 py-1 rounded-full text-paper"
             style={{
-              background: "rgba(0,0,0,0.55)",
-              backdropFilter: "blur(8px)",
-              color: "#fde68a",
-              border: "1px solid rgba(212,168,67,0.2)",
+              background: "rgba(224,122,30,0.85)",
             }}
           >
             {video.label}
@@ -135,12 +127,12 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
               aria-label="Pause"
               className="pointer-events-auto w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110"
               style={{
-                background: "rgba(0,0,0,0.55)",
+                background: "rgba(43,24,18,0.55)",
                 backdropFilter: "blur(8px)",
-                border: "1px solid rgba(255,255,255,0.15)",
+                border: "1px solid rgba(255,253,248,0.15)",
               }}
             >
-              <Pause size={15} className="text-white" fill="currentColor" />
+              <Pause size={15} className="text-paper" fill="currentColor" />
             </button>
           )}
         </div>
@@ -152,14 +144,14 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
             aria-label={muted ? "Unmute" : "Mute"}
             className="pointer-events-auto w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110"
             style={{
-              background: "rgba(0,0,0,0.55)",
+              background: "rgba(43,24,18,0.55)",
               backdropFilter: "blur(8px)",
-              border: "1px solid rgba(255,255,255,0.15)",
+              border: "1px solid rgba(255,253,248,0.15)",
             }}
           >
             {muted
-              ? <VolumeX size={15} className="text-white/60" />
-              : <Volume2 size={15} className="text-amber-400" />
+              ? <VolumeX size={15} className="text-paper/70" />
+              : <Volume2 size={15} className="text-marigold" />
             }
           </button>
         </div>
@@ -175,10 +167,10 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
       {/* ── Info bar ── */}
       <div className="px-5 py-4 flex items-center justify-between">
         <div>
-          <h3 className="font-serif text-base sm:text-lg font-bold text-amber-50 leading-tight">
+          <h3 className="font-display text-base sm:text-lg font-bold text-ink leading-tight">
             {video.title}
           </h3>
-          <p className="text-amber-200/50 text-xs mt-0.5">{video.subtitle}</p>
+          <p className="text-ink-soft text-xs mt-0.5">{video.subtitle}</p>
         </div>
         <button
           onClick={handlePlay}
@@ -187,13 +179,13 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
           style={
             playing
               ? {
-                  background: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  color: "#fde68a",
+                  background: "rgba(123,30,43,0.07)",
+                  border: "1px solid rgba(123,30,43,0.2)",
+                  color: "#7b1e2b",
                 }
               : {
-                  background: "linear-gradient(135deg,#f59e0b,#d4a843)",
-                  color: "#1a0a00",
+                  background: "linear-gradient(135deg,#f1a93a,#e07a1e)",
+                  color: "#fffdf8",
                 }
           }
         >
@@ -208,16 +200,8 @@ function VideoCard({ video, index }: { video: VideoData; index: number }) {
 
 export default function VideoGallery() {
   return (
-    <section id="videos" className="relative py-24 sm:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 50% at 50% 50%, rgba(88,28,135,0.1), transparent)",
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="videos" className="relative py-24 sm:py-32 overflow-hidden bg-paper">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -226,26 +210,25 @@ export default function VideoGallery() {
           variants={stagger}
           className="text-center mb-12"
         >
-          <motion.span
-            variants={fadeUp}
-            className="text-amber-400 text-xs font-semibold uppercase tracking-[0.25em]"
-          >
+          <motion.span variants={fadeUp} className="eyebrow">
             Ashram Recordings
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-amber-50"
+            className="mt-3 font-display text-4xl sm:text-5xl font-bold text-ink"
           >
-            Sacred <span className="gold-text">Videos</span>
+            Sacred <span className="accent-text">Videos</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm"
+            className="mt-4 text-ink-soft max-w-xl mx-auto text-[0.95rem]"
           >
             Immerse yourself in the divine atmosphere of Guruji&apos;s ashram.
             Click play — sound is on.
           </motion.p>
-          <motion.div variants={fadeUp} className="section-divider" />
+          <motion.div variants={fadeUp} className="ornament">
+            <span>✦</span>
+          </motion.div>
         </motion.div>
 
         {/* Equal-size video grid */}
@@ -256,8 +239,8 @@ export default function VideoGallery() {
           variants={stagger}
           className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto"
         >
-          {VIDEOS.map((v, i) => (
-            <VideoCard key={v.src} video={v} index={i} />
+          {VIDEOS.map((v) => (
+            <VideoCard key={v.src} video={v} />
           ))}
         </motion.div>
       </div>
