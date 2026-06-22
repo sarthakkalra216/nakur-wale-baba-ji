@@ -78,7 +78,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            poster="/images/photo3.jpg"
+            preload="auto"
             onError={() => setVideoError(true)}
           >
             <source src="/background%20effect/hero-bg.mp4" type="video/mp4" />

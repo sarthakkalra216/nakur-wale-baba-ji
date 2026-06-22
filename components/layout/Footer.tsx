@@ -5,15 +5,14 @@ import { RamBackground } from "@/components/decor/SacredBackground"
 const LOCATION = "Nakur, Saharanpur, Uttar Pradesh"
 
 const CONTACT = {
-  address: "Shri Guruji Ashram, Nakur, District Saharanpur, Uttar Pradesh — 247341",
-  phone: "+91 XXXXX XXXXX",
-  email: "info@gurujinakurwale.com",
+  address: "Pant Vihar, Saharanpur, Uttar Pradesh",
+  email: "nakurwalebabai@gmail.com",
 }
 
 const SOCIAL = {
-  youtube: "https://youtube.com/@GurujNakurWale",
-  facebook: "https://facebook.com/GurujNakurWale",
-  instagram: "https://instagram.com/GurujNakurWale",
+  youtube: "https://www.youtube.com/@bawavideo",
+  facebook: "https://www.facebook.com/bawajinakurwale",
+  instagram: "https://www.instagram.com/nakur_wale_baba_ji/",
 }
 
 const NAV = [
@@ -109,11 +108,6 @@ export default function Footer() {
             </h3>
             <address className="not-italic space-y-3 text-sm text-amber-100/55">
               <p>{CONTACT.address}</p>
-              <p>
-                <a href={`tel:${CONTACT.phone}`} className="hover:text-amber-400 transition-colors">
-                  {CONTACT.phone}
-                </a>
-              </p>
               <p>
                 <a href={`mailto:${CONTACT.email}`} className="hover:text-amber-400 transition-colors">
                   {CONTACT.email}

@@ -28,7 +28,8 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
     if (videoRef.current) videoRef.current.muted = muted
   })
 
-  // Read the video's true aspect ratio so it displays uncropped.
+  // Read each video's real aspect ratio so its card matches its shape
+  // (portrait or landscape) — like the photo gallery's masonry.
   const onMeta = () => {
     const v = videoRef.current
     if (v && v.videoWidth && v.videoHeight) setRatio(v.videoWidth / v.videoHeight)
@@ -62,17 +63,17 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
       variants={fadeUp}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.25 }}
-      className="group relative rounded-3xl overflow-hidden"
+      className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl"
       style={{
         background: "#000",
         border: "1px solid rgba(212,168,67,0.18)",
         boxShadow: "0 24px 64px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Video area — sizes to the video's own aspect ratio, shown uncropped */}
+      {/* Card sizes to the video's own aspect ratio — fills it fully, no bars */}
       <div
         className="relative w-full"
-        style={{ aspectRatio: ratio ?? 16 / 9, background: "#000" }}
+        style={{ aspectRatio: ratio ?? 9 / 16, background: "#000" }}
       >
         <video
           ref={videoRef}
@@ -206,7 +207,7 @@ export default function VideoGallery({ videos }: { videos: VideoItem[] }) {
             whileInView="show"
             viewport={{ once: true }}
             variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-start"
+            className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto"
           >
             {videos.map((v, i) => (
               <VideoCard key={v.src} video={v} index={i} />

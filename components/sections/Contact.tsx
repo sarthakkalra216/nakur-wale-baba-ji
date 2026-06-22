@@ -2,15 +2,18 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, MessageCircle, CheckCircle, Send } from "lucide-react"
+import { MapPin, Mail, CheckCircle, Send, ExternalLink } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
 
 const CONTACT = {
-  address: "Shri Guruji Ashram, Nakur, District Saharanpur, Uttar Pradesh — 247341",
-  phone: "+91 XXXXX XXXXX",
-  email: "info@gurujinakurwale.com",
-  whatsapp: "+91 XXXXX XXXXX",
+  address: "Pant Vihar, Saharanpur, Uttar Pradesh",
+  email: "nakurwalebabai@gmail.com",
 }
+
+// Web3Forms access key. Get a free key at https://web3forms.com using the email
+// nakurwalebabai@gmail.com — submissions are delivered straight to that inbox.
+// Paste the key you receive below (it is safe to expose; Web3Forms keys are public).
+const WEB3FORMS_ACCESS_KEY = "af8b1bf1-411e-451f-9f51-2550f250092e"
 
 interface FormState {
   name: string
@@ -34,6 +37,7 @@ export default function Contact() {
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,10 +49,36 @@ export default function Contact() {
     e.preventDefault()
     if (!form.name || !form.message) return
     setSubmitting(true)
-    // Simulate submit
-    await new Promise((r) => setTimeout(r, 1200))
-    setSubmitting(false)
-    setSubmitted(true)
+    setError(null)
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New message from Guruji website contact form",
+          from_name: "Nakur Wale Baba Ji Website",
+          cc: ["sarthakkalra34@gmail.com"],
+          name: form.name,
+          email: form.email || "Not provided",
+          phone: form.phone || "Not provided",
+          message: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSubmitted(true)
+      } else {
+        setError(data.message || "Something went wrong. Please try again.")
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputClass =
@@ -222,6 +252,10 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+
+                {error && (
+                  <p className="text-red-400 text-xs text-center">{error}</p>
+                )}
               </form>
             )}
           </motion.div>
@@ -248,7 +282,6 @@ export default function Contact() {
 
               {[
                 { icon: <MapPin size={16} />, label: "Address", value: CONTACT.address },
-                { icon: <Phone size={16} />, label: "Phone", value: CONTACT.phone },
                 { icon: <Mail size={16} />, label: "Email", value: CONTACT.email },
               ].map((item) => (
                 <div key={item.label} className="flex gap-3">
@@ -271,81 +304,46 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* WhatsApp */}
-            <a
-              href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-5 rounded-2xl transition-all duration-300 hover:scale-[1.02] group"
-              style={{
-                background: "linear-gradient(135deg,rgba(37,211,102,0.1),rgba(18,140,126,0.1))",
-                border: "1px solid rgba(37,211,102,0.2)",
-              }}
-            >
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0"
-                style={{ background: "linear-gradient(135deg,#25d366,#128c7e)" }}
-              >
-                <MessageCircle size={22} className="text-white" />
-              </div>
-              <div>
-                <div className="text-emerald-400 font-semibold text-sm">
-                  Chat on WhatsApp
-                </div>
-                <div className="text-amber-100/50 text-xs">
-                  Instant response for seva & satsang queries
-                </div>
-              </div>
-            </a>
-
-            {/* Map placeholder */}
+            {/* Map */}
             <div
-              className="rounded-2xl overflow-hidden aspect-video relative"
+              className="rounded-2xl overflow-hidden"
               style={{
-                background: "linear-gradient(135deg,#0d0520,#1e0531,#0d0520)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <MapPin size={28} className="text-amber-400/50" />
-                <p className="text-amber-200/40 text-xs text-center px-4">
-                  Nakur, Saharanpur, Uttar Pradesh
-                  <br />
-                  <span className="text-[10px] text-amber-200/25">
-                    (Embed Google Map here)
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            {/* Satsang timings */}
-            <div
-              className="p-5 rounded-2xl"
-              style={{
-                background: "rgba(212,168,67,0.05)",
+                background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(212,168,67,0.13)",
               }}
             >
-              <h4 className="text-amber-400 font-semibold text-sm mb-3">
-                🕉 Daily Satsang Timings
-              </h4>
-              {[
-                { time: "5:30 AM", event: "Brahma Muhurta Aarti" },
-                { time: "7:00 AM", event: "Morning Satsang" },
-                { time: "12:00 PM", event: "Langar Seva" },
-                { time: "7:00 PM", event: "Evening Kirtan & Aarti" },
-              ].map((t) => (
-                <div
-                  key={t.time}
-                  className="flex items-center justify-between py-1.5 border-b border-white/[0.04] last:border-0"
-                >
-                  <span className="text-amber-200/50 text-xs">{t.event}</span>
-                  <span className="text-amber-400 text-xs font-semibold">{t.time}</span>
+              <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3">
+                <div className="flex items-center gap-2 text-amber-50">
+                  <MapPin size={16} className="text-amber-400 shrink-0" />
+                  <h3 className="font-serif text-lg font-semibold">
+                    Find the Ashram
+                  </h3>
                 </div>
-              ))}
-              <p className="text-amber-200/30 text-[10px] mt-2">
-                * Timings may vary during special events. Please confirm before visiting.
-              </p>
+                <a
+                  href="https://www.google.com/maps/dir/?api=1&destination=Nakur+Wale+Baba+Ji+Ka+Ashram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-amber-400 text-xs font-medium hover:text-amber-300 transition-colors shrink-0"
+                >
+                  Directions
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+              <div className="relative aspect-video mx-3 mb-3 rounded-xl overflow-hidden ring-1 ring-amber-400/15">
+                <iframe
+                  title="Nakur Wale Baba Ji Ka Ashram location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d216.07798300968773!2d77.53344246072008!3d29.94355222826942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eeb753256bc79%3A0x6774fd08e0a36e90!2sNakur%20Wale%20Baba%20Ji%20Ka%20Ashram!5e0!3m2!1sen!2sin!4v1782116314659!5m2!1sen!2sin"
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    border: 0,
+                    filter:
+                      "invert(0.9) hue-rotate(180deg) brightness(0.95) contrast(0.9)",
+                  }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

@@ -125,7 +125,7 @@ export function RamBackground({ variant = "tiled", opacity, className }: RamBack
         {columns.map((col, ci) => (
           <div
             key={ci}
-            className="absolute inset-y-0 overflow-hidden"
+            className="absolute inset-y-0 overflow-hidden hidden md:block"
             style={col.side === "left" ? { left: EDGE } : { right: EDGE }}
           >
             <div
