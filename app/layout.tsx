@@ -23,26 +23,66 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
   weight: ["400", "500", "600", "700"],
 })
 
+const SITE_URL = "https://nakurwalebabaji.vercel.app"
+const TITLE = "Nakur Wale Baba Ji | Guruji of Nakur, Saharanpur"
+const DESCRIPTION =
+  "Official website of Shri Guruji Nakur Wale Baba Ji — spreading divine wisdom, seva, love, and spiritual awakening from Nakur, Saharanpur. Darshan, gallery, videos, and seva."
+
 export const metadata: Metadata = {
-  title: "Guruji Nakur Wale Baba Ji | Spiritual Wisdom & Seva",
-  description:
-    "Shri Guruji Nakur Wale Baba Ji — Spreading Divine Wisdom, Seva, Love, and Spiritual Awakening from Nakur, Saharanpur.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s | Nakur Wale Baba Ji",
+  },
+  description: DESCRIPTION,
+  applicationName: "Nakur Wale Baba Ji",
   keywords: [
-    "Guruji",
     "Nakur Wale Baba Ji",
-    "Spiritual",
+    "Nakur Wale Babaji",
+    "Guruji Nakur Wale",
+    "Guruji",
+    "Baba Ji Nakur",
+    "Spiritual Guru Saharanpur",
     "Satsang",
-    "Kirtan",
     "Seva",
-    "Wisdom",
+    "Spiritual Wisdom",
     "Nakur",
     "Saharanpur",
+    "Uttar Pradesh",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Guruji Nakur Wale Baba Ji | Spiritual Wisdom & Seva",
-    description:
-      "Spreading Divine Wisdom, Seva, Love, and Spiritual Awakening",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Nakur Wale Baba Ji",
+    locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/images/photo1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Shri Guruji Nakur Wale Baba Ji",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/images/photo1.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
   },
 }
 
