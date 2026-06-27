@@ -15,37 +15,6 @@ const fadeUp = {
 }
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } }
 
-/**
- * Sacred "राम" seal — a slow-spinning mandala ring with a frosted-glass centre
- * holding golden राम calligraphy. Used as a devotional accent in empty corners.
- */
-function RamSeal({ className = "", size = 112 }: { className?: string; size?: number }) {
-  return (
-    <div
-      aria-hidden
-      className={`relative grid place-items-center pointer-events-none select-none ${className}`}
-      style={{ width: size, height: size }}
-    >
-      <div className="absolute inset-0 spin-slow" style={{ opacity: 0.55 }}>
-        <Mandala className="w-full h-full" />
-      </div>
-      <div
-        className="glass ram-breathe grid place-items-center rounded-full"
-        style={{
-          width: size * 0.56,
-          height: size * 0.56,
-          border: "1px solid var(--border-gold)",
-          boxShadow: "var(--card-shadow)",
-        }}
-      >
-        <span className="ram-glyph ram-glyph-gold" style={{ fontSize: size * 0.2, lineHeight: 1 }}>
-          राम
-        </span>
-      </div>
-    </div>
-  )
-}
-
 export default function Successor() {
   const { t, lang } = useSite()
   return (
@@ -117,9 +86,6 @@ export default function Successor() {
               </span>
               <Lotus className="absolute -bottom-5 -left-4 w-36 h-20 opacity-10" />
             </div>
-
-            {/* Ram seal floating at the top-right corner of the panel */}
-            <RamSeal size={96} className="absolute -top-5 -right-5 z-20 hidden sm:grid" />
 
             <motion.div
               initial="hidden"
@@ -260,10 +226,6 @@ export default function Successor() {
                 className="w-full h-auto block"
               />
             </div>
-
-            {/* Ram seals accenting the image stack's empty corners */}
-            <RamSeal size={120} className="absolute -bottom-7 -left-7 z-20" />
-            <RamSeal size={84} className="absolute top-1/2 -right-6 -translate-y-1/2 z-20 hidden sm:grid" />
           </motion.div>
         </div>
       </div>
