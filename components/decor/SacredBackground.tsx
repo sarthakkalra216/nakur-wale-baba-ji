@@ -109,7 +109,7 @@ export function RamBackground({ variant = "tiled", opacity, className }: RamBack
               writingMode: "vertical-rl",
               letterSpacing: "0.35em",
               textShadow:
-                "0 0 18px rgba(245,185,66,0.6), 0 0 6px rgba(245,185,66,0.5)",
+                "0 0 18px var(--ram-glow), 0 0 6px var(--ram-glow)",
             }}
           >
             राम
@@ -270,7 +270,7 @@ export function Mandala({ className }: { className?: string }) {
   const petals = Array.from({ length: 16 })
   return (
     <svg viewBox="0 0 200 200" className={className} fill="none" aria-hidden>
-      <g stroke="#d4a843" strokeWidth="0.6">
+      <g stroke="var(--gold)" strokeWidth="0.6">
         <circle cx="100" cy="100" r="96" />
         <circle cx="100" cy="100" r="78" />
         <circle cx="100" cy="100" r="44" />
@@ -281,7 +281,7 @@ export function Mandala({ className }: { className?: string }) {
             <g key={i} transform={`rotate(${a} 100 100)`}>
               <path
                 d="M100 12 C112 40, 112 60, 100 78 C88 60, 88 40, 100 12 Z"
-                stroke="#e9c46a"
+                stroke="var(--ram-ink)"
                 strokeWidth="0.5"
               />
               <line x1="100" y1="22" x2="100" y2="44" />
@@ -294,7 +294,7 @@ export function Mandala({ className }: { className?: string }) {
             <path d="M100 56 C107 72, 107 84, 100 96 C93 84, 93 72, 100 56 Z" />
           </g>
         ))}
-        <circle cx="100" cy="100" r="6" fill="#d4a843" stroke="none" />
+        <circle cx="100" cy="100" r="6" fill="var(--gold)" stroke="none" />
       </g>
     </svg>
   )
@@ -304,7 +304,7 @@ export function Mandala({ className }: { className?: string }) {
 export function Lotus({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 120 70" className={className} fill="none" aria-hidden>
-      <g stroke="#d4a843" strokeWidth="1" strokeLinecap="round">
+      <g stroke="var(--ram-ink)" strokeWidth="1" strokeLinecap="round">
         <path d="M60 64 C60 30, 60 22, 60 10 C66 26, 66 46, 60 64 Z" />
         <path d="M60 64 C48 34, 40 28, 30 20 C44 30, 56 46, 60 64 Z" />
         <path d="M60 64 C72 34, 80 28, 90 20 C76 30, 64 46, 60 64 Z" />
