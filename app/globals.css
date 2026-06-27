@@ -232,11 +232,17 @@ body {
   from { opacity: 0.1; }
   to { opacity: 0.5; }
 }
+/* On the cream theme the terracotta watermark needs a higher floor to read */
+@keyframes ram-glow-pulse-strong {
+  from { opacity: 0.45; }
+  to { opacity: 0.85; }
+}
 
 .ram-float-y { animation: ram-float-y 14s ease-in-out infinite; }
 .ram-breathe { animation: ram-breathe 9s ease-in-out infinite; }
 .ram-scroll-y { animation: ram-scroll-y 60s linear infinite; }
 .ram-glow-pulse { animation: ram-glow-pulse 1.5s ease-in-out infinite alternate; }
+[data-theme="light"] .ram-glow-pulse { animation-name: ram-glow-pulse-strong; }
 .spin-slow { animation: spin-slow 90s linear infinite; }
 .spin-slow-rev { animation: spin-slow-rev 120s linear infinite; }
 
@@ -252,4 +258,6 @@ body {
   .marquee-right {
     animation: none !important;
   }
+  /* Keep the cream-theme side watermark legible without the pulse */
+  [data-theme="light"] .ram-glow-pulse { opacity: 0.6 !important; }
 }
