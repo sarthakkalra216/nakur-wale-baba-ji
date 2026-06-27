@@ -27,8 +27,10 @@ export default function Successor() {
             "radial-gradient(ellipse 60% 50% at 100% 50%, rgba(88,28,135,0.14), transparent), radial-gradient(ellipse 45% 45% at 0% 50%, rgba(212,168,67,0.06), transparent)",
         }}
       />
-      {/* Sacred राम watermark — moving columns (one up, one down) */}
-      <RamBackground variant="vertical" opacity={0.3} />
+      {/* Sacred राम watermark — vertical columns on desktop, horizontal
+          marquee rows on mobile (columns crowd the narrow phone width). */}
+      <RamBackground variant="vertical" opacity={0.3} className="hidden md:block" />
+      <RamBackground variant="marquee" opacity={0.08} className="md:hidden" />
 
       {/* Faint mandalas filling the flat corners */}
       <div aria-hidden className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">

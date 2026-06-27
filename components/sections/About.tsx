@@ -25,8 +25,10 @@ export default function About() {
             "radial-gradient(ellipse 65% 55% at 100% 50%, rgba(88,28,135,0.13), transparent), radial-gradient(ellipse 40% 40% at 0% 50%, rgba(212,168,67,0.05), transparent)",
         }}
       />
-      {/* Sacred राम watermark — moving columns (one up, one down) */}
-      <RamBackground variant="vertical" opacity={0.3} />
+      {/* Sacred राम watermark — vertical columns on desktop, horizontal
+          marquee rows on mobile (columns crowd the narrow phone width). */}
+      <RamBackground variant="vertical" opacity={0.3} className="hidden md:block" />
+      <RamBackground variant="marquee" opacity={0.08} className="md:hidden" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

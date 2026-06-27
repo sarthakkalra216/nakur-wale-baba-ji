@@ -113,9 +113,32 @@ function JourneyRow({ ch, i, lang }: { ch: Chapter; i: number; lang: Lang }) {
 
   return (
     <div ref={ref} className="relative">
-      {/* Node on the central rail (desktop) / left rail (mobile) */}
+      {/* Mobile: horizontal divider with a centred node, sitting in the gap
+          between chapters (no divider above the first row). */}
+      {i > 0 && (
+        <div className="md:hidden flex items-center gap-3 mb-10" aria-hidden>
+          <span
+            className="h-px flex-1"
+            style={{ background: "linear-gradient(to right, transparent, var(--gold))" }}
+          />
+          <span
+            className="w-2.5 h-2.5 rounded-full shrink-0"
+            style={{
+              background: "var(--bg)",
+              border: "2px solid var(--gold)",
+              boxShadow: "0 0 12px rgba(212,168,67,0.55)",
+            }}
+          />
+          <span
+            className="h-px flex-1"
+            style={{ background: "linear-gradient(to left, transparent, var(--gold))" }}
+          />
+        </div>
+      )}
+
+      {/* Node on the central rail — desktop only */}
       <div
-        className="absolute top-3 left-[12px] md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full z-10"
+        className="hidden md:block absolute top-3 md:left-1/2 md:-translate-x-1/2 w-3.5 h-3.5 rounded-full z-10"
         style={{
           background: "var(--bg)",
           border: "2px solid var(--gold)",
@@ -125,7 +148,7 @@ function JourneyRow({ ch, i, lang }: { ch: Chapter; i: number; lang: Lang }) {
 
       <motion.div
         style={{ y, opacity }}
-        className="pl-12 md:pl-0 grid gap-5 md:grid-cols-2 md:gap-12 items-center will-change-transform"
+        className="grid gap-5 md:grid-cols-2 md:gap-12 items-center will-change-transform"
       >
         <div className={imageLeft ? "md:order-1" : "md:order-2"}>{imageBlock}</div>
         <div className={imageLeft ? "md:order-2" : "md:order-1"}>{textBlock}</div>
@@ -148,8 +171,10 @@ export default function LifeJourney() {
             "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(88,28,135,0.16), transparent), radial-gradient(ellipse 50% 45% at 50% 100%, rgba(212,168,67,0.05), transparent)",
         }}
       />
-      {/* Sacred राम vertical watermark */}
-      <RamBackground variant="vertical" opacity={0.3} />
+      {/* Sacred राम watermark — vertical columns on desktop; on mobile they
+          crowd the narrow column, so use horizontal राम marquee rows instead. */}
+      <RamBackground variant="vertical" opacity={0.3} className="hidden md:block" />
+      <RamBackground variant="marquee" opacity={0.08} className="md:hidden" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -203,12 +228,14 @@ export default function LifeJourney() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Vertical rail — left on mobile, centered on desktop */}
+          {/* Vertical rail — desktop only (centred). On mobile the timeline
+              uses horizontal dividers between chapters instead. */}
           <div
-            className="absolute left-[18px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-px"
+            className="hidden md:block absolute md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-px"
             style={{
               background:
-                "linear-gradient(to bottom, transparent, var(--border-gold), var(--border-gold), transparent)",
+                "linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent)",
+              opacity: 0.55,
             }}
           />
 
