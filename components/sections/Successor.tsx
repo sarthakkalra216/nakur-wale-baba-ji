@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Award } from "lucide-react"
-import { RamBackground, Lotus } from "@/components/decor/SacredBackground"
+import { RamBackground, Lotus, Mandala } from "@/components/decor/SacredBackground"
 import { useSite } from "@/components/providers/SiteProvider"
 
 // सद्गुरुदेव की उत्तराधिकारिणी — सुश्री देवी सुदीक्षा सरस्वती जी (राष्ट्रपति पदक से सम्मानित)
@@ -14,6 +14,37 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
 }
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } }
+
+/**
+ * Sacred "राम" seal — a slow-spinning mandala ring with a frosted-glass centre
+ * holding golden राम calligraphy. Used as a devotional accent in empty corners.
+ */
+function RamSeal({ className = "", size = 112 }: { className?: string; size?: number }) {
+  return (
+    <div
+      aria-hidden
+      className={`relative grid place-items-center pointer-events-none select-none ${className}`}
+      style={{ width: size, height: size }}
+    >
+      <div className="absolute inset-0 spin-slow" style={{ opacity: 0.55 }}>
+        <Mandala className="w-full h-full" />
+      </div>
+      <div
+        className="glass ram-breathe grid place-items-center rounded-full"
+        style={{
+          width: size * 0.56,
+          height: size * 0.56,
+          border: "1px solid var(--border-gold)",
+          boxShadow: "var(--card-shadow)",
+        }}
+      >
+        <span className="ram-glyph ram-glyph-gold" style={{ fontSize: size * 0.2, lineHeight: 1 }}>
+          राम
+        </span>
+      </div>
+    </div>
+  )
+}
 
 export default function Successor() {
   const { t, lang } = useSite()
@@ -29,6 +60,16 @@ export default function Successor() {
       />
       {/* Sacred राम watermark — moving columns (one up, one down) */}
       <RamBackground variant="vertical" opacity={0.3} />
+
+      {/* Faint mandalas filling the flat corners */}
+      <div aria-hidden className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
+        <div className="absolute -left-28 top-10 w-80 h-80 spin-slow-rev" style={{ opacity: 0.05 }}>
+          <Mandala className="w-full h-full" />
+        </div>
+        <div className="absolute -right-32 bottom-4 w-[26rem] h-[26rem] spin-slow" style={{ opacity: 0.05 }}>
+          <Mandala className="w-full h-full" />
+        </div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -61,14 +102,32 @@ export default function Successor() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Content — LEFT (on desktop) */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="order-2 lg:order-1"
+          {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
+          <div
+            className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
+            style={{ border: "1px solid var(--border-gold)", boxShadow: "var(--card-shadow)" }}
           >
+            {/* Decorative back layer — faint राम + lotus filling the panel corners */}
+            <div aria-hidden className="absolute inset-0 z-0 pointer-events-none select-none">
+              <span
+                className="ram-glyph absolute -top-8 -right-3"
+                style={{ fontSize: "8rem", lineHeight: 1, opacity: 0.06 }}
+              >
+                राम
+              </span>
+              <Lotus className="absolute -bottom-5 -left-4 w-36 h-20 opacity-10" />
+            </div>
+
+            {/* Ram seal floating at the top-right corner of the panel */}
+            <RamSeal size={96} className="absolute -top-5 -right-5 z-20 hidden sm:grid" />
+
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="relative z-10"
+            >
             <motion.div variants={fadeUp} className="mb-8">
               <span
                 className="font-hindi gold-text font-bold text-5xl sm:text-6xl lg:text-7xl inline-block"
@@ -90,25 +149,31 @@ export default function Successor() {
               </motion.p>
             ))}
 
-            {/* Sacred couplets */}
+            {/* Sacred couplets — glass strip over a slow mandala */}
             <motion.div
               variants={fadeUp}
-              className="my-6 py-4 px-5 rounded-2xl text-center"
-              style={{
-                background: "var(--surface-2)",
-                border: "1px solid var(--border-gold)",
-              }}
+              className="relative my-7 py-5 px-5 rounded-2xl text-center overflow-hidden glass"
+              style={{ border: "1px solid var(--border-gold)" }}
             >
-              {t.successor.couplets.map((c) => (
-                <p
-                  key={c}
-                  lang={lang}
-                  className="font-hindi italic text-base sm:text-lg leading-relaxed"
-                  style={{ color: "var(--gold)" }}
-                >
-                  {c}
-                </p>
-              ))}
+              <div
+                aria-hidden
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 spin-slow pointer-events-none"
+                style={{ opacity: 0.1 }}
+              >
+                <Mandala className="w-full h-full" />
+              </div>
+              <div className="relative z-10">
+                {t.successor.couplets.map((c) => (
+                  <p
+                    key={c}
+                    lang={lang}
+                    className="font-hindi italic text-base sm:text-lg leading-relaxed"
+                    style={{ color: "var(--gold)" }}
+                  >
+                    {c}
+                  </p>
+                ))}
+              </div>
             </motion.div>
 
             <motion.p
@@ -150,7 +215,8 @@ export default function Successor() {
                 </span>
               </div>
             </motion.div>
-          </motion.div>
+            </motion.div>
+          </div>
 
           {/* Image — RIGHT (on desktop), shown first on mobile */}
           <motion.div
@@ -194,6 +260,10 @@ export default function Successor() {
                 className="w-full h-auto block"
               />
             </div>
+
+            {/* Ram seals accenting the image stack's empty corners */}
+            <RamSeal size={120} className="absolute -bottom-7 -left-7 z-20" />
+            <RamSeal size={84} className="absolute top-1/2 -right-6 -translate-y-1/2 z-20 hidden sm:grid" />
           </motion.div>
         </div>
       </div>
