@@ -4,6 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { RamBackground, Lotus } from "@/components/decor/SacredBackground"
+import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 import type { Lang } from "@/lib/i18n"
 
@@ -55,26 +56,42 @@ function JourneyRow({ ch, i, lang }: { ch: Chapter; i: number; lang: Lang }) {
   // Even rows: image left / text right. Odd rows: text left / image right.
   const imageLeft = i % 2 === 0
 
+  // The photo drifts a little further than its text and sways a hair as it
+  // passes — a second parallax layer that gives each chapter real depth.
+  // Scroll-proportional (never autonomous), like the row's own y/opacity.
+  const imageY = useTransform(scrollYProgress, [0, 1], [34, -34])
+  const imageRotate = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    imageLeft ? [-1.6, 0, 1.2] : [1.6, 0, -1.2]
+  )
+
   const imageBlock = (
-    <div
-      className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl"
-      style={{ background: "var(--surface-2)" }}
-    >
-      <Image
-        src={ch.image}
-        alt={ch.title}
-        fill
-        className="object-contain"
-        sizes="(max-width: 768px) 100vw, 420px"
-      />
-      <div
-        className="absolute inset-0 pointer-events-none rounded-2xl"
-        style={{
-          border: "1px solid var(--border-gold)",
-          boxShadow: "inset 0 0 40px rgba(0,0,0,0.12)",
-        }}
-      />
-    </div>
+    <motion.div style={{ y: imageY, rotate: imageRotate }}>
+      <TiltCard
+        maxTilt={6}
+        lift={4}
+        scale={1.015}
+        glare
+        className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl"
+        style={{ background: "var(--surface-2)" }}
+      >
+        <Image
+          src={ch.image}
+          alt={ch.title}
+          fill
+          className="object-contain"
+          sizes="(max-width: 768px) 100vw, 420px"
+        />
+        <div
+          className="absolute inset-0 pointer-events-none rounded-2xl"
+          style={{
+            border: "1px solid var(--border-gold)",
+            boxShadow: "inset 0 0 40px rgba(0,0,0,0.12)",
+          }}
+        />
+      </TiltCard>
+    </motion.div>
   )
 
   const textBlock = (

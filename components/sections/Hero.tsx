@@ -1,9 +1,18 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion"
 import Link from "next/link"
 import { ChevronDown, Sparkles, Volume2, VolumeX } from "lucide-react"
+import { Magnetic } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 
 // The hero stays cinematically dark in BOTH themes (it sits over a video), so
@@ -49,6 +58,39 @@ export default function Hero() {
   const [isMuted, setIsMuted] = useState(true)
   const [videoError, setVideoError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const reduced = useReducedMotion()
+
+  // Apple-style scroll depth: as the hero scrolls away, the backdrop drifts
+  // down and zooms while the content rises, shrinks, and fades — layered
+  // parallax that reads as real depth. Transform/opacity only.
+  // Reduced motion flattens the ranges instead of branching the markup —
+  // all ranges start at their resting value, so SSR/client HTML matches
+  // regardless of the user's motion preference.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  })
+  const videoY = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["0%", "24%"])
+  const videoScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1] : [1, 1.14])
+  const contentY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -90])
+  const contentScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1] : [1, 0.95])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], reduced ? [1, 1] : [1, 0])
+
+  // Mouse-follow spotlight — a soft gold/violet glow trailing the cursor.
+  // Starts far offscreen so nothing shows until the mouse enters.
+  const mx = useMotionValue(-1000)
+  const my = useMotionValue(-1000)
+  const spotX = useSpring(mx, { stiffness: 60, damping: 20 })
+  const spotY = useSpring(my, { stiffness: 60, damping: 20 })
+  const spotlight = useMotionTemplate`radial-gradient(560px circle at ${spotX}px ${spotY}px, rgba(245,185,66,0.09), rgba(124,58,237,0.05) 45%, transparent 70%)`
+
+  const onSpotlightMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (reduced || e.pointerType !== "mouse") return
+    const rect = e.currentTarget.getBoundingClientRect()
+    mx.set(e.clientX - rect.left)
+    my.set(e.clientY - rect.top)
+  }
 
   useEffect(() => {
     setParticles(
@@ -79,6 +121,8 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      ref={sectionRef}
+      onPointerMove={onSpotlightMove}
       className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden"
     >
       {/* Base background */}
@@ -86,7 +130,10 @@ export default function Hero() {
 
       {/* Video background — upper portion only, fades into the page colour */}
       {!videoError && (
-        <div className="absolute inset-x-0 top-0 h-[78%] overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute inset-x-0 top-0 h-[78%] overflow-hidden pointer-events-none"
+          style={{ y: videoY, scale: videoScale }}
+        >
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
@@ -108,17 +155,19 @@ export default function Hero() {
                 "linear-gradient(to bottom, transparent 72%, rgba(4,0,12,0.85) 92%, #04000c 100%)",
             }}
           />
-        </div>
+        </motion.div>
       )}
 
       {/* Fallback: photo when video can't load — upper part only */}
       {videoError && (
-        <div
+        <motion.div
           className="absolute inset-x-0 top-0 h-[78%] bg-cover"
           style={{
             backgroundPosition: "center 30%",
             backgroundImage:
               "linear-gradient(to bottom, transparent 40%, #04000c 100%), url('/images/photo3.jpg')",
+            y: videoY,
+            scale: videoScale,
           }}
         />
       )}
@@ -136,6 +185,37 @@ export default function Hero() {
             radial-gradient(ellipse 55% 45% at 15% 55%, rgba(88,28,135,0.14), transparent)
           `,
         }}
+      />
+
+      {/* Cinematic lighting — two soft light blobs drifting slowly through
+          the scene, like temple lamps breathing behind the haze. The global
+          MotionConfig stills them for reduced-motion users. */}
+      <motion.div
+        aria-hidden
+        className="absolute -left-40 top-1/4 w-[36rem] h-[36rem] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(124,58,237,0.14), transparent 65%)",
+          filter: "blur(50px)",
+        }}
+        animate={{ x: [0, 110, 0], y: [0, -70, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute -right-40 top-1/2 w-[32rem] h-[32rem] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(245,185,66,0.1), transparent 65%)",
+          filter: "blur(55px)",
+        }}
+        animate={{ x: [0, -100, 0], y: [0, 80, 0] }}
+        transition={{ duration: 27, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Mouse-follow spotlight (desktop only) */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none hidden md:block"
+        style={{ background: spotlight }}
       />
 
       {/* Subtle grid */}
@@ -188,8 +268,11 @@ export default function Hero() {
         </motion.button>
       )}
 
-      {/* Content */}
-      <div className="relative z-20 px-4 sm:px-6 max-w-4xl mx-auto pt-28 pb-20 sm:py-16">
+      {/* Content — rises, shrinks, and fades as the hero scrolls away */}
+      <motion.div
+        className="relative z-20 px-4 sm:px-6 max-w-4xl mx-auto pt-28 pb-20 sm:py-16"
+        style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.97, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -209,38 +292,51 @@ export default function Hero() {
           <Sparkles size={13} className="animate-pulse" />
         </motion.div>
 
-        {/* Heading */}
+        {/* Heading — each line tips up out of 3D space in sequence */}
         <motion.h1
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="font-hindi font-bold mb-5 sm:mb-6"
+          style={{ perspective: 800 }}
           lang={lang}
         >
-          <span
+          <motion.span
+            initial={{ opacity: 0, y: 34, rotateX: 28 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.85, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="block text-amber-200/90 text-base sm:text-2xl lg:text-3xl mb-2 font-medium"
             style={{ lineHeight: 1.6, paddingBlock: "0.1em" }}
           >
             {t.hero.eyebrow}
-          </span>
-          <span
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, y: 34, rotateX: 28 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.85, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
             className="block text-3xl sm:text-5xl lg:text-6xl"
             style={{ ...goldGradient, lineHeight: 1.5, paddingBlock: "0.14em" }}
           >
             {t.hero.name1}
-          </span>
-          <span
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, y: 34, rotateX: 28 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.85, delay: 0.44, ease: [0.22, 1, 0.36, 1] }}
             className="block text-amber-50 text-3xl sm:text-5xl lg:text-6xl"
             style={{ lineHeight: 1.5, paddingBlock: "0.14em" }}
           >
             {t.hero.name2}
-          </span>
-          <span
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0, y: 34, rotateX: 28 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{ duration: 0.85, delay: 0.56, ease: [0.22, 1, 0.36, 1] }}
             className="block text-2xl sm:text-4xl lg:text-5xl mt-2 sm:mt-3"
             style={{ ...purpleGradient, lineHeight: 1.55, paddingBlock: "0.16em" }}
           >
             {t.hero.name3}
-          </span>
+          </motion.span>
         </motion.h1>
 
         {/* Ornament divider */}
@@ -273,20 +369,24 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.55 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-10 sm:mb-16"
         >
-          <button
-            onClick={() => scrollTo("#about")}
-            className="font-hindi w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 font-bold text-base hover:from-amber-300 hover:to-yellow-400 transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-400/45 hover:scale-105 cursor-pointer"
-            lang={lang}
-          >
-            {t.hero.ctaPrimary}
-          </button>
-          <Link
-            href="/contact"
-            className="font-hindi w-full sm:w-auto px-8 py-4 rounded-full border border-amber-400/40 text-amber-300 font-bold text-base hover:bg-amber-400/10 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 backdrop-blur-sm cursor-pointer text-center"
-            lang={lang}
-          >
-            {t.hero.ctaSecondary}
-          </Link>
+          <Magnetic className="w-full sm:w-auto" strength={0.28}>
+            <button
+              onClick={() => scrollTo("#about")}
+              className="font-hindi w-full px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 font-bold text-base hover:from-amber-300 hover:to-yellow-400 transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-400/45 hover:scale-105 cursor-pointer"
+              lang={lang}
+            >
+              {t.hero.ctaPrimary}
+            </button>
+          </Magnetic>
+          <Magnetic className="w-full sm:w-auto" strength={0.28}>
+            <Link
+              href="/contact"
+              className="font-hindi block w-full px-8 py-4 rounded-full border border-amber-400/40 text-amber-300 font-bold text-base hover:bg-amber-400/10 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 backdrop-blur-sm cursor-pointer text-center"
+              lang={lang}
+            >
+              {t.hero.ctaSecondary}
+            </Link>
+          </Magnetic>
         </motion.div>
 
         {/* Stats */}
@@ -308,7 +408,7 @@ export default function Hero() {
           ))}
         </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <motion.button

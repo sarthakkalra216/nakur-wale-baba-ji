@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Utensils, BookOpen, HeartPulse, Home, Leaf, IndianRupee, ArrowRight } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
+import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 
 // Language-neutral visuals for each seva card; title/description/impact come
@@ -105,12 +106,13 @@ export default function Seva() {
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {sevas.map((seva, idx) => (
-            <motion.div
+            <TiltCard
               key={idx}
               variants={fadeUp}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.25 }}
-              className="group rounded-2xl p-6 flex flex-col gap-4"
+              maxTilt={7}
+              lift={6}
+              glare
+              className="group relative h-full rounded-2xl p-6 flex flex-col gap-4"
               style={{
                 background: seva.gradient,
                 border: "1px solid var(--border)",
@@ -164,7 +166,7 @@ export default function Seva() {
                   className="transition-transform duration-300 group-hover/btn:translate-x-1"
                 />
               </Link>
-            </motion.div>
+            </TiltCard>
           ))}
         </motion.div>
 

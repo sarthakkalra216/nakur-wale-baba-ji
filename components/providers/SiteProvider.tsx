@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useCallback } from "react"
+import { MotionConfig } from "framer-motion"
 import { dict, type Lang, type Dictionary } from "@/lib/i18n"
 
 export type Theme = "light" | "dark"
@@ -69,7 +70,8 @@ export function SiteProvider({
         toggleLang,
       }}
     >
-      {children}
+      {/* Honour prefers-reduced-motion for every Framer Motion animation site-wide */}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </SiteContext.Provider>
   )
 }

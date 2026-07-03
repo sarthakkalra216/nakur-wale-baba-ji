@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { RamBackground, Lotus } from "@/components/decor/SacredBackground"
+import { ImageReveal, Parallax } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 
 // ── परिचय (about me) — स्रोत: public/about me/about me_extracted_text.txt ─────
@@ -68,28 +69,32 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
-              {/* Soft golden halo */}
-              <div
-                className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at 50% 30%, rgba(245,185,66,0.18), transparent 70%)",
-                  filter: "blur(20px)",
-                }}
-              />
-              <Image
-                src="/images/photo2.jpg"
-                alt={t.about.imgAlt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 448px"
-              />
-              <div
-                className="absolute inset-0 rounded-3xl pointer-events-none"
-                style={{ border: "1px solid var(--border-gold)" }}
-              />
-            </div>
+            <Parallax offset={26}>
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
+                {/* Soft golden halo */}
+                <div
+                  className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 50% 30%, rgba(245,185,66,0.18), transparent 70%)",
+                    filter: "blur(20px)",
+                  }}
+                />
+                <ImageReveal fill>
+                  <Image
+                    src="/images/photo2.jpg"
+                    alt={t.about.imgAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 448px"
+                  />
+                </ImageReveal>
+                <div
+                  className="absolute inset-0 rounded-3xl pointer-events-none"
+                  style={{ border: "1px solid var(--border-gold)" }}
+                />
+              </div>
+            </Parallax>
           </motion.div>
 
           {/* Right – bio text */}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Magnetic } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 import SettingsToggles from "@/components/layout/SettingsToggles"
 
@@ -107,13 +108,15 @@ export default function Header() {
           <div className="flex items-center gap-2 sm:gap-3">
             <SettingsToggles />
 
-            <Link
-              href="/contact"
-              className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 font-semibold text-sm px-5 py-2 rounded-full hover:from-amber-400 hover:to-yellow-300 transition-all duration-300 shadow-lg shadow-amber-500/20 hover:scale-105 cursor-pointer"
-              style={{ color: "var(--on-accent)" }}
-            >
-              {t.nav.cta}
-            </Link>
+            <Magnetic className="hidden lg:block" strength={0.25}>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 font-semibold text-sm px-5 py-2 rounded-full hover:from-amber-400 hover:to-yellow-300 transition-all duration-300 shadow-lg shadow-amber-500/20 hover:scale-105 cursor-pointer"
+                style={{ color: "var(--on-accent)" }}
+              >
+                {t.nav.cta}
+              </Link>
+            </Magnetic>
 
             {/* Mobile hamburger */}
             <button

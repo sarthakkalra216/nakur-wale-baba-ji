@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Award } from "lucide-react"
 import { RamBackground, Lotus, Mandala } from "@/components/decor/SacredBackground"
+import { ImageReveal, Parallax } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 
 // सद्गुरुदेव की उत्तराधिकारिणी — सुश्री देवी सुदीक्षा सरस्वती जी (राष्ट्रपति पदक से सम्मानित)
@@ -202,32 +203,38 @@ export default function Successor() {
                 filter: "blur(22px)",
               }}
             />
-            <div
-              className="relative rounded-3xl overflow-hidden"
-              style={{ border: "1px solid var(--border-gold)" }}
-            >
-              <Image
-                src="/images/devi-ji.png"
-                alt={t.successor.imgAlt1}
-                width={0}
-                height={0}
-                sizes="(max-width: 1024px) 100vw, 520px"
-                className="w-full h-auto block"
-              />
-            </div>
-            <div
-              className="relative rounded-3xl overflow-hidden mt-6"
-              style={{ border: "1px solid var(--border-gold)" }}
-            >
-              <Image
-                src="/images/devi-ji2.png"
-                alt={t.successor.imgAlt2}
-                width={0}
-                height={0}
-                sizes="(max-width: 1024px) 100vw, 520px"
-                className="w-full h-auto block"
-              />
-            </div>
+            <Parallax offset={30}>
+              <div
+                className="relative rounded-3xl overflow-hidden"
+                style={{ border: "1px solid var(--border-gold)" }}
+              >
+                <ImageReveal>
+                  <Image
+                    src="/images/devi-ji.png"
+                    alt={t.successor.imgAlt1}
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 1024px) 100vw, 520px"
+                    className="w-full h-auto block"
+                  />
+                </ImageReveal>
+              </div>
+              <div
+                className="relative rounded-3xl overflow-hidden mt-6"
+                style={{ border: "1px solid var(--border-gold)" }}
+              >
+                <ImageReveal delay={0.12}>
+                  <Image
+                    src="/images/devi-ji2.png"
+                    alt={t.successor.imgAlt2}
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 1024px) 100vw, 520px"
+                    className="w-full h-auto block"
+                  />
+                </ImageReveal>
+              </div>
+            </Parallax>
           </motion.div>
         </div>
       </div>

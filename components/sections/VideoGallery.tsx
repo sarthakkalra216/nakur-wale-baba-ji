@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Play, Pause, Volume2, VolumeX, VideoOff } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
 import { AmbientVideo } from "@/components/decor/AmbientVideo"
+import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
 
 export interface VideoItem {
@@ -60,11 +61,13 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
   const label = String(index + 1).padStart(2, "0")
 
   return (
-    <motion.div
+    <TiltCard
       variants={fadeUp}
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.25 }}
-      className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl"
+      maxTilt={5}
+      lift={5}
+      scale={1.015}
+      outerClassName="mb-4 w-full break-inside-avoid"
+      className="group relative block w-full overflow-hidden rounded-2xl"
       style={{
         background: "#000",
         border: "1px solid rgba(212,168,67,0.18)",
@@ -148,7 +151,7 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
           {muted ? <VolumeX size={15} className="text-white/60" /> : <Volume2 size={15} className="text-amber-400" />}
         </button>
       </div>
-    </motion.div>
+    </TiltCard>
   )
 }
 
