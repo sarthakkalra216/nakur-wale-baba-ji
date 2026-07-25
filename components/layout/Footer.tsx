@@ -156,6 +156,9 @@ export default function Footer() {
           <p className="text-xs text-muted-themed" lang={lang}>
             © {new Date().getFullYear()} {t.footer.rights}
           </p>
+          <p className="mt-2 text-[11px] text-muted-themed opacity-70" lang={lang}>
+            {t.footer.trustName}
+          </p>
         </div>
       </div>
     </footer>
