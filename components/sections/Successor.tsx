@@ -195,7 +195,10 @@ export default function Successor() {
           </div>
 
           {/* Images — RIGHT (on desktop), shown first on mobile — three
-              equally-sized portraits in one row: Devi Ji, then both disciples */}
+              equally-sized portraits in one row: Devi Ji, then both disciples.
+              devi-ji-portrait.jpg is a pre-cropped close-up (source:
+              Devi ji/devi-ji.png, a wide side-by-side collage that doesn't
+              crop well into this tall column at arbitrary widths). */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -223,11 +226,10 @@ export default function Successor() {
                   >
                     <ImageReveal fill>
                       <Image
-                        src="/images/Devi%20ji/devi-ji.png"
+                        src="/images/devi-ji-portrait.jpg"
                         alt={t.successor.imgAlt1}
                         fill
                         className="object-cover"
-                        style={{ objectPosition: "18% 55%" }}
                         sizes="(max-width: 1024px) 33vw, 220px"
                       />
                     </ImageReveal>
