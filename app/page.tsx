@@ -1,6 +1,6 @@
 import Hero from "@/components/sections/Hero"
-import Successor from "@/components/sections/Successor"
 import LifeJourney from "@/components/sections/LifeJourney"
+import Successor from "@/components/sections/Successor"
 
 const SITE_URL = "https://nakurwalebabaji.vercel.app"
 
@@ -49,8 +49,8 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Hero />
-      <Successor />
       <LifeJourney />
+      <Successor />
     </main>
   )
 }
