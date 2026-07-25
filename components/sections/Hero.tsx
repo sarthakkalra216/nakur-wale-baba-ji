@@ -137,21 +137,18 @@ export default function Hero() {
               transform produced a persistent GPU compositing seam (a faint
               rainbow line) at the container's clipped edge, independent of
               scroll position. Translate-only avoids it entirely.
-              The fade is a mask on the video itself (not a translucent
-              gradient div stacked on top of it) — a separate overlay div
-              forces two independently-composited layers (hardware-decoded
-              video vs. software-rendered gradient) that can show a seam
-              where they blend in Chrome. Masking keeps it one layer: the
-              video's own alpha fades out, revealing the solid page
-              background that's already behind it. */}
+              No fade-to-black effect on the video either (previously a
+              gradient div, then a mask) — both produced the same seam on
+              the reporter's device/browser and couldn't be reproduced or
+              debugged from here, so it's removed rather than re-tuned
+              again. The video now shows at full brightness within its box
+              and simply ends at a hard edge; the section's other overlays
+              (radial glows, dark tint, grid) still carry the rest of the
+              atmosphere. */}
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              objectPosition: "center 30%",
-              maskImage: "linear-gradient(to bottom, black 68%, transparent 96%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 68%, transparent 96%)",
-            }}
+            style={{ objectPosition: "center 30%" }}
             autoPlay
             muted
             loop
@@ -176,16 +173,6 @@ export default function Hero() {
           }}
         />
       )}
-
-      {/* Solid patch over the video container's bottom edge — masks a faint
-          seam that appears there from GPU layer compositing (the transformed,
-          clipped video box vs. the plain background below), independent of
-          the exact fade/scale tuning. Static, unclipped, untransformed, so it
-          can't introduce a seam of its own. */}
-      <div
-        className="absolute inset-x-0 pointer-events-none"
-        style={{ top: "calc(78% - 20px)", height: "40px", background: "#04000c" }}
-      />
 
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/35" />
