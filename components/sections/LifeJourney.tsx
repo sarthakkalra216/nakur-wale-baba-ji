@@ -212,7 +212,11 @@ export default function LifeJourney() {
           <h2 className="mt-3 font-serif text-3xl sm:text-5xl font-bold text-heading" lang={lang}>
             <span className="gold-text">{t.journey.titleLead}</span> {t.journey.titleEm}
           </h2>
-          <p className="mt-4 ram-glyph text-base sm:text-lg" style={{ opacity: 0.85 }} lang={lang}>
+          <p
+            className="mt-4 ram-glyph text-base sm:text-lg px-2"
+            style={{ opacity: 0.85, whiteSpace: "normal" }}
+            lang={lang}
+          >
             {t.journey.subtitle}
           </p>
           <div className="flex justify-center mt-5">
@@ -271,7 +275,11 @@ export default function LifeJourney() {
           transition={{ duration: 0.7 }}
           className="mt-16 text-center"
         >
-          <p className="ram-glyph text-2xl sm:text-3xl mb-3" style={{ opacity: 0.9 }} lang={lang}>
+          <p
+            className="ram-glyph text-2xl sm:text-3xl mb-3 px-2"
+            style={{ opacity: 0.9, whiteSpace: "normal" }}
+            lang={lang}
+          >
             {t.journey.closingGlyph}
           </p>
           <p className="text-sm text-muted-themed" lang={lang}>
