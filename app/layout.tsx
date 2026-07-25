@@ -90,6 +90,11 @@ export const metadata: Metadata = {
   verification: {
     google: "SgBHMgAA7SiaO7ebWqvptQ6SDj2jbAyIP1t11PTeE2k",
   },
+  // The site already ships its own Hindi/English toggle, so suppress Chrome's
+  // "translate this page?" prompt to avoid a redundant, conflicting UI.
+  other: {
+    google: "notranslate",
+  },
 }
 
 export default async function RootLayout({
@@ -105,7 +110,8 @@ export default async function RootLayout({
       lang={lang}
       data-theme={theme}
       data-lang={lang}
-      className={`${geistSans.variable} ${playfairDisplay.variable} ${notoSerifDevanagari.variable} antialiased`}
+      translate="no"
+      className={`${geistSans.variable} ${playfairDisplay.variable} ${notoSerifDevanagari.variable} antialiased notranslate`}
     >
       <body className="min-h-screen bg-page text-body overflow-x-hidden">
         <SiteProvider initialTheme={theme} initialLang={lang}>
