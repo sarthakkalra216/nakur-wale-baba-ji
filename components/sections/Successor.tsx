@@ -10,6 +10,13 @@ import { useSite } from "@/components/providers/SiteProvider"
 // सद्गुरुदेव की उत्तराधिकारिणी — सुश्री देवी सुदीक्षा सरस्वती जी (राष्ट्रपति पदक से सम्मानित)
 // स्रोत: public/about me/about me_extracted_text.txt (अंतिम अनुच्छेद)
 
+// Disciple portraits shown beside the समर्पण text — names always Hindi,
+// independent of the site's language toggle (names, not translatable copy).
+const DISCIPLES = [
+  { src: "/images/Devi%20ji/photo29.jpg.jpeg", name: "सुश्री सौम्या सरस्वती जी" },
+  { src: "/images/Devi%20ji/photo30.jpg.jpeg", name: "सुश्री समीक्षा सरस्वती जी" },
+]
+
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
@@ -73,7 +80,7 @@ export default function Successor() {
           </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr] gap-10 lg:gap-10 items-start">
           {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
           <div
             className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
@@ -234,6 +241,51 @@ export default function Successor() {
                   />
                 </ImageReveal>
               </div>
+            </Parallax>
+          </motion.div>
+
+          {/* Disciples — aside the समर्पण text, third column on desktop */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="order-3 relative max-w-xl mx-auto lg:mx-0 w-full"
+          >
+            <div
+              className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 35%, rgba(245,185,66,0.18), transparent 70%)",
+                filter: "blur(22px)",
+              }}
+            />
+            <Parallax offset={30}>
+              {DISCIPLES.map((p, i) => (
+                <div key={p.src} className={i > 0 ? "mt-6" : undefined}>
+                  <div
+                    className="relative rounded-3xl overflow-hidden"
+                    style={{ border: "1px solid var(--border-gold)" }}
+                  >
+                    <ImageReveal delay={i * 0.12}>
+                      <Image
+                        src={p.src}
+                        alt={p.name}
+                        width={0}
+                        height={0}
+                        sizes="(max-width: 1024px) 100vw, 400px"
+                        className="w-full h-auto block"
+                      />
+                    </ImageReveal>
+                  </div>
+                  <p
+                    className="mt-3 text-center font-serif text-sm sm:text-base font-semibold text-heading"
+                    lang="hi"
+                  >
+                    {p.name}
+                  </p>
+                </div>
+              ))}
             </Parallax>
           </motion.div>
         </div>
