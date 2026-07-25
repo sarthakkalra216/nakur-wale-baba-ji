@@ -80,6 +80,12 @@ const hi = {
       "इसी भाव के साथ — शक्ति देना, भक्ति देना, आशीर्वाद देना — ताकि आपके पुनः आगमन तक मैं आपकी प्रतीक्षा कर सकूँ; क्योंकि यह निश्चित है। आपके सभी प्रेमी भक्तजनों एवं समाज के लिए मंगल-कामना।",
   },
 
+  disciples: {
+    eyebrow: "साध्वी मंडल",
+    titleLead: "पूज्य",
+    titleEm: "साध्वी गण",
+  },
+
   seva: {
     eyebrow: "निःस्वार्थ सेवा",
     titleLead: "सेवा में",
@@ -233,6 +239,12 @@ const en: typeof hi = {
     couplets: ["राम ते अधिक राम कर दासा।", "तुम ते अधिक गुरुहि जिय जानी॥"],
     closing:
       "With this very feeling — grant me strength, grant me devotion, grant me your blessing — so that I may await your return; for it is certain. Blessings and well-wishes upon all your loving devotees and upon society.",
+  },
+
+  disciples: {
+    eyebrow: "Sadhvi Fellowship",
+    titleLead: "Revered",
+    titleEm: "Sadhvis",
   },
 
   seva: {
