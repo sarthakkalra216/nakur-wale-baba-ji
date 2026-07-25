@@ -80,7 +80,7 @@ export default function Successor() {
           </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr] gap-10 lg:gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
           <div
             className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
@@ -194,13 +194,14 @@ export default function Successor() {
             </motion.div>
           </div>
 
-          {/* Image — RIGHT (on desktop), shown first on mobile */}
+          {/* Images — RIGHT (on desktop), shown first on mobile — three
+              equally-sized portraits in one row: Devi Ji, then both disciples */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2 relative max-w-xl mx-auto lg:mx-0 w-full"
+            className="order-1 lg:order-2 relative w-full"
           >
             <div
               className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
@@ -211,81 +212,48 @@ export default function Successor() {
               }}
             />
             <Parallax offset={30}>
-              <div
-                className="relative rounded-3xl overflow-hidden"
-                style={{ border: "1px solid var(--border-gold)" }}
-              >
-                <ImageReveal>
-                  <Image
-                    src="/images/Devi%20ji/devi-ji.png"
-                    alt={t.successor.imgAlt1}
-                    width={0}
-                    height={0}
-                    sizes="(max-width: 1024px) 100vw, 520px"
-                    className="w-full h-auto block"
-                  />
-                </ImageReveal>
-              </div>
-              <div
-                className="relative rounded-3xl overflow-hidden mt-6"
-                style={{ border: "1px solid var(--border-gold)" }}
-              >
-                <ImageReveal delay={0.12}>
-                  <Image
-                    src="/images/Devi%20ji/devi-ji2.png"
-                    alt={t.successor.imgAlt2}
-                    width={0}
-                    height={0}
-                    sizes="(max-width: 1024px) 100vw, 520px"
-                    className="w-full h-auto block"
-                  />
-                </ImageReveal>
-              </div>
-            </Parallax>
-          </motion.div>
-
-          {/* Disciples — aside the समर्पण text, third column on desktop */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="order-3 relative max-w-xl mx-auto lg:mx-0 w-full"
-          >
-            <div
-              className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 35%, rgba(245,185,66,0.18), transparent 70%)",
-                filter: "blur(22px)",
-              }}
-            />
-            <Parallax offset={30}>
-              {DISCIPLES.map((p, i) => (
-                <div key={p.src} className={i > 0 ? "mt-6" : undefined}>
+              <div className="grid grid-cols-3 gap-4 sm:gap-5">
+                <div>
                   <div
-                    className="relative rounded-3xl overflow-hidden"
+                    className="relative rounded-2xl overflow-hidden aspect-[4/5]"
                     style={{ border: "1px solid var(--border-gold)" }}
                   >
-                    <ImageReveal delay={i * 0.12}>
+                    <ImageReveal fill>
                       <Image
-                        src={p.src}
-                        alt={p.name}
-                        width={0}
-                        height={0}
-                        sizes="(max-width: 1024px) 100vw, 400px"
-                        className="w-full h-auto block"
+                        src="/images/Devi%20ji/devi-ji.png"
+                        alt={t.successor.imgAlt1}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 33vw, 220px"
                       />
                     </ImageReveal>
                   </div>
-                  <p
-                    className="mt-3 text-center font-serif text-sm sm:text-base font-semibold text-heading"
-                    lang="hi"
-                  >
-                    {p.name}
-                  </p>
                 </div>
-              ))}
+                {DISCIPLES.map((p, i) => (
+                  <div key={p.src}>
+                    <div
+                      className="relative rounded-2xl overflow-hidden aspect-[4/5]"
+                      style={{ border: "1px solid var(--border-gold)" }}
+                    >
+                      <ImageReveal fill delay={(i + 1) * 0.1}>
+                        <Image
+                          src={p.src}
+                          alt={p.name}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 33vw, 220px"
+                        />
+                      </ImageReveal>
+                    </div>
+                    <p
+                      className="mt-2.5 text-center font-serif text-xs sm:text-sm font-semibold text-heading"
+                      lang="hi"
+                    >
+                      {p.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </Parallax>
           </motion.div>
         </div>

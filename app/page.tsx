@@ -1,6 +1,5 @@
 import Hero from "@/components/sections/Hero"
 import LifeJourney from "@/components/sections/LifeJourney"
-import Successor from "@/components/sections/Successor"
 
 const SITE_URL = "https://nakurwalebabaji.vercel.app"
 
@@ -50,7 +49,6 @@ export default function Home() {
       />
       <Hero />
       <LifeJourney />
-      <Successor />
     </main>
   )
 }

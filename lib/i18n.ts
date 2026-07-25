@@ -9,6 +9,7 @@ export type Lang = "hi" | "en"
 const hi = {
   nav: {
     home: "होम",
+    about: "परिचय",
     journey: "जीवन यात्रा",
     gallery: "गैलरी",
     videos: "वीडियो",
@@ -68,7 +69,6 @@ const hi = {
     name: "सुश्री देवी सुदीक्षा सरस्वती जी",
     award: "राष्ट्रपति पदक से सम्मानित",
     imgAlt1: "सुश्री देवी सुदीक्षा सरस्वती जी — पूज्य गुरुदेव के साथ",
-    imgAlt2: "हमारे हैं श्री गुरुवर — सुश्री देवी सुदीक्षा सरस्वती जी एवं पूज्य गुरुदेव",
     paras: [
       "परम पूज्य, प्रातः स्मरणीय, वन्दनीय श्री महाराज जी के पावन चरणों में इस तुच्छ शिष्या की भावांजलि सादर समर्पित है। शिष्या का जीवन ही अपने आप में एक संस्मरण है। सन् 1969 से आपने मुझे अपने पावन चरणों में स्थान दिया; मुझ अकिंचन को मोह-ममता के जाल से निकालकर अपने स्नेह के सागर में सराबोर करना — यह आप जैसी निःस्वार्थ, तपोमय व अनुपम विभूति-स्वरूप फ़रिश्ते ही कर सकते थे।",
       "सन् 1970 में आपने पवित्र नगरी हरिद्वार से पावन ग्रन्थ श्री रामचरितमानस प्रसाद रूप में दिया तथा मनन व चिन्तन की प्रेरणा दी। सन् 1971 ई० में प्रशिक्षित करवाकर शिक्षा विभाग में सेवा का अवसर आशीर्वाद-स्वरूप मेरी झोली में डाला, जो अब तक भी पल्लवित है।",
@@ -164,6 +164,7 @@ const hi = {
 const en: typeof hi = {
   nav: {
     home: "Home",
+    about: "About",
     journey: "Life Journey",
     gallery: "Gallery",
     videos: "Videos",
@@ -223,7 +224,6 @@ const en: typeof hi = {
     name: "Sushri Devi Sudiksha Saraswati Ji",
     award: "Honoured with the President's Medal",
     imgAlt1: "Sushri Devi Sudiksha Saraswati Ji — with the revered Gurudev",
-    imgAlt2: "Our Gurudev — Sushri Devi Sudiksha Saraswati Ji with the revered Gurudev",
     paras: [
       "At the holy feet of the most revered, ever-remembered, and venerable Shri Maharaj Ji, this humble disciple offers her heartfelt tribute. The disciple's very life is a memoir in itself. From 1969 you gave me a place at your sacred feet; to lift this insignificant one out of the snares of attachment and immerse her in the ocean of your affection — only a selfless, austere, and matchless angel like you could do this.",
       "In 1970, from the holy city of Haridwar, you gave me the sacred scripture Shri Ramcharitmanas as prasad and inspired me to reflect and contemplate upon it. In 1971, having me trained, you placed in my lap — as a blessing — the opportunity to serve in the education department, which flourishes to this day.",
