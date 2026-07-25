@@ -57,7 +57,7 @@ export default function Contact() {
         },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
-          subject: "New message from Guruji website contact form",
+          subject: "New message from Nakur Wale Baba Ji website contact form",
           from_name: "Nakur Wale Baba Ji Website",
           name: form.name,
           email: form.email || "Not provided",

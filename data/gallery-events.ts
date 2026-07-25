@@ -24,3 +24,20 @@ export const galleryEventOrder: string[] = [
   "Different events",
   "Devi ji",
 ]
+
+// Named captions for specific photos, keyed by "<folder>/<filename>" (or
+// just "<filename>" for the flat Nakur Wale Baba Ji photos in public/images/ directly).
+// Captions always render in Hindi, regardless of the site's language toggle
+// — they're names, not translatable copy.
+export const galleryImageCaptions: Record<string, string> = {
+  "Devi ji/photo29.jpg.jpeg": "सुश्री सौम्या सरस्वती जी",
+  "Devi ji/photo30.jpg.jpeg": "सुश्री समीक्षा सरस्वती जी",
+}
+
+// Filenames listed here (same "<folder>/<filename>" keys as above) render
+// at the end of their folder's grid, in the order given — overriding
+// natural sort so a section can close with specific named portraits.
+export const galleryImagePinLast: string[] = [
+  "Devi ji/photo29.jpg.jpeg",
+  "Devi ji/photo30.jpg.jpeg",
+]

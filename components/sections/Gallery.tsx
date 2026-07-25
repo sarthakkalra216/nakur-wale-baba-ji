@@ -8,7 +8,7 @@ import { AmbientVideo } from "@/components/decor/AmbientVideo"
 import { useSite } from "@/components/providers/SiteProvider"
 import type { GallerySection } from "@/lib/media"
 
-const ALT = "Guruji Nakur Wale Baba Ji — sacred moment at the Nakur ashram"
+const ALT = "Nakur Wale Baba Ji — sacred moment at the Nakur ashram"
 
 const headerStagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
 const fadeUp = {
@@ -189,6 +189,22 @@ export default function Gallery({ sections }: { sections: GallerySection[] }) {
                           className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                           style={{ boxShadow: "inset 0 0 0 2px rgba(212,168,67,0.55)" }}
                         />
+                        {/* Name caption — always Hindi, shown regardless of the site's language toggle */}
+                        {img.caption && (
+                          <div
+                            className="absolute inset-x-0 bottom-0 px-3 py-2.5 pointer-events-none"
+                            style={{
+                              background: "linear-gradient(to top, rgba(0,0,0,0.78), transparent)",
+                            }}
+                          >
+                            <span
+                              className="font-serif text-xs sm:text-sm font-semibold text-amber-50"
+                              lang="hi"
+                            >
+                              {img.caption}
+                            </span>
+                          </div>
+                        )}
                       </motion.button>
                     )
                   })}
@@ -222,6 +238,22 @@ export default function Gallery({ sections }: { sections: GallerySection[] }) {
             >
               {String(active! + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
             </motion.div>
+
+            {/* Name caption — always Hindi, shown regardless of the site's language toggle */}
+            {activeImg.caption && (
+              <motion.div
+                key={`caption-${activeImg.src}`}
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.2 }}
+                className="absolute top-14 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full font-serif text-sm sm:text-base font-semibold text-amber-200"
+                style={{ background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)" }}
+                lang="hi"
+              >
+                {activeImg.caption}
+              </motion.div>
+            )}
 
             {/* The morphing image */}
             <motion.img

@@ -18,56 +18,56 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Ramesh Sharma",
     location: "Saharanpur, UP",
     role: "Devotee since 2005",
-    text: "Guruji's satsangs transformed my life completely. I came to him lost and confused, and left with clarity, peace, and a renewed sense of purpose. Jai Guruji!",
+    text: "Nakur Wale Baba Ji's satsangs transformed my life completely. I came to him lost and confused, and left with clarity, peace, and a renewed sense of purpose. Jai Nakur Wale Baba Ji!",
   },
   {
     id: 2,
     name: "Sunita Devi",
     location: "Dehradun, Uttarakhand",
     role: "Regular Sevak",
-    text: "Joining the langar seva was the most fulfilling decision of my life. Guruji says serving food is serving God — I have experienced that truth every single day.",
+    text: "Joining the langar seva was the most fulfilling decision of my life. Nakur Wale Baba Ji says serving food is serving God — I have experienced that truth every single day.",
   },
   {
     id: 3,
     name: "Vikram Chauhan",
     location: "Delhi",
     role: "First-time visitor",
-    text: "I visited the ashram for the first time last year. The peace and love I felt in Guruji's presence was unlike anything I had experienced before. I keep returning.",
+    text: "I visited the ashram for the first time last year. The peace and love I felt in Nakur Wale Baba Ji's presence was unlike anything I had experienced before. I keep returning.",
   },
   {
     id: 4,
     name: "Meera Kapoor",
     location: "Muzaffarnagar, UP",
     role: "Kirtan Sevak",
-    text: "Guruji's kirtans make me forget all worries. The vibration of that music carries you to another dimension entirely. My family life has become so harmonious.",
+    text: "Nakur Wale Baba Ji's kirtans make me forget all worries. The vibration of that music carries you to another dimension entirely. My family life has become so harmonious.",
   },
   {
     id: 5,
     name: "Suresh Agarwal",
     location: "Meerut, UP",
     role: "Devotee since 2012",
-    text: "I was suffering from a serious illness and found immense strength in Guruji's teachings on acceptance and surrender. His words healed me from within.",
+    text: "I was suffering from a serious illness and found immense strength in Nakur Wale Baba Ji's teachings on acceptance and surrender. His words healed me from within.",
   },
   {
     id: 6,
     name: "Priya Verma",
     location: "Haridwar, Uttarakhand",
     role: "Young Devotee",
-    text: "As a student, Guruji's teaching on discipline completely changed how I approach my studies and my life. I feel centered and motivated every morning.",
+    text: "As a student, Nakur Wale Baba Ji's teaching on discipline completely changed how I approach my studies and my life. I feel centered and motivated every morning.",
   },
   {
     id: 7,
     name: "Jagdish Prasad",
     location: "Roorkee, Uttarakhand",
     role: "Ashram volunteer",
-    text: "I have been volunteering at the ashram for 8 years. The community of devotees here is like a second family — united by love for Guruji and for each other.",
+    text: "I have been volunteering at the ashram for 8 years. The community of devotees here is like a second family — united by love for Nakur Wale Baba Ji and for each other.",
   },
   {
     id: 8,
     name: "Kavita Singh",
     location: "Shamli, UP",
     role: "Devotee",
-    text: "Guruji's simple words — 'Love everyone, serve everyone, remember God' — changed my entire outlook on life. My heart feels lighter than it ever has.",
+    text: "Nakur Wale Baba Ji's simple words — 'Love everyone, serve everyone, remember God' — changed my entire outlook on life. My heart feels lighter than it ever has.",
   },
 ]
 
@@ -136,7 +136,7 @@ export default function Testimonials() {
             Voices of <span className="gold-text">Devotion</span>
           </h2>
           <p className="mt-4 text-amber-100/60 max-w-xl mx-auto text-sm">
-            Thousands of lives touched by Guruji&apos;s presence, wisdom, and love.
+            Thousands of lives touched by Nakur Wale Baba Ji&apos;s presence, wisdom, and love.
           </p>
           <div className="section-divider" />
         </motion.div>
@@ -163,7 +163,7 @@ export default function Testimonials() {
       {/* Bottom note */}
       <div className="mt-12 text-center">
         <p className="text-amber-200/30 text-xs">
-          Join thousands of devotees who have found peace and purpose through Guruji&apos;s guidance.
+          Join thousands of devotees who have found peace and purpose through Nakur Wale Baba Ji&apos;s guidance.
         </p>
       </div>
     </section>

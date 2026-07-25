@@ -3,9 +3,9 @@ import VideoGallery from "@/components/sections/VideoGallery"
 import { getVideos } from "@/lib/media"
 
 export const metadata: Metadata = {
-  title: "Videos | Guruji Nakur Wale Baba Ji",
+  title: "Videos | Nakur Wale Baba Ji",
   description:
-    "Watch satsang pravachan videos of Shri Guruji Nakur Wale Baba Ji.",
+    "Watch satsang pravachan videos of Shri Nakur Wale Baba Ji.",
 }
 
 export default function VideosPage() {

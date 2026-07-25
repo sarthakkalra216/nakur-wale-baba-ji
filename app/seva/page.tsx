@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import Seva from "@/components/sections/Seva"
 
 export const metadata: Metadata = {
-  title: "Seva | Guruji Nakur Wale Baba Ji",
+  title: "Seva | Nakur Wale Baba Ji",
   description:
-    "Join the selfless service (seva) initiatives — langar, education, medical camps, and more — in Guruji's name.",
+    "Join the selfless service (seva) initiatives — langar, education, medical camps, and more — in Nakur Wale Baba Ji's name.",
 }
 
 export default function SevaPage() {

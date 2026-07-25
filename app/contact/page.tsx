@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Contact from "@/components/sections/Contact"
 
 export const metadata: Metadata = {
-  title: "Contact | Guruji Nakur Wale Baba Ji",
+  title: "Contact | Nakur Wale Baba Ji",
   description:
     "Reach the Nakur ashram for satsang schedules, seva opportunities, donations, and any spiritual query.",
 }

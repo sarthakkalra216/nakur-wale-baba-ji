@@ -19,13 +19,13 @@ const hi = {
   },
 
   hero: {
-    badge: "जय गुरुजी — नकुड़ वाले बाबा जी",
+    badge: "जय नकुड़ वाले बाबा जी",
     eyebrow: "परम श्रद्धेय",
     name1: "श्री श्री १०८ स्वामी रामानन्द",
     name2: "सरस्वती जी महाराज",
     name3: "(नकुड़ वाले बाबा जी)",
     tagline: "दिव्य ज्ञान, सेवा, प्रेम और आध्यात्मिक जागृति का प्रसार",
-    ctaPrimary: "गुरुजी को जानें",
+    ctaPrimary: "नकुड़ वाले बाबा जी को जानें",
     ctaSecondary: "संपर्क करें",
     scrollCue: "दर्शन",
     stats: [
@@ -85,11 +85,11 @@ const hi = {
     titleLead: "सेवा में",
     titleEm: "सहभागी बनें",
     intro:
-      "'सेवा से बड़ी कोई पूजा नहीं।' — गुरुजी। सेवा के मार्ग खोजें और निःस्वार्थ दान के परिवर्तनकारी आनंद का अनुभव करें।",
+      "'सेवा से बड़ी कोई पूजा नहीं।' — नकुड़ वाले बाबा जी। सेवा के मार्ग खोजें और निःस्वार्थ दान के परिवर्तनकारी आनंद का अनुभव करें।",
     joinCta: "इस सेवा में जुड़ें",
     bottomQuote:
       "जब आप बिना किसी प्रतिफल की आशा के दूसरों की सेवा करते हैं, तब आप स्वयं प्रभु की सेवा करते हैं।",
-    bottomAttrib: "— गुरुजी नकुड़ वाले बाबा जी",
+    bottomAttrib: "— नकुड़ वाले बाबा जी",
     items: [
       { title: "लंगर सेवा", description: "आश्रम की सामुदायिक रसोई में प्रतिदिन निःशुल्क भोजन परोसें। हज़ारों श्रद्धालुओं और आगंतुकों को रोज़ भोजन कराया जाता है — कोई भूखा नहीं जाता।", impact: "५००+ भोजन / प्रतिदिन" },
       { title: "शिक्षा सेवा", description: "वंचित बच्चों को पुस्तकें, स्टेशनरी और छात्रवृत्ति से सहयोग दें। अगली पीढ़ी को गुणवत्तापूर्ण शिक्षा तक पहुँचने में मदद करें।", impact: "२००+ विद्यार्थियों को सहायता" },
@@ -106,14 +106,14 @@ const hi = {
     titleEm: "गैलरी",
     subtitle: "आध्यात्मिक कृपा, सेवा और दिव्य आशीर्वाद के क्षण",
     empty: "अभी कोई चित्र नहीं। तस्वीरें",
-    guruji: "गुरुजी",
+    guruji: "नकुड़ वाले बाबा जी",
   },
 
   videos: {
     eyebrow: "आश्रम रिकॉर्डिंग",
     titleLead: "पावन",
     titleEm: "वीडियो",
-    subtitle: "गुरुजी के आश्रम के दिव्य वातावरण में डूब जाएँ। प्ले दबाएँ — ध्वनि चालू है।",
+    subtitle: "नकुड़ वाले बाबा जी के आश्रम के दिव्य वातावरण में डूब जाएँ। प्ले दबाएँ — ध्वनि चालू है।",
     empty: "अभी कोई वीडियो नहीं। फ़ाइलें",
   },
 
@@ -130,13 +130,13 @@ const hi = {
     phoneLabel: "फ़ोन",
     phonePlaceholder: "+91 XXXXX XXXXX",
     messageLabel: "संदेश *",
-    messagePlaceholder: "अपना प्रश्न, सेवा हेतु अनुरोध, या गुरुजी के लिए संदेश लिखें…",
+    messagePlaceholder: "अपना प्रश्न, सेवा हेतु अनुरोध, या नकुड़ वाले बाबा जी के लिए संदेश लिखें…",
     send: "संदेश भेजें",
     sending: "भेजा जा रहा है…",
     sendAnother: "एक और संदेश भेजें",
     successTitle: "संदेश प्राप्त हुआ!",
     successBody:
-      "जय गुरुजी! संपर्क करने के लिए धन्यवाद। हम शीघ्र ही आपसे संपर्क करेंगे। गुरुजी का आशीर्वाद आप पर बना रहे। 🙏",
+      "जय नकुड़ वाले बाबा जी! संपर्क करने के लिए धन्यवाद। हम शीघ्र ही आपसे संपर्क करेंगे। नकुड़ वाले बाबा जी का आशीर्वाद आप पर बना रहे। 🙏",
     errorGeneric: "कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।",
     errorNetwork: "नेटवर्क त्रुटि। कृपया अपना कनेक्शन जाँचें और पुनः प्रयास करें।",
     ashramContact: "आश्रम संपर्क",
@@ -148,7 +148,7 @@ const hi = {
   },
 
   footer: {
-    brand: "गुरुजी नकुड़ वाले बाबा जी",
+    brand: "नकुड़ वाले बाबा जी",
     location: "नकुड़, सहारनपुर, उत्तर प्रदेश",
     blurb:
       "सत्संग, कीर्तन, सेवा और भक्ति का एक पावन स्थल — दिव्य प्रेम और आंतरिक शांति के सभी साधकों के लिए खुला।",
@@ -157,7 +157,7 @@ const hi = {
     address: "पन्त विहार, सहारनपुर, उत्तर प्रदेश",
     trustName: "सरस्वती युवा संगठन ट्रस्ट (रजि.), पंत विहार, सहारनपुर",
     quote: "सब में ईश्वर है — हर सेवा में सेवा, हर कदम में भक्ति।",
-    rights: "श्री गुरुजी नकुड़ वाले बाबा जी। सर्वाधिकार सुरक्षित। श्रद्धा से निर्मित।",
+    rights: "श्री नकुड़ वाले बाबा जी। सर्वाधिकार सुरक्षित। श्रद्धा से निर्मित।",
   },
 }
 
@@ -174,13 +174,13 @@ const en: typeof hi = {
   },
 
   hero: {
-    badge: "Jai Guruji — Nakur Wale Baba Ji",
+    badge: "Jai Nakur Wale Baba Ji",
     eyebrow: "The Most Revered",
     name1: "Shri Shri 108 Swami Ramanand",
     name2: "Saraswati Ji Maharaj",
     name3: "(Nakur Wale Baba Ji)",
     tagline: "Spreading divine wisdom, seva, love, and spiritual awakening",
-    ctaPrimary: "Know Guruji",
+    ctaPrimary: "Know Nakur Wale Baba Ji",
     ctaSecondary: "Contact Us",
     scrollCue: "Darshan",
     stats: [
@@ -240,11 +240,11 @@ const en: typeof hi = {
     titleLead: "Join",
     titleEm: "Seva",
     intro:
-      "“Seva se badi koi pooja nahi.” — Guruji. Discover ways to serve and experience the transformative joy of selfless giving.",
+      "“Seva se badi koi pooja nahi.” — Nakur Wale Baba Ji. Discover ways to serve and experience the transformative joy of selfless giving.",
     joinCta: "Join this Seva",
     bottomQuote:
       "When you serve others without expectation of reward, you serve God Himself.",
-    bottomAttrib: "— Guruji Nakur Wale Baba Ji",
+    bottomAttrib: "— Nakur Wale Baba Ji",
     items: [
       { title: "Langar Seva", description: "Serve free meals daily at the ashram's community kitchen. Thousands of devotees and visitors are fed every day — no one leaves hungry.", impact: "500+ meals / day" },
       { title: "Education Seva", description: "Support underprivileged children with books, stationery, and scholarships. Help the next generation access quality education.", impact: "200+ students helped" },
@@ -261,14 +261,14 @@ const en: typeof hi = {
     titleEm: "Gallery",
     subtitle: "Moments of Spiritual Grace, Seva, and Divine Blessings",
     empty: "No images yet. Add photos to",
-    guruji: "Guruji",
+    guruji: "Nakur Wale Baba Ji",
   },
 
   videos: {
     eyebrow: "Ashram Recordings",
     titleLead: "Sacred",
     titleEm: "Videos",
-    subtitle: "Immerse yourself in the divine atmosphere of Guruji's ashram. Click play — sound is on.",
+    subtitle: "Immerse yourself in the divine atmosphere of Nakur Wale Baba Ji's ashram. Click play — sound is on.",
     empty: "No videos yet. Add files to",
   },
 
@@ -285,13 +285,13 @@ const en: typeof hi = {
     phoneLabel: "Phone",
     phonePlaceholder: "+91 XXXXX XXXXX",
     messageLabel: "Message *",
-    messagePlaceholder: "Share your query, request for seva, or message for Guruji…",
+    messagePlaceholder: "Share your query, request for seva, or message for Nakur Wale Baba Ji…",
     send: "Send Message",
     sending: "Sending…",
     sendAnother: "Send Another Message",
     successTitle: "Message Received!",
     successBody:
-      "Jai Guruji! Thank you for reaching out. We will get back to you very soon. May Guruji's blessings be with you. 🙏",
+      "Jai Nakur Wale Baba Ji! Thank you for reaching out. We will get back to you very soon. May Nakur Wale Baba Ji's blessings be with you. 🙏",
     errorGeneric: "Something went wrong. Please try again.",
     errorNetwork: "Network error. Please check your connection and try again.",
     ashramContact: "Ashram Contact",
@@ -303,7 +303,7 @@ const en: typeof hi = {
   },
 
   footer: {
-    brand: "Guruji Nakur Wale Baba Ji",
+    brand: "Nakur Wale Baba Ji",
     location: "Nakur, Saharanpur, Uttar Pradesh",
     blurb:
       "A sacred space for satsang, kirtan, seva, and devotion — open to all seekers of divine love and inner peace.",
@@ -312,7 +312,7 @@ const en: typeof hi = {
     address: "Pant Vihar, Saharanpur, Uttar Pradesh",
     trustName: "Saraswati Yuva Sangathan Trust (Regd.), Pant Vihar, Saharanpur",
     quote: "Sab mein Ishwar hai — har sehal mein Seva, har qadam mein Bhakti.",
-    rights: "Shri Guruji Nakur Wale Baba Ji. All Rights Reserved. Built with devotion.",
+    rights: "Shri Nakur Wale Baba Ji. All Rights Reserved. Built with devotion.",
   },
 }
 

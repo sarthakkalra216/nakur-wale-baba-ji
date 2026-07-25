@@ -10,7 +10,7 @@ export const kirtanPlaylist: PlaylistVideo[] = [
     youtubeId: "IC4QKHfRqVs",
     title: "Mere Sarkar Aaye Hain",
     description:
-      "A soul-stirring devotional kirtan celebrating Guruji's divine presence — recorded live at Nakur ashram during the evening satsang.",
+      "A soul-stirring devotional kirtan celebrating Nakur Wale Baba Ji's divine presence — recorded live at Nakur ashram during the evening satsang.",
     featured: true,
   },
   {

@@ -27,9 +27,9 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
 })
 
 const SITE_URL = "https://nakurwalebabaji.vercel.app"
-const TITLE = "Nakur Wale Baba Ji | Guruji of Nakur, Saharanpur"
+const TITLE = "Nakur Wale Baba Ji | Nakur, Saharanpur"
 const DESCRIPTION =
-  "Official website of Shri Guruji Nakur Wale Baba Ji — spreading divine wisdom, seva, love, and spiritual awakening from Nakur, Saharanpur. Darshan, gallery, videos, and seva."
+  "Official website of Shri Nakur Wale Baba Ji — spreading divine wisdom, seva, love, and spiritual awakening from Nakur, Saharanpur. Darshan, gallery, videos, and seva."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
         url: "/images/Nakud%20wale%20baba%20ji/photo1.jpg",
         width: 1200,
         height: 630,
-        alt: "Shri Guruji Nakur Wale Baba Ji",
+        alt: "Shri Nakur Wale Baba Ji",
       },
     ],
   },

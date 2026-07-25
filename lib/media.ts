@@ -3,7 +3,7 @@
 // Gallery and Videos sections are fully dynamic — drop a file in following the
 // naming convention and it appears automatically, with no code changes.
 //
-//   public/images/photo*.{jpg,jpeg,png,webp,avif}         → Gallery "Guruji" section
+//   public/images/photo*.{jpg,jpeg,png,webp,avif}         → Gallery "Nakur Wale Baba Ji" section
 //   public/images/<event folder>/*.{jpg,jpeg,png,webp,avif} → Gallery event section
 //   public/videos/video*.{mp4,webm,mov,ogg}                → Videos
 //
@@ -18,7 +18,12 @@
 
 import { readdirSync } from "fs"
 import { join } from "path"
-import { galleryEventOrder, galleryEventTitles } from "@/data/gallery-events"
+import {
+  galleryEventOrder,
+  galleryEventTitles,
+  galleryImageCaptions,
+  galleryImagePinLast,
+} from "@/data/gallery-events"
 
 const PUBLIC_DIR = join(process.cwd(), "public")
 
@@ -36,22 +41,47 @@ export interface MediaFile {
   src: string
   /** raw file name, e.g. "photo1.jpeg" */
   name: string
+  /** optional name/label shown on the photo — always Hindi, independent of the site's language toggle */
+  caption?: string
 }
 
 // urlBase and each filename are percent-encoded independently so folder/file
 // names containing spaces (e.g. "Devi ji/devi-ji.png") resolve correctly;
 // plain names like "photo1.jpg" pass through encodeURIComponent unchanged.
-function scan(folder: string, urlBase: string, pattern: RegExp): MediaFile[] {
+//
+// keyPrefix identifies this folder in data/gallery-events.ts's caption/pin
+// maps ("<folder>/<filename>", or just "<filename>" when omitted for the
+// flat Nakur Wale Baba Ji photos directly in public/images/).
+function scan(folder: string, urlBase: string, pattern: RegExp, keyPrefix = ""): MediaFile[] {
   let files: string[] = []
   try {
     files = readdirSync(join(PUBLIC_DIR, folder))
   } catch {
     return [] // folder may not exist yet
   }
-  return files
-    .filter((f) => pattern.test(f))
-    .sort(naturalSort)
-    .map((f) => ({ src: `${urlBase}/${encodeURIComponent(f)}`, name: f }))
+  const key = (f: string) => (keyPrefix ? `${keyPrefix}/${f}` : f)
+
+  let matched = files.filter((f) => pattern.test(f)).sort(naturalSort)
+
+  // Move any pinned filenames to the end, in the order listed, overriding
+  // natural sort (e.g. to close a section with specific named portraits).
+  const pinnedKeys = galleryImagePinLast.filter((k) => matched.some((f) => key(f) === k))
+  if (pinnedKeys.length) {
+    matched = matched.filter((f) => !pinnedKeys.includes(key(f)))
+    for (const k of pinnedKeys) {
+      const pinned = files.find((f) => key(f) === k && pattern.test(f))
+      if (pinned) matched.push(pinned)
+    }
+  }
+
+  return matched.map((f) => {
+    const caption = galleryImageCaptions[key(f)]
+    return {
+      src: `${urlBase}/${encodeURIComponent(f)}`,
+      name: f,
+      ...(caption ? { caption } : {}),
+    }
+  })
 }
 
 export interface GallerySection {
@@ -73,7 +103,7 @@ function humanizeSlug(slug: string): string {
 
 /**
  * Event-based gallery: the flat photo*.ext files directly in public/images/
- * form the "Guruji" section; every subfolder is a separate event section.
+ * form the "Nakur Wale Baba Ji" section; every subfolder is a separate event section.
  * Order: galleryEventOrder (from data/gallery-events.ts) first, in the
  * order listed there, then any remaining folders in natural name order.
  */
@@ -82,7 +112,10 @@ export function getGalleryEvents(): GallerySection[] {
 
   const guruji = scan("images", "/images", IMAGE_RE)
   if (guruji.length) {
-    const title = galleryEventTitles["guruji"] ?? { hi: "गुरुजी", en: "Guruji" }
+    const title = galleryEventTitles["guruji"] ?? {
+      hi: "नकुड़ वाले बाबा जी",
+      en: "Nakur Wale Baba Ji",
+    }
     bySlug.set("guruji", { slug: "guruji", title, images: guruji })
   }
 
@@ -100,7 +133,12 @@ export function getGalleryEvents(): GallerySection[] {
     .sort(naturalSort)
 
   for (const folder of folders) {
-    const images = scan(`images/${folder}`, `/images/${encodeURIComponent(folder)}`, IMAGE_EXT_RE)
+    const images = scan(
+      `images/${folder}`,
+      `/images/${encodeURIComponent(folder)}`,
+      IMAGE_EXT_RE,
+      folder
+    )
     if (!images.length) continue
     const title = galleryEventTitles[folder] ?? {
       hi: humanizeSlug(folder),

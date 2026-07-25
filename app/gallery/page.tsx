@@ -3,9 +3,9 @@ import Gallery from "@/components/sections/Gallery"
 import { getGalleryEvents } from "@/lib/media"
 
 export const metadata: Metadata = {
-  title: "Gallery | Guruji Nakur Wale Baba Ji",
+  title: "Gallery | Nakur Wale Baba Ji",
   description:
-    "Sacred darshan, satsang, and seva moments of Shri Guruji Nakur Wale Baba Ji at the Nakur ashram.",
+    "Sacred darshan, satsang, and seva moments of Shri Nakur Wale Baba Ji at the Nakur ashram.",
 }
 
 export default function GalleryPage() {
