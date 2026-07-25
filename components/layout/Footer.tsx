@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import NextLink from "next/link"
 import { Tv, ExternalLink, Link } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
@@ -45,7 +46,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl">🕉</span>
+              <span className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Nakur Wale Baba Ji"
+                  fill
+                  className="object-cover"
+                  sizes="40px"
+                />
+              </span>
               <div>
                 <div
                   className="font-serif text-lg font-bold"

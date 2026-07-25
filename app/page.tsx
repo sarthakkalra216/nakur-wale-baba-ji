@@ -20,7 +20,7 @@ const structuredData = {
       alternateName: ["Guruji Nakur Wale Baba Ji", "Nakur Wale Babaji"],
       url: SITE_URL,
       image: `${SITE_URL}/images/Nakud%20wale%20baba%20ji/photo1.jpg`,
-      logo: `${SITE_URL}/images/Nakud%20wale%20baba%20ji/photo1.jpg`,
+      logo: `${SITE_URL}/images/logo.png`,
       description:
         "Shri Nakur Wale Baba Ji — spreading divine wisdom, seva, love, and spiritual awakening from Nakur, Saharanpur.",
       address: {

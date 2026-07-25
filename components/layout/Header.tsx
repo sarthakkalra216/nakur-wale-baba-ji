@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
@@ -54,17 +55,18 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo — जय श्री राम */}
           <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-            {/* Saffron ॐ emblem */}
+            {/* Ashram emblem */}
             <span
-              aria-hidden
-              className="grid place-items-center w-10 h-10 sm:w-11 sm:h-11 rounded-full shrink-0 font-hindi text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-105"
-              style={{
-                background: "linear-gradient(135deg,#f59e0b,#d4a843)",
-                color: "var(--on-accent)",
-                boxShadow: "0 4px 16px rgba(212,168,67,0.4)",
-              }}
+              className="relative grid place-items-center w-10 h-10 sm:w-11 sm:h-11 rounded-full shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105"
+              style={{ boxShadow: "0 4px 16px rgba(212,168,67,0.4)" }}
             >
-              ॐ
+              <Image
+                src="/images/logo.png"
+                alt="Nakur Wale Baba Ji"
+                fill
+                className="object-cover"
+                sizes="44px"
+              />
             </span>
             <div className="leading-tight">
               <div
