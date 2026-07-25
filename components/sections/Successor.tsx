@@ -80,7 +80,7 @@ export default function Successor() {
           </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 lg:items-stretch">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
           <div
             className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
@@ -194,17 +194,18 @@ export default function Successor() {
             </motion.div>
           </div>
 
-          {/* Images — RIGHT (on desktop), shown first on mobile — three
-              equally-sized portraits in one row: Devi Ji, then both disciples.
+          {/* Images — RIGHT (on desktop), shown first on mobile — Devi Ji's
+              photo on top, both disciples in a row below. Fixed aspect
+              ratios throughout (cropped, never stretched).
               devi-ji-portrait.jpg is a pre-cropped close-up (source:
               Devi ji/devi-ji.png, a wide side-by-side collage that doesn't
-              crop well into this tall column at arbitrary widths). */}
+              crop well at arbitrary widths). */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2 relative w-full lg:h-full flex flex-col"
+            className="order-1 lg:order-2 relative w-full"
           >
             <div
               className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
@@ -214,36 +215,29 @@ export default function Successor() {
                 filter: "blur(22px)",
               }}
             />
-            {/* Grows to fill the column's full height on desktop, so the
-                photos cover the space beside the (longer) dedication text
-                instead of leaving empty space below a short row. */}
-            <Parallax offset={30} className="flex-1 flex flex-col">
-              <div className="grid grid-cols-3 gap-4 sm:gap-5 flex-1">
-                <div className="flex flex-col">
-                  <div
-                    className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1"
-                    style={{ border: "1px solid var(--border-gold)" }}
-                  >
-                    <ImageReveal fill>
-                      <Image
-                        src="/images/devi-ji-portrait.jpg"
-                        alt={t.successor.imgAlt1}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 33vw, 220px"
-                      />
-                    </ImageReveal>
-                  </div>
-                  {/* Invisible spacer — keeps this image the same height as
-                      the captioned disciple photos beside it */}
-                  <p aria-hidden className="mt-2.5 text-center text-xs sm:text-sm invisible">
-                    &nbsp;
-                  </p>
-                </div>
+            <Parallax offset={30}>
+              {/* Devi Ji — full width, above both disciples */}
+              <div
+                className="relative rounded-2xl overflow-hidden aspect-[4/3]"
+                style={{ border: "1px solid var(--border-gold)" }}
+              >
+                <ImageReveal fill>
+                  <Image
+                    src="/images/devi-ji-portrait.jpg"
+                    alt={t.successor.imgAlt1}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 520px"
+                  />
+                </ImageReveal>
+              </div>
+
+              {/* Disciples — side by side below */}
+              <div className="grid grid-cols-2 gap-4 sm:gap-5 mt-5">
                 {DISCIPLES.map((p, i) => (
-                  <div key={p.src} className="flex flex-col">
+                  <div key={p.src}>
                     <div
-                      className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1"
+                      className="relative rounded-2xl overflow-hidden aspect-[4/5]"
                       style={{ border: "1px solid var(--border-gold)" }}
                     >
                       <ImageReveal fill delay={(i + 1) * 0.1}>
@@ -252,7 +246,7 @@ export default function Successor() {
                           alt={p.name}
                           fill
                           className="object-cover"
-                          sizes="(max-width: 1024px) 33vw, 220px"
+                          sizes="(max-width: 1024px) 50vw, 260px"
                         />
                       </ImageReveal>
                     </div>
