@@ -174,6 +174,16 @@ export default function Hero() {
         />
       )}
 
+      {/* Solid patch over the video container's bottom edge — masks a faint
+          seam that appears there from GPU layer compositing (the transformed,
+          clipped video box vs. the plain background below), independent of
+          the exact fade/scale tuning. Static, unclipped, untransformed, so it
+          can't introduce a seam of its own. */}
+      <div
+        className="absolute inset-x-0 pointer-events-none"
+        style={{ top: "calc(78% - 20px)", height: "40px", background: "#04000c" }}
+      />
+
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/35" />
 
