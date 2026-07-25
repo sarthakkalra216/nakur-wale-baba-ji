@@ -10,7 +10,7 @@ const CONTACT_EMAIL = "nakurwalebabaji@gmail.com"
 
 // Web3Forms access key registered to nakurwalebabaji@gmail.com — submissions are
 // delivered straight to that inbox. (Safe to expose; Web3Forms keys are public.)
-const WEB3FORMS_ACCESS_KEY = "730b2dbf-73e0-4ab4-ab98-c8b7d12d1f1b"
+const WEB3FORMS_ACCESS_KEY = "aac5011a-7ce9-487a-8b9c-e244620b4db8"
 
 interface FormState {
   name: string
