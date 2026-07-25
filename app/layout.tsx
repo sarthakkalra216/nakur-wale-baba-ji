@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/photo1.jpg",
+        url: "/images/Nakud%20wale%20baba%20ji/photo1.jpg",
         width: 1200,
         height: 630,
         alt: "Shri Guruji Nakur Wale Baba Ji",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/images/photo1.jpg"],
+    images: ["/images/Nakud%20wale%20baba%20ji/photo1.jpg"],
   },
   robots: {
     index: true,

@@ -9,7 +9,6 @@ export type Lang = "hi" | "en"
 const hi = {
   nav: {
     home: "होम",
-    about: "परिचय",
     journey: "जीवन यात्रा",
     gallery: "गैलरी",
     videos: "वीडियो",
@@ -33,20 +32,6 @@ const hi = {
       { value: "५०+", label: "वर्षों की सेवा" },
       { value: "१ लाख+", label: "श्रद्धालु" },
       { value: "∞", label: "दिव्य प्रेम" },
-    ],
-  },
-
-  about: {
-    eyebrow: "जीवन परिचय",
-    titleLead: "गुरुजी का",
-    titleEm: "परिचय",
-    imgAlt: "श्री गुरुजी नकुड़ वाले बाबा जी",
-    shortBio:
-      "श्री श्री 108 स्वामी रामानन्द सरस्वती जी महाराज — प्रेम से 'नकुड़ वाले बाबा जी' कहलाने वाले — एक ऐसे महान सन्त थे जिनका सम्पूर्ण जीवन दूसरों के कल्याण को समर्पित रहा। उनका कहना था कि मनुष्य पहले इन्सान है, बाद में हिन्दू या मुसलमान।",
-    paras: [
-      "बचपन में 'जहान सिंह' नाम से जाने गए गुरुजी का जन्म चैत्र शुक्ल अष्टमी, सन् 1912 (सम्वत् 1968 वि०) को जिला बागपत के ग्राम बामनौली में हुआ। उनकी माता श्रीमती भारती देवी (गाँव सरूरपुर) में प्रभु राम की भक्ति कूट-कूट कर भरी थी, और वही संस्कार धीरे-धीरे उनमें पल्लवित होते गए। बचपन से ही उनका हृदय दुखियों पर तरस खाता था और वे सदैव उनकी सेवा करते थे।",
-      "सन् 1934 में गाँव कुरमाली की भागीरथी देवी से उनका विवाह हुआ, और 18 जनवरी 1936 को उन्हें पुलिस विभाग में नौकरी मिली। सेवा के दौरान वे भारत के अनेक स्थानों पर रहे तथा महात्मा गांधी, पं० जवाहरलाल नेहरू, डॉ० राजेन्द्र प्रसाद व श्री लाल बहादुर शास्त्री जैसे नेताओं के पास ड्यूटी पर रहे — फिर भी न कभी किसी को गाली दी, न कर्तव्य की अवहेलना की, और जीवन भर किसी से एक पाई-पैसा नहीं लिया।",
-      "सन् 1953-54 में उन्होंने पुलिस लाइन में रामायण पर प्रवचन देना आरम्भ किया और 'बाबा' के रूप में विख्यात हुए। संसार को निःसार समझकर 5 सितम्बर 1981 को हरिद्वार में श्री नारायण मुनि जी महाराज से संन्यास की दीक्षा ली, जिन्होंने उन्हें 'श्री रामानन्द सरस्वती' नाम दिया। 15 जनवरी 2003 को वे प्रभु श्री राम के ध्यान में लीन होकर महासमाधि को प्राप्त हुए।",
     ],
   },
 
@@ -178,7 +163,6 @@ const hi = {
 const en: typeof hi = {
   nav: {
     home: "Home",
-    about: "About",
     journey: "Life Journey",
     gallery: "Gallery",
     videos: "Videos",
@@ -202,20 +186,6 @@ const en: typeof hi = {
       { value: "50+", label: "Years of Seva" },
       { value: "100k+", label: "Devotees" },
       { value: "∞", label: "Divine Love" },
-    ],
-  },
-
-  about: {
-    eyebrow: "Life Introduction",
-    titleLead: "About",
-    titleEm: "Guruji",
-    imgAlt: "Shri Guruji Nakur Wale Baba Ji",
-    shortBio:
-      "Shri Shri 108 Swami Ramanand Saraswati Ji Maharaj — lovingly known as 'Nakur Wale Baba Ji' — was a great saint whose entire life was devoted to the welfare of others. He often said that a person is first a human being, and only after that a Hindu or a Muslim.",
-    paras: [
-      "Known in childhood as 'Jahan Singh', Guruji was born on Chaitra Shukla Ashtami, 1912 (Samvat 1968 Vikrami) in the village of Bamnauli, district Baghpat. His mother, Smt. Bharti Devi (of village Sarurpur), was filled with deep devotion to Lord Ram, and those very samskaras gradually blossomed within him. From childhood his heart melted for the suffering, and he was ever ready to serve them.",
-      "In 1934 he married Bhagirathi Devi of village Kurmali, and on 18 January 1936 he joined the police department. During his service he lived across many parts of India and was posted on duty near leaders such as Mahatma Gandhi, Pt. Jawaharlal Nehru, Dr. Rajendra Prasad, and Shri Lal Bahadur Shastri — yet he never abused anyone, never neglected his duty, and throughout his life never accepted a single coin from anyone.",
-      "In 1953–54 he began giving discourses on the Ramayana within the police lines and became renowned as 'Baba'. Seeing the world as transient, on 5 September 1981 he took sannyas initiation at Haridwar from Shri Narayan Muni Ji Maharaj, who gave him the name 'Shri Ramanand Saraswati'. On 15 January 2003, absorbed in meditation upon Lord Shri Ram, he attained Mahasamadhi.",
     ],
   },
 

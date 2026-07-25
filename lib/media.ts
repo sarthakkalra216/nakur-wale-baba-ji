@@ -3,21 +3,22 @@
 // Gallery and Videos sections are fully dynamic — drop a file in following the
 // naming convention and it appears automatically, with no code changes.
 //
-//   public/images/photo*.{jpg,jpeg,png,webp,avif}   → Gallery "Guruji" section
-//   public/images/<event-slug>/*.{jpg,jpeg,png,webp,avif} → Gallery event section
-//   public/videos/video*.{mp4,webm,mov,ogg}         → Videos
+//   public/images/photo*.{jpg,jpeg,png,webp,avif}         → Gallery "Guruji" section
+//   public/images/<event folder>/*.{jpg,jpeg,png,webp,avif} → Gallery event section
+//   public/videos/video*.{mp4,webm,mov,ogg}                → Videos
 //
-// Event folders under public/images/ sort naturally by folder name — prefix
-// them with numbers or dates (e.g. "01-langar-seva") to control page order.
-// Give a folder a proper bilingual title in data/gallery-events.ts; otherwise
-// its name is auto-formatted into a title.
+// Event folders sort naturally by folder name by default (prefix them with
+// numbers or dates, e.g. "01-langar-seva", to control that order) — or list
+// folders explicitly in data/gallery-events.ts's galleryEventOrder to pin an
+// exact order regardless of name. Give a folder a proper bilingual title
+// there too; otherwise its name is auto-formatted into one.
 //
 // NOTE: This module uses the Node `fs` API and must only be imported from
 // server components (e.g. the route `page.tsx` files), never from client code.
 
 import { readdirSync } from "fs"
 import { join } from "path"
-import { galleryEventTitles } from "@/data/gallery-events"
+import { galleryEventOrder, galleryEventTitles } from "@/data/gallery-events"
 
 const PUBLIC_DIR = join(process.cwd(), "public")
 
@@ -37,6 +38,9 @@ export interface MediaFile {
   name: string
 }
 
+// urlBase and each filename are percent-encoded independently so folder/file
+// names containing spaces (e.g. "Devi ji/devi-ji.png") resolve correctly;
+// plain names like "photo1.jpg" pass through encodeURIComponent unchanged.
 function scan(folder: string, urlBase: string, pattern: RegExp): MediaFile[] {
   let files: string[] = []
   try {
@@ -47,7 +51,7 @@ function scan(folder: string, urlBase: string, pattern: RegExp): MediaFile[] {
   return files
     .filter((f) => pattern.test(f))
     .sort(naturalSort)
-    .map((f) => ({ src: `${urlBase}/${f}`, name: f }))
+    .map((f) => ({ src: `${urlBase}/${encodeURIComponent(f)}`, name: f }))
 }
 
 export interface GallerySection {
@@ -69,15 +73,17 @@ function humanizeSlug(slug: string): string {
 
 /**
  * Event-based gallery: the flat photo*.ext files directly in public/images/
- * form the permanent "Guruji" section (always first); every subfolder is a
- * separate event section, in natural folder-name order.
+ * form the "Guruji" section; every subfolder is a separate event section.
+ * Order: galleryEventOrder (from data/gallery-events.ts) first, in the
+ * order listed there, then any remaining folders in natural name order.
  */
 export function getGalleryEvents(): GallerySection[] {
-  const sections: GallerySection[] = []
+  const bySlug = new Map<string, GallerySection>()
 
   const guruji = scan("images", "/images", IMAGE_RE)
   if (guruji.length) {
-    sections.push({ slug: "guruji", title: { hi: "गुरुजी", en: "Guruji" }, images: guruji })
+    const title = galleryEventTitles["guruji"] ?? { hi: "गुरुजी", en: "Guruji" }
+    bySlug.set("guruji", { slug: "guruji", title, images: guruji })
   }
 
   const imagesDir = join(PUBLIC_DIR, "images")
@@ -94,16 +100,26 @@ export function getGalleryEvents(): GallerySection[] {
     .sort(naturalSort)
 
   for (const folder of folders) {
-    const images = scan(`images/${folder}`, `/images/${folder}`, IMAGE_EXT_RE)
+    const images = scan(`images/${folder}`, `/images/${encodeURIComponent(folder)}`, IMAGE_EXT_RE)
     if (!images.length) continue
     const title = galleryEventTitles[folder] ?? {
       hi: humanizeSlug(folder),
       en: humanizeSlug(folder),
     }
-    sections.push({ slug: folder, title, images })
+    bySlug.set(folder, { slug: folder, title, images })
   }
 
-  return sections
+  const ordered: GallerySection[] = []
+  for (const slug of galleryEventOrder) {
+    const section = bySlug.get(slug)
+    if (section) {
+      ordered.push(section)
+      bySlug.delete(slug)
+    }
+  }
+  // Anything not explicitly ordered falls after, in natural slug order.
+  const remaining = [...bySlug.values()].sort((a, b) => naturalSort(a.slug, b.slug))
+  return [...ordered, ...remaining]
 }
 
 /** All videos (video*). */

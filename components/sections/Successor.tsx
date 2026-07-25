@@ -210,7 +210,7 @@ export default function Successor() {
               >
                 <ImageReveal>
                   <Image
-                    src="/images/devi-ji.png"
+                    src="/images/Devi%20ji/devi-ji.png"
                     alt={t.successor.imgAlt1}
                     width={0}
                     height={0}
@@ -225,7 +225,7 @@ export default function Successor() {
               >
                 <ImageReveal delay={0.12}>
                   <Image
-                    src="/images/devi-ji2.png"
+                    src="/images/Devi%20ji/devi-ji2.png"
                     alt={t.successor.imgAlt2}
                     width={0}
                     height={0}
