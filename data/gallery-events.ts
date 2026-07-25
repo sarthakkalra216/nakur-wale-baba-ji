@@ -21,8 +21,8 @@ export const galleryEventTitles: Record<string, GalleryEventTitle> = {
 
 export const galleryEventOrder: string[] = [
   "Nakud wale baba ji",
-  "Different events",
   "Devi ji",
+  "Different events",
 ]
 
 // Named captions for specific photos, keyed by "<folder>/<filename>" (or
