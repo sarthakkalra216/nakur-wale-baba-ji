@@ -136,11 +136,22 @@ export default function Hero() {
           {/* No scroll-linked scale on the video — scaling a <video> via CSS
               transform produced a persistent GPU compositing seam (a faint
               rainbow line) at the container's clipped edge, independent of
-              scroll position. Translate-only avoids it entirely. */}
+              scroll position. Translate-only avoids it entirely.
+              The fade is a mask on the video itself (not a translucent
+              gradient div stacked on top of it) — a separate overlay div
+              forces two independently-composited layers (hardware-decoded
+              video vs. software-rendered gradient) that can show a seam
+              where they blend in Chrome. Masking keeps it one layer: the
+              video's own alpha fades out, revealing the solid page
+              background that's already behind it. */}
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "center 30%" }}
+            style={{
+              objectPosition: "center 30%",
+              maskImage: "linear-gradient(to bottom, black 68%, transparent 96%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 68%, transparent 96%)",
+            }}
             autoPlay
             muted
             loop
@@ -150,14 +161,6 @@ export default function Hero() {
           >
             <source src="/background%20effect/hero-bg.mp4" type="video/mp4" />
           </video>
-          {/* Fade the video's bottom edge into the page background */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 72%, rgba(4,0,12,0.85) 92%, #04000c 100%)",
-            }}
-          />
         </motion.div>
       )}
 
