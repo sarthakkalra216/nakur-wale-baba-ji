@@ -121,6 +121,7 @@ const hi = {
     titleEm: "गैलरी",
     subtitle: "आध्यात्मिक कृपा, सेवा और दिव्य आशीर्वाद के क्षण",
     empty: "अभी कोई चित्र नहीं। तस्वीरें",
+    guruji: "गुरुजी",
   },
 
   videos: {
@@ -289,6 +290,7 @@ const en: typeof hi = {
     titleEm: "Gallery",
     subtitle: "Moments of Spiritual Grace, Seva, and Divine Blessings",
     empty: "No images yet. Add photos to",
+    guruji: "Guruji",
   },
 
   videos: {

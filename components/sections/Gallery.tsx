@@ -6,11 +6,7 @@ import { ChevronLeft, ChevronRight, X, ZoomIn, ImageOff } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
 import { AmbientVideo } from "@/components/decor/AmbientVideo"
 import { useSite } from "@/components/providers/SiteProvider"
-
-export interface GalleryImage {
-  src: string
-  name: string
-}
+import type { GallerySection } from "@/lib/media"
 
 const ALT = "Guruji Nakur Wale Baba Ji — sacred moment at the Nakur ashram"
 
@@ -19,14 +15,29 @@ const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 }
+const eventFadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+}
 
 // Spring used for the shared-element (thumbnail ⇄ fullscreen) morph
 const morph = { type: "spring" as const, stiffness: 220, damping: 28 }
 
-export default function Gallery({ images }: { images: GalleryImage[] }) {
+export default function Gallery({ sections }: { sections: GallerySection[] }) {
   const { t, lang } = useSite()
   const [active, setActive] = useState<number | null>(null)
-  const count = images.length
+
+  // Flatten every event section into one ordered list so the fullscreen
+  // viewer's Prev/Next can move seamlessly across event boundaries, while
+  // each section still renders its own labeled grid below.
+  const flat = sections.flatMap((s) => s.images)
+  const count = flat.length
+  let offset = 0
+  const sectionsWithOffset = sections.map((s) => {
+    const withOffset = { section: s, offset }
+    offset += s.images.length
+    return withOffset
+  })
 
   const close = useCallback(() => setActive(null), [])
   const paginate = useCallback(
@@ -49,7 +60,7 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
     }
   }, [active, close, paginate])
 
-  const activeImg = active !== null ? images[active] : null
+  const activeImg = active !== null ? flat[active] : null
 
   return (
     <section id="gallery" className="relative py-24 sm:py-32 overflow-hidden">
@@ -100,54 +111,89 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
           <motion.div variants={fadeUp} className="section-divider" />
         </motion.div>
 
-        {/* ── Masonry grid ── */}
+        {/* ── Event-grouped masonry grids ── */}
         {count === 0 ? (
           <div className="flex flex-col items-center gap-3 py-20 text-muted-themed">
             <ImageOff size={36} />
             <p className="text-sm" lang={lang}>{t.gallery.empty} <code>public/images</code>.</p>
           </div>
         ) : (
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 sm:gap-5">
-            {images.map((img, i) => (
-              <motion.button
-                key={img.src}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: Math.min(i * 0.04, 0.4) }}
-                onClick={() => setActive(i)}
-                className="group relative mb-4 sm:mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl cursor-pointer"
-                style={{ border: "1px solid var(--border-gold)" }}
-                aria-label={`Open image ${i + 1}`}
-              >
-                {/* Shared-element thumbnail (morphs into the fullscreen view) */}
-                <motion.img
-                  layoutId={`gal-${img.src}`}
-                  transition={morph}
-                  src={img.src}
-                  alt={ALT}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto block transition-transform duration-500 ease-out group-hover:scale-[1.06]"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/55 via-black/10 to-transparent">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
-                    style={{
-                      background: "rgba(0,0,0,0.5)",
-                      backdropFilter: "blur(10px)",
-                      border: "1px solid rgba(212,168,67,0.4)",
-                    }}
+          <div className="space-y-16 sm:space-y-20">
+            {sectionsWithOffset.map(({ section, offset: sectionOffset }) => (
+              <div key={section.slug}>
+                {/* Event heading */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-60px" }}
+                  variants={headerStagger}
+                  className="mb-6 sm:mb-8"
+                >
+                  <motion.h3
+                    variants={eventFadeUp}
+                    className="font-serif text-xl sm:text-2xl font-bold text-heading"
+                    lang={lang}
                   >
-                    <ZoomIn size={20} className="text-amber-400" />
-                  </div>
+                    {section.slug === "guruji" ? t.gallery.guruji : section.title[lang]}
+                  </motion.h3>
+                  <motion.div
+                    variants={eventFadeUp}
+                    className="mt-3 h-px w-full"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, var(--border-gold), transparent)",
+                    }}
+                  />
+                </motion.div>
+
+                {/* Masonry grid for this event's photos */}
+                <div className="columns-2 md:columns-3 lg:columns-4 gap-4 sm:gap-5">
+                  {section.images.map((img, i) => {
+                    const globalIndex = sectionOffset + i
+                    return (
+                      <motion.button
+                        key={img.src}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-40px" }}
+                        transition={{ duration: 0.5, delay: Math.min(i * 0.04, 0.4) }}
+                        onClick={() => setActive(globalIndex)}
+                        className="group relative mb-4 sm:mb-5 block w-full break-inside-avoid overflow-hidden rounded-2xl cursor-pointer"
+                        style={{ border: "1px solid var(--border-gold)" }}
+                        aria-label={`Open image ${globalIndex + 1}`}
+                      >
+                        {/* Shared-element thumbnail (morphs into the fullscreen view) */}
+                        <motion.img
+                          layoutId={`gal-${img.src}`}
+                          transition={morph}
+                          src={img.src}
+                          alt={ALT}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-auto block transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                        />
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/55 via-black/10 to-transparent">
+                          <div
+                            className="w-12 h-12 rounded-full flex items-center justify-center translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
+                            style={{
+                              background: "rgba(0,0,0,0.5)",
+                              backdropFilter: "blur(10px)",
+                              border: "1px solid rgba(212,168,67,0.4)",
+                            }}
+                          >
+                            <ZoomIn size={20} className="text-amber-400" />
+                          </div>
+                        </div>
+                        <div
+                          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{ boxShadow: "inset 0 0 0 2px rgba(212,168,67,0.55)" }}
+                        />
+                      </motion.button>
+                    )
+                  })}
                 </div>
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{ boxShadow: "inset 0 0 0 2px rgba(212,168,67,0.55)" }}
-                />
-              </motion.button>
+              </div>
             ))}
           </div>
         )}

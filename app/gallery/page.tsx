@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Gallery from "@/components/sections/Gallery"
-import { getGalleryImages } from "@/lib/media"
+import { getGalleryEvents } from "@/lib/media"
 
 export const metadata: Metadata = {
   title: "Gallery | Guruji Nakur Wale Baba Ji",
@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function GalleryPage() {
-  const images = getGalleryImages()
+  const sections = getGalleryEvents()
   return (
     <main className="pt-16">
-      <Gallery images={images} />
+      <Gallery sections={sections} />
     </main>
   )
 }
