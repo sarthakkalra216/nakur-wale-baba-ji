@@ -80,7 +80,7 @@ export default function Successor() {
           </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 lg:items-stretch">
           {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
           <div
             className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
@@ -201,7 +201,7 @@ export default function Successor() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2 relative w-full"
+            className="order-1 lg:order-2 relative w-full lg:h-full flex flex-col"
           >
             <div
               className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
@@ -211,11 +211,14 @@ export default function Successor() {
                 filter: "blur(22px)",
               }}
             />
-            <Parallax offset={30}>
-              <div className="grid grid-cols-3 gap-4 sm:gap-5">
-                <div>
+            {/* Grows to fill the column's full height on desktop, so the
+                photos cover the space beside the (longer) dedication text
+                instead of leaving empty space below a short row. */}
+            <Parallax offset={30} className="flex-1 flex flex-col">
+              <div className="grid grid-cols-3 gap-4 sm:gap-5 flex-1">
+                <div className="flex flex-col">
                   <div
-                    className="relative rounded-2xl overflow-hidden aspect-[4/5]"
+                    className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1"
                     style={{ border: "1px solid var(--border-gold)" }}
                   >
                     <ImageReveal fill>
@@ -224,15 +227,21 @@ export default function Successor() {
                         alt={t.successor.imgAlt1}
                         fill
                         className="object-cover"
+                        style={{ objectPosition: "18% 55%" }}
                         sizes="(max-width: 1024px) 33vw, 220px"
                       />
                     </ImageReveal>
                   </div>
+                  {/* Invisible spacer — keeps this image the same height as
+                      the captioned disciple photos beside it */}
+                  <p aria-hidden className="mt-2.5 text-center text-xs sm:text-sm invisible">
+                    &nbsp;
+                  </p>
                 </div>
                 {DISCIPLES.map((p, i) => (
-                  <div key={p.src}>
+                  <div key={p.src} className="flex flex-col">
                     <div
-                      className="relative rounded-2xl overflow-hidden aspect-[4/5]"
+                      className="relative rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1"
                       style={{ border: "1px solid var(--border-gold)" }}
                     >
                       <ImageReveal fill delay={(i + 1) * 0.1}>

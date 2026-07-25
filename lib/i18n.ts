@@ -10,7 +10,6 @@ const hi = {
   nav: {
     home: "होम",
     about: "परिचय",
-    journey: "जीवन यात्रा",
     gallery: "गैलरी",
     videos: "वीडियो",
     seva: "सेवा",
@@ -165,7 +164,6 @@ const en: typeof hi = {
   nav: {
     home: "Home",
     about: "About",
-    journey: "Life Journey",
     gallery: "Gallery",
     videos: "Videos",
     seva: "Seva",

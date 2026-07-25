@@ -15,10 +15,9 @@ const SOCIAL = {
   instagram: "https://www.instagram.com/nakur_wale_baba_ji/",
 }
 
-const NAV: { key: "home" | "about" | "journey" | "gallery" | "videos" | "seva" | "contact"; href: string }[] = [
+const NAV: { key: "home" | "about" | "gallery" | "videos" | "seva" | "contact"; href: string }[] = [
   { key: "home", href: "/" },
   { key: "about", href: "/about" },
-  { key: "journey", href: "/#life-journey" },
   { key: "gallery", href: "/gallery" },
   { key: "videos", href: "/videos" },
   { key: "seva", href: "/seva" },
