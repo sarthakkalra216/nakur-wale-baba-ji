@@ -72,7 +72,6 @@ export default function Hero() {
     offset: ["start start", "end start"],
   })
   const videoY = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["0%", "24%"])
-  const videoScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1] : [1, 1.14])
   const contentY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -90])
   const contentScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1] : [1, 0.95])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.65], reduced ? [1, 1] : [1, 0])
@@ -132,15 +131,16 @@ export default function Hero() {
       {!videoError && (
         <motion.div
           className="absolute inset-x-0 top-0 h-[78%] overflow-hidden pointer-events-none"
-          style={{ y: videoY, transform: "translateZ(0)" }}
+          style={{ y: videoY }}
         >
-          {/* Scale lives on the video itself, not this clipping container —
-              scaling the container (and its gradient sibling below) together
-              produced a hairline compositing seam at the clip edge. */}
-          <motion.video
+          {/* No scroll-linked scale on the video — scaling a <video> via CSS
+              transform produced a persistent GPU compositing seam (a faint
+              rainbow line) at the container's clipped edge, independent of
+              scroll position. Translate-only avoids it entirely. */}
+          <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "center 30%", scale: videoScale }}
+            style={{ objectPosition: "center 30%" }}
             autoPlay
             muted
             loop
@@ -149,13 +149,13 @@ export default function Hero() {
             onError={() => setVideoError(true)}
           >
             <source src="/background%20effect/hero-bg.mp4" type="video/mp4" />
-          </motion.video>
+          </video>
           {/* Fade the video's bottom edge into the page background */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, transparent 55%, rgba(4,0,12,0.92) 75%, #04000c 86%)",
+                "linear-gradient(to bottom, transparent 72%, rgba(4,0,12,0.85) 92%, #04000c 100%)",
             }}
           />
         </motion.div>
@@ -170,7 +170,6 @@ export default function Hero() {
             backgroundImage:
               "linear-gradient(to bottom, transparent 40%, #04000c 100%), url('/images/Nakud%20wale%20baba%20ji/photo3.jpg')",
             y: videoY,
-            scale: videoScale,
           }}
         />
       )}
