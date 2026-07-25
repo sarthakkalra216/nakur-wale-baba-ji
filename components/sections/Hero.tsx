@@ -132,12 +132,15 @@ export default function Hero() {
       {!videoError && (
         <motion.div
           className="absolute inset-x-0 top-0 h-[78%] overflow-hidden pointer-events-none"
-          style={{ y: videoY, scale: videoScale }}
+          style={{ y: videoY, transform: "translateZ(0)" }}
         >
-          <video
+          {/* Scale lives on the video itself, not this clipping container —
+              scaling the container (and its gradient sibling below) together
+              produced a hairline compositing seam at the clip edge. */}
+          <motion.video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "center 30%" }}
+            style={{ objectPosition: "center 30%", scale: videoScale }}
             autoPlay
             muted
             loop
@@ -146,13 +149,13 @@ export default function Hero() {
             onError={() => setVideoError(true)}
           >
             <source src="/background%20effect/hero-bg.mp4" type="video/mp4" />
-          </video>
+          </motion.video>
           {/* Fade the video's bottom edge into the page background */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, transparent 72%, rgba(4,0,12,0.85) 92%, #04000c 100%)",
+                "linear-gradient(to bottom, transparent 55%, rgba(4,0,12,0.92) 75%, #04000c 86%)",
             }}
           />
         </motion.div>
