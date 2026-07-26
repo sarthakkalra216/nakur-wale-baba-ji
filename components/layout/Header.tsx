@@ -57,7 +57,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
             {/* Ashram emblem */}
             <span
-              className="relative grid place-items-center w-10 h-10 sm:w-11 sm:h-11 rounded-full shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105"
+              className="relative grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-full shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105"
               style={{ boxShadow: "0 4px 16px rgba(212,168,67,0.4)" }}
             >
               <Image
@@ -65,7 +65,7 @@ export default function Header() {
                 alt="Nakur Wale Baba Ji"
                 fill
                 className="object-cover"
-                sizes="44px"
+                sizes="56px"
               />
             </span>
             <div className="leading-tight">

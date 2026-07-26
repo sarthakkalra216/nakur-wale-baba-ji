@@ -231,6 +231,13 @@ export default function Successor() {
                   />
                 </ImageReveal>
               </div>
+              {/* Name — always Hindi, independent of the site's language toggle */}
+              <p
+                className="mt-2.5 text-center font-serif text-xs sm:text-sm font-semibold text-heading"
+                lang="hi"
+              >
+                सुश्री देवी सुदीक्षा सरस्वती जी
+              </p>
 
               {/* Disciples — side by side below */}
               <div className="grid grid-cols-2 gap-4 sm:gap-5 mt-5">
