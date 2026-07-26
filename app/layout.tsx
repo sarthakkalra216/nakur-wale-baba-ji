@@ -26,7 +26,7 @@ const notoSerifDevanagari = Noto_Serif_Devanagari({
   weight: ["400", "500", "600", "700"],
 })
 
-const SITE_URL = "https://nakurwalebabaji.vercel.app"
+const SITE_URL = "https://nakurwalebabaji.com"
 const TITLE = "Nakur Wale Baba Ji | Nakur, Saharanpur"
 const DESCRIPTION =
   "Official website of Shri Nakur Wale Baba Ji — spreading divine wisdom, seva, love, and spiritual awakening from Nakur, Saharanpur. Darshan, gallery, videos, and seva."

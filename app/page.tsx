@@ -1,7 +1,7 @@
 import Hero from "@/components/sections/Hero"
 import LifeJourney from "@/components/sections/LifeJourney"
 
-const SITE_URL = "https://nakurwalebabaji.vercel.app"
+const SITE_URL = "https://nakurwalebabaji.com"
 
 const structuredData = {
   "@context": "https://schema.org",
