@@ -18,7 +18,7 @@ export default function AboutTabs() {
 
   return (
     <>
-      <div className="relative z-10 flex justify-center gap-3 flex-wrap px-4 pt-20 sm:pt-28">
+      <div className="relative z-10 flex justify-center gap-3 flex-wrap px-4 pt-20 sm:pt-28 pb-16 sm:pb-20">
         {tabs.map((tb) => (
           <button
             key={tb.key}

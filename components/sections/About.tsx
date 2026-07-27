@@ -110,11 +110,19 @@ export default function About() {
             <motion.blockquote
               variants={fadeUp}
               lang={lang}
-              className="font-serif text-lg sm:text-xl font-medium italic leading-relaxed mb-8 border-l-2 pl-5"
+              className="font-serif text-lg sm:text-xl font-medium italic leading-relaxed mb-6 border-l-2 pl-5"
               style={{ color: "var(--gold)", borderColor: "var(--border-gold)" }}
             >
               &ldquo;{t.about.shortBio}&rdquo;
             </motion.blockquote>
+
+            <motion.p
+              variants={fadeUp}
+              lang={lang}
+              className="leading-8 mb-8 text-[0.95rem] text-muted-themed"
+            >
+              {t.about.extra}
+            </motion.p>
 
             <motion.div variants={fadeUp}>
               <Link
