@@ -61,6 +61,24 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
 
+  // The video backdrop tracks the section's real rendered height (which
+  // varies with content/viewport, since the section is min-h-screen, not a
+  // fixed height) rather than a CSS percentage or a flat 100vh. Percentage
+  // heights forced object-cover to stretch the video far beyond its native
+  // scale whenever content pushed the section taller than the video's own
+  // aspect ratio allowed (visibly blurry, and heavier to decode/composite).
+  // A flat 100vh avoided that but left a plain dark gap below the video on
+  // any render where the section ends up taller than one viewport. Matching
+  // the measured height avoids both.
+  const [heroHeight, setHeroHeight] = useState<number | null>(null)
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => setHeroHeight(entry.contentRect.height))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   // Apple-style scroll depth: as the hero scrolls away, the backdrop drifts
   // down and zooms while the content rises, shrinks, and fades — layered
   // parallax that reads as real depth. Transform/opacity only.
@@ -127,18 +145,13 @@ export default function Hero() {
       {/* Base background */}
       <div className="absolute inset-0 bg-[#04000c]" />
 
-      {/* Video background — capped to one viewport tall (h-screen), not the
-          Hero section's own height. The section can grow taller than 100vh
-          depending on content/font length; sizing the video to match that
-          variable height (via inset-0/h-full) forced object-cover to stretch
-          it far beyond its natural scale to "cover" the taller box, which
-          both blurred it out and made decoding/compositing much heavier
-          (visibly slower navigation). h-screen keeps the render cost fixed
-          regardless of how tall the section's content makes it. */}
+      {/* Video background — height tracks the section's actual measured
+          height (see heroHeight above), falling back to 100vh only until
+          the first measurement lands. */}
       {!videoError && (
         <motion.div
-          className="absolute inset-x-0 top-0 h-screen overflow-hidden pointer-events-none"
-          style={{ y: videoY }}
+          className="absolute inset-x-0 top-0 overflow-hidden pointer-events-none"
+          style={{ y: videoY, height: heroHeight ? `${heroHeight}px` : "100vh" }}
         >
           {/* No scroll-linked scale on the video — scaling a <video> via CSS
               transform produced a persistent GPU compositing seam (a faint
@@ -171,11 +184,12 @@ export default function Hero() {
       {/* Fallback: photo when video can't load — same h-screen cap */}
       {videoError && (
         <motion.div
-          className="absolute inset-x-0 top-0 h-screen bg-cover"
+          className="absolute inset-x-0 top-0 bg-cover"
           style={{
             backgroundPosition: "center 30%",
             backgroundImage: "url('/images/Nakud%20wale%20baba%20ji/photo3.jpg')",
             y: videoY,
+            height: heroHeight ? `${heroHeight}px` : "100vh",
           }}
         />
       )}
