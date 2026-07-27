@@ -127,10 +127,11 @@ export default function Hero() {
       {/* Base background */}
       <div className="absolute inset-0 bg-[#04000c]" />
 
-      {/* Video background — upper portion only, fades into the page colour */}
+      {/* Video background — covers the full hero, no leftover solid-black
+          area below it like the old 78%-tall box left behind. */}
       {!videoError && (
         <motion.div
-          className="absolute inset-x-0 top-0 h-[78%] overflow-hidden pointer-events-none"
+          className="absolute inset-0 overflow-hidden pointer-events-none"
           style={{ y: videoY }}
         >
           {/* No scroll-linked scale on the video — scaling a <video> via CSS
@@ -161,14 +162,13 @@ export default function Hero() {
         </motion.div>
       )}
 
-      {/* Fallback: photo when video can't load — upper part only */}
+      {/* Fallback: photo when video can't load — covers the full hero */}
       {videoError && (
         <motion.div
-          className="absolute inset-x-0 top-0 h-[78%] bg-cover"
+          className="absolute inset-0 bg-cover"
           style={{
             backgroundPosition: "center 30%",
-            backgroundImage:
-              "linear-gradient(to bottom, transparent 40%, #04000c 100%), url('/images/Nakud%20wale%20baba%20ji/photo3.jpg')",
+            backgroundImage: "url('/images/Nakud%20wale%20baba%20ji/photo3.jpg')",
             y: videoY,
           }}
         />
