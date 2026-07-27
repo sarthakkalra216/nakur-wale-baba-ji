@@ -105,7 +105,12 @@ export default function Header() {
                       ? "var(--gold)"
                       : scrolled
                         ? "var(--text-muted)"
-                        : "rgba(254,243,220,0.85)",
+                        : "rgba(255,255,255,0.95)",
+                    // A shadow guarantees contrast unscrolled no matter what
+                    // color the video happens to show behind it at that
+                    // moment (a gradient scrim alone isn't reliable against
+                    // every frame).
+                    textShadow: scrolled ? undefined : "0 1px 4px rgba(0,0,0,0.85), 0 1px 12px rgba(0,0,0,0.5)",
                   }}
                 >
                   {t.nav[link.key]}

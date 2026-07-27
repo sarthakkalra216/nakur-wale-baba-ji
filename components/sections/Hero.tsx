@@ -185,7 +185,7 @@ export default function Hero() {
         className="absolute inset-x-0 top-0 h-28 sm:h-36 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(58,29,12,0.55), rgba(122,46,30,0.28) 55%, transparent 100%)",
+            "linear-gradient(to bottom, rgba(58,29,12,0.72), rgba(122,46,30,0.4) 60%, transparent 100%)",
         }}
       />
 
