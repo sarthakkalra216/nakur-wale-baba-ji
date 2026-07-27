@@ -28,11 +28,6 @@ const hi = {
     ctaPrimary: "नकुड़ वाले बाबा जी को जानें",
     ctaSecondary: "संपर्क करें",
     scrollCue: "दर्शन",
-    stats: [
-      { value: "५०+", label: "वर्षों की सेवा" },
-      { value: "१ लाख+", label: "श्रद्धालु" },
-      { value: "∞", label: "दिव्य प्रेम" },
-    ],
   },
 
   journey: {
@@ -182,11 +177,6 @@ const en: typeof hi = {
     ctaPrimary: "Know Nakur Wale Baba Ji",
     ctaSecondary: "Contact Us",
     scrollCue: "Darshan",
-    stats: [
-      { value: "50+", label: "Years of Seva" },
-      { value: "100k+", label: "Devotees" },
-      { value: "∞", label: "Divine Love" },
-    ],
   },
 
   journey: {

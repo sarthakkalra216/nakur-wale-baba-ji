@@ -391,24 +391,6 @@ export default function Hero() {
           </Magnetic>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          className="grid grid-cols-3 gap-6 max-w-sm mx-auto"
-        >
-          {t.hero.stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="font-hindi text-2xl sm:text-3xl font-bold text-amber-400">
-                {s.value}
-              </div>
-              <div className="font-hindi text-xs text-amber-200/60 mt-1 tracking-wide" lang={lang}>
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
         </motion.div>
       </motion.div>
 
