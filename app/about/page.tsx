@@ -1,16 +1,16 @@
 import type { Metadata } from "next"
-import Successor from "@/components/sections/Successor"
+import AboutTabs from "@/components/sections/AboutTabs"
 
 export const metadata: Metadata = {
   title: "About | Nakur Wale Baba Ji",
   description:
-    "Guru parampara — the sacred succession and dedication of Sant Devi Sudiksha Saraswati Ji to Shri Nakur Wale Baba Ji.",
+    "Guru parampara — Nakur Wale Baba Ji's life journey and the sacred succession and dedication of Sant Devi Sudiksha Saraswati Ji.",
 }
 
 export default function AboutPage() {
   return (
     <main className="pt-16">
-      <Successor />
+      <AboutTabs />
     </main>
   )
 }

@@ -30,6 +30,18 @@ const hi = {
     scrollCue: "दर्शन",
   },
 
+  about: {
+    eyebrow: "जीवन परिचय",
+    titleLead: "नकुड़ वाले बाबा जी का",
+    titleEm: "परिचय",
+    imgAlt: "श्री नकुड़ वाले बाबा जी",
+    shortBio:
+      "श्री श्री 108 स्वामी रामानन्द सरस्वती जी महाराज — प्रेम से 'नकुड़ वाले बाबा जी' कहलाने वाले — एक ऐसे महान सन्त थे जिनका सम्पूर्ण जीवन दूसरों के कल्याण को समर्पित रहा। उनका कहना था कि मनुष्य पहले इन्सान है, बाद में हिन्दू या मुसलमान।",
+    knowMore: "और जानें",
+    tabJourney: "नकुड़ वाले बाबा जी के बारे में",
+    tabDevi: "देवी जी के बारे में",
+  },
+
   journey: {
     eyebrow: "संक्षिप्त जीवन परिचय",
     titleLead: "जीवन",
@@ -177,6 +189,18 @@ const en: typeof hi = {
     ctaPrimary: "Know Nakur Wale Baba Ji",
     ctaSecondary: "Contact Us",
     scrollCue: "Darshan",
+  },
+
+  about: {
+    eyebrow: "Life Introduction",
+    titleLead: "About",
+    titleEm: "Nakur Wale Baba Ji",
+    imgAlt: "Shri Nakur Wale Baba Ji",
+    shortBio:
+      "Shri Shri 108 Swami Ramanand Saraswati Ji Maharaj — lovingly known as 'Nakur Wale Baba Ji' — was a great saint whose entire life was devoted to the welfare of others. He often said that a person is first a human being, and only after that a Hindu or a Muslim.",
+    knowMore: "Know More",
+    tabJourney: "About Nakur Wale Baba Ji",
+    tabDevi: "About Devi Ji",
   },
 
   journey: {

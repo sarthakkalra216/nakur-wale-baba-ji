@@ -373,7 +373,7 @@ export default function Hero() {
         >
           <Magnetic className="w-full sm:w-auto" strength={0.28}>
             <button
-              onClick={() => scrollTo("#life-journey")}
+              onClick={() => scrollTo("#about")}
               className="font-hindi w-full px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 font-bold text-base hover:from-amber-300 hover:to-yellow-400 transition-all duration-300 shadow-xl shadow-amber-500/25 hover:shadow-amber-400/45 hover:scale-105 cursor-pointer"
               lang={lang}
             >
@@ -399,7 +399,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6 }}
-        onClick={() => scrollTo("#life-journey")}
+        onClick={() => scrollTo("#about")}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-amber-400/50 hover:text-amber-400 transition-colors cursor-pointer"
       >
         <span className="font-hindi text-[11px] tracking-[0.2em]" lang={lang}>{t.hero.scrollCue}</span>

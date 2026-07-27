@@ -1,5 +1,5 @@
 import Hero from "@/components/sections/Hero"
-import LifeJourney from "@/components/sections/LifeJourney"
+import About from "@/components/sections/About"
 
 const SITE_URL = "https://nakurwalebabaji.com"
 
@@ -48,7 +48,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Hero />
-      <LifeJourney />
+      <About />
     </main>
   )
 }

@@ -10,13 +10,6 @@ import { useSite } from "@/components/providers/SiteProvider"
 // सद्गुरुदेव की उत्तराधिकारिणी — सुश्री देवी सुदीक्षा सरस्वती जी (राष्ट्रपति पदक से सम्मानित)
 // स्रोत: public/about me/about me_extracted_text.txt (अंतिम अनुच्छेद)
 
-// Disciple portraits shown beside the समर्पण text — names always Hindi,
-// independent of the site's language toggle (names, not translatable copy).
-const DISCIPLES = [
-  { src: "/images/Devi%20ji/photo29.jpg.jpeg", name: "सुश्री सौम्या सरस्वती जी" },
-  { src: "/images/Devi%20ji/photo30.jpg.jpeg", name: "सुश्री समीक्षा सरस्वती जी" },
-]
-
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
@@ -194,18 +187,17 @@ export default function Successor() {
             </motion.div>
           </div>
 
-          {/* Images — RIGHT (on desktop), shown first on mobile — Devi Ji's
-              photo on top, both disciples in a row below. Fixed aspect
-              ratios throughout (cropped, never stretched).
-              devi-ji-portrait.jpg is a pre-cropped close-up (source:
+          {/* Image — RIGHT (on desktop), shown first on mobile — Devi Ji's
+              photo. devi-ji-portrait.jpg is a pre-cropped close-up (source:
               Devi ji/devi-ji.png, a wide side-by-side collage that doesn't
-              crop well at arbitrary widths). */}
+              crop well at arbitrary widths).
+              Disciple photos (सौम्या, समीक्षा) removed here for now. */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2 relative w-full"
+            className="order-1 lg:order-2 relative max-w-xl mx-auto lg:mx-0 w-full"
           >
             <div
               className="absolute -inset-4 rounded-[2rem] pointer-events-none ram-breathe"
@@ -216,7 +208,6 @@ export default function Successor() {
               }}
             />
             <Parallax offset={30}>
-              {/* Devi Ji — full width, above both disciples */}
               <div
                 className="relative rounded-2xl overflow-hidden aspect-[4/3]"
                 style={{ border: "1px solid var(--border-gold)" }}
@@ -238,34 +229,6 @@ export default function Successor() {
               >
                 सुश्री देवी सुदीक्षा सरस्वती जी
               </p>
-
-              {/* Disciples — side by side below */}
-              <div className="grid grid-cols-2 gap-4 sm:gap-5 mt-5">
-                {DISCIPLES.map((p, i) => (
-                  <div key={p.src}>
-                    <div
-                      className="relative rounded-2xl overflow-hidden aspect-[4/5]"
-                      style={{ border: "1px solid var(--border-gold)" }}
-                    >
-                      <ImageReveal fill delay={(i + 1) * 0.1}>
-                        <Image
-                          src={p.src}
-                          alt={p.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 1024px) 50vw, 260px"
-                        />
-                      </ImageReveal>
-                    </div>
-                    <p
-                      className="mt-2.5 text-center font-serif text-xs sm:text-sm font-semibold text-heading"
-                      lang="hi"
-                    >
-                      {p.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
             </Parallax>
           </motion.div>
         </div>
