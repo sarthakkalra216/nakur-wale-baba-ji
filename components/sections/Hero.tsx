@@ -127,11 +127,17 @@ export default function Hero() {
       {/* Base background */}
       <div className="absolute inset-0 bg-[#04000c]" />
 
-      {/* Video background — covers the full hero, no leftover solid-black
-          area below it like the old 78%-tall box left behind. */}
+      {/* Video background — capped to one viewport tall (h-screen), not the
+          Hero section's own height. The section can grow taller than 100vh
+          depending on content/font length; sizing the video to match that
+          variable height (via inset-0/h-full) forced object-cover to stretch
+          it far beyond its natural scale to "cover" the taller box, which
+          both blurred it out and made decoding/compositing much heavier
+          (visibly slower navigation). h-screen keeps the render cost fixed
+          regardless of how tall the section's content makes it. */}
       {!videoError && (
         <motion.div
-          className="absolute inset-0 overflow-hidden pointer-events-none"
+          className="absolute inset-x-0 top-0 h-screen overflow-hidden pointer-events-none"
           style={{ y: videoY }}
         >
           {/* No scroll-linked scale on the video — scaling a <video> via CSS
@@ -162,10 +168,10 @@ export default function Hero() {
         </motion.div>
       )}
 
-      {/* Fallback: photo when video can't load — covers the full hero */}
+      {/* Fallback: photo when video can't load — same h-screen cap */}
       {videoError && (
         <motion.div
-          className="absolute inset-0 bg-cover"
+          className="absolute inset-x-0 top-0 h-screen bg-cover"
           style={{
             backgroundPosition: "center 30%",
             backgroundImage: "url('/images/Nakud%20wale%20baba%20ji/photo3.jpg')",
@@ -176,18 +182,6 @@ export default function Hero() {
 
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/35" />
-
-      {/* Warm scrim behind the fixed nav bar — the header is transparent
-          until scrolled, so without this its text loses contrast against
-          bright frames of the video. Warm gold/maroon tint (not black) to
-          keep the mood welcoming rather than moody. */}
-      <div
-        className="absolute inset-x-0 top-0 h-28 sm:h-36 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(58,29,12,0.72), rgba(122,46,30,0.4) 60%, transparent 100%)",
-        }}
-      />
 
       {/* Radial glows on top of video */}
       <div

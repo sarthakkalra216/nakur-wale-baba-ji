@@ -43,14 +43,10 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 inset-x-0 z-50 transition-all duration-500",
-          scrolled ? "backdrop-blur-xl border-b shadow-2xl" : "bg-transparent border-b border-transparent"
+          "fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b transition-shadow duration-500",
+          scrolled ? "shadow-2xl" : ""
         )}
-        style={
-          scrolled
-            ? { background: "var(--header-bg)", borderColor: "var(--header-border)" }
-            : undefined
-        }
+        style={{ background: "var(--header-bg)", borderColor: "var(--header-border)" }}
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo — जय श्री राम */}
@@ -96,21 +92,7 @@ export default function Header() {
                     isActive(link.href) ? "font-semibold" : ""
                   )}
                   style={{
-                    // Unscrolled, the header is transparent and always sits
-                    // over the hero video (which stays dark in both themes),
-                    // so nav text stays light here regardless of the site's
-                    // light/dark toggle. Once scrolled, the header gets its
-                    // own theme-matched backdrop, so text follows the theme.
-                    color: isActive(link.href)
-                      ? "var(--gold)"
-                      : scrolled
-                        ? "var(--text-muted)"
-                        : "rgba(255,255,255,0.95)",
-                    // A shadow guarantees contrast unscrolled no matter what
-                    // color the video happens to show behind it at that
-                    // moment (a gradient scrim alone isn't reliable against
-                    // every frame).
-                    textShadow: scrolled ? undefined : "0 1px 4px rgba(0,0,0,0.85), 0 1px 12px rgba(0,0,0,0.5)",
+                    color: isActive(link.href) ? "var(--gold)" : "var(--text-muted)",
                   }}
                 >
                   {t.nav[link.key]}
