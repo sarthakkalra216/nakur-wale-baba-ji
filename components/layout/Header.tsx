@@ -96,7 +96,16 @@ export default function Header() {
                     isActive(link.href) ? "font-semibold" : ""
                   )}
                   style={{
-                    color: isActive(link.href) ? "var(--gold)" : "var(--text-muted)",
+                    // Unscrolled, the header is transparent and always sits
+                    // over the hero video (which stays dark in both themes),
+                    // so nav text stays light here regardless of the site's
+                    // light/dark toggle. Once scrolled, the header gets its
+                    // own theme-matched backdrop, so text follows the theme.
+                    color: isActive(link.href)
+                      ? "var(--gold)"
+                      : scrolled
+                        ? "var(--text-muted)"
+                        : "rgba(254,243,220,0.85)",
                   }}
                 >
                   {t.nav[link.key]}
