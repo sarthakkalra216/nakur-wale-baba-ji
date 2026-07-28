@@ -2,47 +2,11 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { motion } from "framer-motion"
-import { Utensils, BookOpen, HeartPulse, Home, Leaf, IndianRupee, ArrowRight, Copy, Check } from "lucide-react"
+import { Copy, Check } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
 import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
-
-// Language-neutral visuals for each seva card; title/description/impact come
-// from the i18n dictionary (seva.items) in matching order.
-const SEVA_META = [
-  {
-    icon: <Utensils size={22} />,
-    gradient: "linear-gradient(135deg,rgba(245,158,11,0.08),rgba(212,168,67,0.04))",
-    iconBg: "linear-gradient(135deg,#f59e0b,#d97706)",
-  },
-  {
-    icon: <BookOpen size={22} />,
-    gradient: "linear-gradient(135deg,rgba(59,130,246,0.08),rgba(37,99,235,0.04))",
-    iconBg: "linear-gradient(135deg,#3b82f6,#2563eb)",
-  },
-  {
-    icon: <HeartPulse size={22} />,
-    gradient: "linear-gradient(135deg,rgba(239,68,68,0.08),rgba(185,28,28,0.04))",
-    iconBg: "linear-gradient(135deg,#ef4444,#b91c1c)",
-  },
-  {
-    icon: <Home size={22} />,
-    gradient: "linear-gradient(135deg,rgba(124,58,237,0.08),rgba(91,33,182,0.04))",
-    iconBg: "linear-gradient(135deg,#7c3aed,#5b21b6)",
-  },
-  {
-    icon: <Leaf size={22} />,
-    gradient: "linear-gradient(135deg,rgba(16,185,129,0.08),rgba(5,150,105,0.04))",
-    iconBg: "linear-gradient(135deg,#10b981,#059669)",
-  },
-  {
-    icon: <IndianRupee size={22} />,
-    gradient: "linear-gradient(135deg,rgba(212,168,67,0.08),rgba(180,83,9,0.04))",
-    iconBg: "linear-gradient(135deg,#d4a843,#b45309)",
-  },
-]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 35 },
@@ -52,7 +16,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
 
 export default function Seva() {
   const { t, lang } = useSite()
-  const sevas = t.seva.items.map((item, i) => ({ ...item, ...SEVA_META[i] }))
+  const sevas = t.seva.items
   const [copied, setCopied] = useState(false)
 
   const copyUpiId = async () => {
@@ -122,63 +86,19 @@ export default function Seva() {
             <TiltCard
               key={idx}
               variants={fadeUp}
-              maxTilt={7}
-              lift={6}
+              maxTilt={5}
+              lift={4}
               glare
-              className="group relative h-full rounded-2xl p-6 flex flex-col gap-4"
+              className="h-full rounded-xl px-6 py-4 flex items-center"
               style={{
-                background: seva.gradient,
-                border: "1px solid var(--border)",
-                backdropFilter: "blur(16px)",
+                background: "var(--surface)",
+                borderLeft: "3px solid var(--gold)",
+                boxShadow: "var(--card-shadow)",
               }}
             >
-              {/* Icon */}
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shrink-0"
-                style={{
-                  background: seva.iconBg,
-                  boxShadow: "0 6px 24px rgba(0,0,0,0.4)",
-                }}
-              >
-                {seva.icon}
-              </div>
-
-              {/* Title + impact */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-1">
-                  <h3 className="font-serif text-lg font-semibold text-heading" lang={lang}>
-                    {seva.title}
-                  </h3>
-                  <span
-                    className="shrink-0 text-[10px] font-semibold px-2.5 py-1 rounded-full"
-                    style={{
-                      background: "rgba(16,185,129,0.15)",
-                      color: "#0f9b6e",
-                      border: "1px solid rgba(16,185,129,0.3)",
-                    }}
-                    lang={lang}
-                  >
-                    {seva.impact}
-                  </span>
-                </div>
-                <p className="text-sm leading-relaxed text-muted-themed" lang={lang}>
-                  {seva.description}
-                </p>
-              </div>
-
-              {/* CTA */}
-              <Link
-                href="/contact"
-                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold transition-colors group/btn cursor-pointer"
-                style={{ color: "var(--gold)" }}
-                lang={lang}
-              >
-                {t.seva.joinCta}
-                <ArrowRight
-                  size={15}
-                  className="transition-transform duration-300 group-hover/btn:translate-x-1"
-                />
-              </Link>
+              <h3 className="font-serif text-lg font-semibold text-heading" lang={lang}>
+                {seva.title}
+              </h3>
             </TiltCard>
           ))}
         </motion.div>
@@ -229,7 +149,7 @@ export default function Seva() {
             <div className="w-56 rounded-lg overflow-hidden bg-white p-3">
               <div className="relative w-full aspect-square">
                 <Image
-                  src="/images/upi-qr.jpg"
+                  src="/images/donation-qr.jpg"
                   alt={`${t.seva.upiLabel}: ${t.seva.upiId}`}
                   fill
                   className="object-contain"
