@@ -122,6 +122,11 @@ const hi = {
     couplets: ["राम ते अधिक राम कर दासा।", "तुम ते अधिक गुरुहि जिय जानी॥"],
     closing:
       "इसी भाव के साथ — शक्ति देना, भक्ति देना, आशीर्वाद देना — ताकि आपके पुनः आगमन तक मैं आपकी प्रतीक्षा कर सकूँ; क्योंकि यह निश्चित है। आपके सभी प्रेमी भक्तजनों एवं समाज के लिए मंगल-कामना।",
+    bioTitle: "संत देवी सुदीक्षा सरस्वती जी",
+    bioText:
+      "सुश्री देवी सुदीक्षा सरस्वती जी 1969 से नकुड़ वाले बाबा जी की शिष्या रही हैं। 1970 में उन्होंने हरिद्वार से श्री रामचरितमानस प्रसाद स्वरूप भेंट किया और उसे मनन-चिंतन करने की प्रेरणा दी; 1971 में उन्हें शिक्षा विभाग में सेवा का अवसर दिया, जो आज भी जारी है। इस कार्य के लिए उन्हें राष्ट्रपति पदक से सम्मानित किया गया है, और आज वे बाबा जी के उत्तराधिकारी के रूप में सेवा, त्याग और भक्ति के पथ को आगे बढ़ा रही हैं।",
+    expand: "समर्पण विस्तार से पढ़ें",
+    collapse: "समेटें",
   },
 
   seva: {
@@ -330,6 +335,11 @@ const en: typeof hi = {
     couplets: ["राम ते अधिक राम कर दासा।", "तुम ते अधिक गुरुहि जिय जानी॥"],
     closing:
       "With this very feeling — grant me strength, grant me devotion, grant me your blessing — so that I may await your return; for it is certain. Blessings and well-wishes upon all your loving devotees and upon society.",
+    bioTitle: "Sant Devi Sudiksha Saraswati Ji",
+    bioText:
+      "Sushri Devi Sudiksha Saraswati Ji has been a disciple of Nakur Wale Baba Ji since 1969. In 1970 he gifted her the sacred Shri Ramcharitmanas from Haridwar and inspired her to reflect and meditate upon it; in 1971 he gave her the opportunity to serve in the education department, a service that continues to this day. For this work she has been honoured with the President's Medal, and today, as Baba Ji's successor, she carries forward the path of seva, sacrifice, and devotion.",
+    expand: "Read the Full Dedication",
+    collapse: "Show Less",
   },
 
   seva: {

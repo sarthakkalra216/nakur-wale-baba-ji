@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
-import { Award } from "lucide-react"
+import { Award, ChevronDown } from "lucide-react"
 import { RamBackground, Lotus, Mandala } from "@/components/decor/SacredBackground"
 import { ImageReveal, Parallax } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
@@ -18,6 +19,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } }
 
 export default function Successor() {
   const { t, lang } = useSite()
+  const [expanded, setExpanded] = useState(false)
   return (
     <section id="successor" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Section glow */}
@@ -74,12 +76,12 @@ export default function Successor() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Content — LEFT (on desktop) — frosted glass dedication panel */}
+          {/* Content — LEFT (on desktop) — short bio card */}
           <div
             className="order-2 lg:order-1 relative glass rounded-[2rem] p-6 sm:p-9 lg:p-10 overflow-hidden"
             style={{ border: "1px solid var(--border-gold)", boxShadow: "var(--card-shadow)" }}
           >
-            {/* Decorative back layer — faint राम + lotus filling the panel corners */}
+            {/* Decorative back layer — faint राम watermark filling the panel corner */}
             <div aria-hidden className="absolute inset-0 z-0 pointer-events-none select-none">
               <span
                 className="ram-glyph absolute -top-8 -right-3"
@@ -87,7 +89,6 @@ export default function Successor() {
               >
                 राम
               </span>
-              <Lotus className="absolute -bottom-5 -left-4 w-36 h-20 opacity-10" />
             </div>
 
             <motion.div
@@ -97,93 +98,21 @@ export default function Successor() {
               variants={stagger}
               className="relative z-10"
             >
-            <motion.div variants={fadeUp} className="mb-8">
-              <span
-                className="font-hindi gold-text font-bold text-5xl sm:text-6xl lg:text-7xl inline-block"
-                lang={lang}
-                style={{ lineHeight: 1.6, paddingTop: "0.18em", paddingBottom: "0.14em" }}
-              >
-                {t.successor.samarpan}
-              </span>
-            </motion.div>
-
-            {t.successor.paras.map((para, i) => (
-              <motion.p
-                key={i}
+              <motion.h3
                 variants={fadeUp}
-                lang={lang}
-                className="font-hindi leading-8 mb-4 text-[0.97rem] text-muted-themed"
-              >
-                {para}
-              </motion.p>
-            ))}
-
-            {/* Sacred couplets — glass strip over a slow mandala */}
-            <motion.div
-              variants={fadeUp}
-              className="relative my-7 py-5 px-5 rounded-2xl text-center overflow-hidden glass"
-              style={{ border: "1px solid var(--border-gold)" }}
-            >
-              <div
-                aria-hidden
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 spin-slow pointer-events-none"
-                style={{ opacity: 0.1 }}
-              >
-                <Mandala className="w-full h-full" />
-              </div>
-              <div className="relative z-10">
-                {t.successor.couplets.map((c) => (
-                  <p
-                    key={c}
-                    lang={lang}
-                    className="font-hindi italic text-base sm:text-lg leading-relaxed"
-                    style={{ color: "var(--gold)" }}
-                  >
-                    {c}
-                  </p>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.p
-              variants={fadeUp}
-              lang={lang}
-              className="font-hindi leading-8 mb-4 text-[0.97rem] text-muted-themed"
-            >
-              {t.successor.closing}
-            </motion.p>
-
-            {/* Designation / signature */}
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 pt-6"
-              style={{ borderTop: "1px solid var(--border-gold)" }}
-            >
-              <div
-                className="font-hindi font-bold text-xl sm:text-2xl gold-text"
+                className="font-hindi gold-text font-bold text-3xl sm:text-4xl mb-5"
                 lang={lang}
                 style={{ lineHeight: 1.4, paddingBottom: "0.06em" }}
               >
-                {t.successor.name}
-              </div>
-              <div
-                className="inline-flex items-center gap-2.5 mt-3 px-4 py-2 rounded-full"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(245,158,11,0.15), rgba(212,168,67,0.08))",
-                  border: "1px solid var(--border-gold)",
-                }}
+                {t.successor.bioTitle}
+              </motion.h3>
+              <motion.p
+                variants={fadeUp}
+                lang={lang}
+                className="font-hindi leading-8 text-[0.97rem] text-muted-themed"
               >
-                <Award size={18} className="shrink-0" style={{ color: "var(--gold)" }} />
-                <span
-                  className="font-hindi text-sm font-semibold"
-                  style={{ color: "var(--heading)" }}
-                  lang={lang}
-                >
-                  {t.successor.award}
-                </span>
-              </div>
-            </motion.div>
+                {t.successor.bioText}
+              </motion.p>
             </motion.div>
           </div>
 
@@ -232,6 +161,143 @@ export default function Successor() {
             </Parallax>
           </motion.div>
         </div>
+
+        {/* समर्पण — the full dedication text, collapsed behind an expand
+            button so the tab opens on the short bio + image, not a wall of
+            text. */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative glass rounded-[2rem] mt-10 lg:mt-14 p-6 sm:p-9 lg:p-10 overflow-hidden"
+          style={{ border: "1px solid var(--border-gold)", boxShadow: "var(--card-shadow)" }}
+        >
+          <div aria-hidden className="absolute inset-0 z-0 pointer-events-none select-none">
+            <Lotus className="absolute -bottom-5 -left-4 w-36 h-20 opacity-10" />
+          </div>
+
+          <div className="relative z-10">
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              className="w-full flex items-center justify-between gap-4 cursor-pointer"
+            >
+              <span
+                className="font-hindi gold-text font-bold text-4xl sm:text-5xl lg:text-6xl inline-block"
+                lang={lang}
+                style={{ lineHeight: 1.6, paddingTop: "0.18em", paddingBottom: "0.14em" }}
+              >
+                {t.successor.samarpan}
+              </span>
+              <span
+                className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-full transition-colors"
+                style={{
+                  background: "var(--surface-2)",
+                  border: "1px solid var(--border-gold)",
+                  color: "var(--gold)",
+                }}
+                lang={lang}
+              >
+                {expanded ? t.successor.collapse : t.successor.expand}
+                <ChevronDown
+                  size={16}
+                  className="transition-transform duration-300"
+                  style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
+                />
+              </span>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {expanded && (
+                <motion.div
+                  key="samarpan-body"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-8">
+                    {t.successor.paras.map((para, i) => (
+                      <p
+                        key={i}
+                        lang={lang}
+                        className="font-hindi leading-8 mb-4 text-[0.97rem] text-muted-themed"
+                      >
+                        {para}
+                      </p>
+                    ))}
+
+                    {/* Sacred couplets — glass strip over a slow mandala */}
+                    <div
+                      className="relative my-7 py-5 px-5 rounded-2xl text-center overflow-hidden glass"
+                      style={{ border: "1px solid var(--border-gold)" }}
+                    >
+                      <div
+                        aria-hidden
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 spin-slow pointer-events-none"
+                        style={{ opacity: 0.1 }}
+                      >
+                        <Mandala className="w-full h-full" />
+                      </div>
+                      <div className="relative z-10">
+                        {t.successor.couplets.map((c) => (
+                          <p
+                            key={c}
+                            lang={lang}
+                            className="font-hindi italic text-base sm:text-lg leading-relaxed"
+                            style={{ color: "var(--gold)" }}
+                          >
+                            {c}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+
+                    <p
+                      lang={lang}
+                      className="font-hindi leading-8 mb-4 text-[0.97rem] text-muted-themed"
+                    >
+                      {t.successor.closing}
+                    </p>
+
+                    {/* Designation / signature */}
+                    <div
+                      className="mt-8 pt-6"
+                      style={{ borderTop: "1px solid var(--border-gold)" }}
+                    >
+                      <div
+                        className="font-hindi font-bold text-xl sm:text-2xl gold-text"
+                        lang={lang}
+                        style={{ lineHeight: 1.4, paddingBottom: "0.06em" }}
+                      >
+                        {t.successor.name}
+                      </div>
+                      <div
+                        className="inline-flex items-center gap-2.5 mt-3 px-4 py-2 rounded-full"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, rgba(245,158,11,0.15), rgba(212,168,67,0.08))",
+                          border: "1px solid var(--border-gold)",
+                        }}
+                      >
+                        <Award size={18} className="shrink-0" style={{ color: "var(--gold)" }} />
+                        <span
+                          className="font-hindi text-sm font-semibold"
+                          style={{ color: "var(--heading)" }}
+                          lang={lang}
+                        >
+                          {t.successor.award}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
