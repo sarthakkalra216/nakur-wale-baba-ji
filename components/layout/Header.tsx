@@ -26,7 +26,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { t } = useSite()
+  const { t, lang } = useSite()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -69,16 +69,16 @@ export default function Header() {
             <div className="leading-tight">
               <div
                 className="font-hindi font-bold gold-text text-xl sm:text-2xl"
-                lang="hi"
+                lang={lang}
                 style={{ lineHeight: 1.35, paddingBottom: "0.06em" }}
               >
-                जय श्री राम
+                {t.footer.brand}
               </div>
               <div
                 className="font-hindi text-[9px] sm:text-[10px] text-muted-themed tracking-[0.18em]"
-                lang="hi"
+                lang={lang}
               >
-                नकुड़ वाले बाबा जी
+                {t.footer.location}
               </div>
             </div>
           </Link>

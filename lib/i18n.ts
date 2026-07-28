@@ -151,6 +151,7 @@ const hi = {
     subtitle: "आध्यात्मिक कृपा, सेवा और दिव्य आशीर्वाद के क्षण",
     empty: "अभी कोई चित्र नहीं। तस्वीरें",
     guruji: "नकुड़ वाले बाबा जी",
+    viewFull: "पूरी गैलरी देखें",
   },
 
   videos: {
@@ -159,6 +160,7 @@ const hi = {
     titleEm: "वीडियो",
     subtitle: "नकुड़ वाले बाबा जी के आश्रम के दिव्य वातावरण में डूब जाएँ। प्ले दबाएँ — ध्वनि चालू है।",
     empty: "अभी कोई वीडियो नहीं। फ़ाइलें",
+    watchMore: "यूट्यूब पर और देखें",
   },
 
   contact: {
@@ -350,6 +352,7 @@ const en: typeof hi = {
     subtitle: "Moments of Spiritual Grace, Seva, and Divine Blessings",
     empty: "No images yet. Add photos to",
     guruji: "Nakur Wale Baba Ji",
+    viewFull: "View Full Gallery",
   },
 
   videos: {
@@ -358,6 +361,7 @@ const en: typeof hi = {
     titleEm: "Videos",
     subtitle: "Immerse yourself in the divine atmosphere of Nakur Wale Baba Ji's ashram. Click play — sound is on.",
     empty: "No videos yet. Add files to",
+    watchMore: "Watch More on YouTube",
   },
 
   contact: {

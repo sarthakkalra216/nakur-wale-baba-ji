@@ -3,7 +3,11 @@ import TodaysWisdom from "@/components/sections/TodaysWisdom"
 import About from "@/components/sections/About"
 import Teachings from "@/components/sections/Teachings"
 import LatestEvents from "@/components/sections/LatestEvents"
+import VideosPreview from "@/components/sections/VideosPreview"
+import GalleryPreview from "@/components/sections/GalleryPreview"
 import Ashrams from "@/components/sections/Ashrams"
+import ContactMini from "@/components/sections/ContactMini"
+import { getGalleryEvents } from "@/lib/media"
 
 const SITE_URL = "https://nakurwalebabaji.com"
 
@@ -45,6 +49,10 @@ const structuredData = {
 }
 
 export default function Home() {
+  const previewImages = getGalleryEvents()
+    .flatMap((section) => section.images)
+    .slice(0, 8)
+
   return (
     <main>
       <script
@@ -56,7 +64,10 @@ export default function Home() {
       <About />
       <Teachings />
       <LatestEvents />
+      <VideosPreview />
+      <GalleryPreview images={previewImages} />
       <Ashrams />
+      <ContactMini />
     </main>
   )
 }
