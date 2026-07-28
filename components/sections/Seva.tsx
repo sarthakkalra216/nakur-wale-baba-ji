@@ -1,8 +1,9 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Utensils, BookOpen, HeartPulse, Home, Leaf, IndianRupee, ArrowRight } from "lucide-react"
+import { Utensils, BookOpen, HeartPulse, Home, Leaf, IndianRupee, ArrowRight, Copy, Check } from "lucide-react"
 import { RamBackground } from "@/components/decor/SacredBackground"
 import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
@@ -51,6 +52,17 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.09 } } }
 export default function Seva() {
   const { t, lang } = useSite()
   const sevas = t.seva.items.map((item, i) => ({ ...item, ...SEVA_META[i] }))
+  const [copied, setCopied] = useState(false)
+
+  const copyUpiId = async () => {
+    try {
+      await navigator.clipboard.writeText(t.seva.upiId)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // clipboard permissions can be denied by the browser; fail silently
+    }
+  }
   return (
     <section id="seva" className="relative py-24 sm:py-32 overflow-hidden">
       <div
@@ -168,6 +180,54 @@ export default function Seva() {
               </Link>
             </TiltCard>
           ))}
+        </motion.div>
+
+        {/* Donation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 mx-auto max-w-lg rounded-2xl p-8 text-center"
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border-gold)",
+            boxShadow: "var(--card-shadow)",
+          }}
+        >
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-heading" lang={lang}>
+            {t.seva.donationTitle}
+          </h3>
+          <p className="mt-2 text-sm text-muted-themed" lang={lang}>
+            {t.seva.donationNote}
+          </p>
+
+          <div
+            className="mt-6 flex items-center justify-between gap-3 rounded-xl px-4 py-3"
+            style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
+          >
+            <div className="text-left">
+              <div className="text-[10px] uppercase tracking-[0.15em] text-muted-themed" lang={lang}>
+                {t.seva.upiLabel}
+              </div>
+              <div className="font-mono text-sm sm:text-base font-semibold text-heading">
+                {t.seva.upiId}
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={copyUpiId}
+              className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full transition-colors cursor-pointer"
+              style={{
+                background: copied ? "rgba(16,185,129,0.15)" : "var(--surface-strong)",
+                color: copied ? "#0f9b6e" : "var(--gold)",
+                border: `1px solid ${copied ? "rgba(16,185,129,0.3)" : "var(--border-gold)"}`,
+              }}
+              lang={lang}
+            >
+              {copied ? <Check size={14} /> : <Copy size={14} />}
+              {copied ? t.seva.copied : t.seva.copy}
+            </button>
+          </div>
         </motion.div>
 
         {/* Bottom quote */}

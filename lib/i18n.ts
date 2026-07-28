@@ -142,6 +142,12 @@ const hi = {
       { title: "पर्यावरण सेवा", description: "आश्रम संगत द्वारा संचालित वृक्षारोपण अभियानों, नदी-स्वच्छता यात्राओं और पर्यावरण-हितैषी पर्व-पहलों में सम्मिलित हों।", impact: "१०००+ वृक्ष लगाए" },
       { title: "दान सेवा", description: "सभी सेवा गतिविधियों को बनाए रखने हेतु आर्थिक सहयोग दें। दान का प्रत्येक रुपया सीधे भोजन, उपचार और शिक्षा पर लगता है।", impact: "१००% पारदर्शी" },
     ],
+    donationTitle: "सीधे सहयोग करें — दान करें",
+    upiLabel: "UPI आईडी",
+    upiId: "9837080611m@pnb",
+    donationNote: "सरस्वती युवा संगठन ट्रस्ट के माध्यम से UPI द्वारा दान करें",
+    copy: "कॉपी करें",
+    copied: "कॉपी हो गया",
   },
 
   gallery: {
@@ -343,6 +349,12 @@ const en: typeof hi = {
       { title: "Environment Seva", description: "Join tree-plantation drives, river-cleaning yatras, and eco-friendly festival initiatives led by the ashram sangat.", impact: "1000+ trees planted" },
       { title: "Donation Seva", description: "Contribute financially to sustain all seva activities. Every rupee donated goes directly toward feeding, healing, and educating.", impact: "100% transparent" },
     ],
+    donationTitle: "Contribute Directly — Donate",
+    upiLabel: "UPI ID",
+    upiId: "9837080611m@pnb",
+    donationNote: "Donate via UPI — Saraswati Yuva Sangathan Trust",
+    copy: "Copy",
+    copied: "Copied",
   },
 
   gallery: {
