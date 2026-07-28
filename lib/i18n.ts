@@ -207,7 +207,7 @@ const hi = {
 
   footer: {
     brand: "नकुड़ वाले बाबा जी",
-    location: "नकुड़, सहारनपुर, उत्तर प्रदेश",
+    location: "सहारनपुर, उत्तर प्रदेश",
     blurb:
       "सत्संग, कीर्तन, सेवा और भक्ति का एक पावन स्थल — दिव्य प्रेम और आंतरिक शांति के सभी साधकों के लिए खुला।",
     quickLinks: "त्वरित लिंक",
@@ -420,7 +420,7 @@ const en: typeof hi = {
 
   footer: {
     brand: "Nakur Wale Baba Ji",
-    location: "Nakur, Saharanpur, Uttar Pradesh",
+    location: "Saharanpur, Uttar Pradesh",
     blurb:
       "A sacred space for satsang, kirtan, seva, and devotion — open to all seekers of divine love and inner peace.",
     quickLinks: "Quick Links",

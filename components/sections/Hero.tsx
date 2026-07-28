@@ -297,7 +297,7 @@ export default function Hero() {
 
       {/* Content — rises, shrinks, and fades as the hero scrolls away */}
       <motion.div
-        className="relative z-20 px-4 sm:px-6 max-w-4xl mx-auto pt-28 pb-20 sm:py-16"
+        className="relative z-20 px-4 sm:px-6 max-w-4xl mx-auto pt-20 pb-12 sm:pt-16 sm:pb-12"
         style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
       >
         <motion.div
@@ -311,7 +311,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 mb-5 sm:mb-8 px-4 sm:px-5 py-2 rounded-full border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 text-xs sm:text-sm font-medium font-hindi"
+          className="inline-flex items-center gap-2 mb-3 sm:mb-5 px-4 sm:px-5 py-2 rounded-full border border-amber-400/30 bg-amber-400/[0.06] text-amber-400 text-xs sm:text-sm font-medium font-hindi"
           lang="hi"
         >
           <Sparkles size={13} className="animate-pulse" />
@@ -324,7 +324,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-hindi font-bold mb-5 sm:mb-6"
+          className="font-hindi font-bold mb-3 sm:mb-5"
           style={{ perspective: 800 }}
           lang={lang}
         >
@@ -332,8 +332,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 34, rotateX: 28 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 0.85, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="block text-amber-200/90 text-base sm:text-2xl lg:text-3xl mb-2 font-medium"
-            style={{ lineHeight: 1.6, paddingBlock: "0.1em" }}
+            className="block text-amber-200/90 text-base sm:text-2xl lg:text-3xl mb-1 font-medium"
+            style={{ lineHeight: 1.25 }}
           >
             {t.hero.eyebrow}
           </motion.span>
@@ -342,7 +342,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 0.85, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
             className="block text-3xl sm:text-5xl lg:text-6xl"
-            style={{ ...goldGradient, lineHeight: 1.5, paddingBlock: "0.14em" }}
+            style={{ ...goldGradient, lineHeight: 1.2, paddingBlock: "0.05em" }}
           >
             {t.hero.name1}
           </motion.span>
@@ -351,7 +351,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 0.85, delay: 0.44, ease: [0.22, 1, 0.36, 1] }}
             className="block text-amber-50 text-3xl sm:text-5xl lg:text-6xl"
-            style={{ lineHeight: 1.5, paddingBlock: "0.14em" }}
+            style={{ lineHeight: 1.2, paddingBlock: "0.05em" }}
           >
             {t.hero.name2}
           </motion.span>
@@ -359,8 +359,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 34, rotateX: 28 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             transition={{ duration: 0.85, delay: 0.56, ease: [0.22, 1, 0.36, 1] }}
-            className="block text-2xl sm:text-4xl lg:text-5xl mt-2 sm:mt-3"
-            style={{ ...purpleGradient, lineHeight: 1.55, paddingBlock: "0.16em" }}
+            className="block text-2xl sm:text-4xl lg:text-5xl mt-1 sm:mt-2"
+            style={{ ...purpleGradient, lineHeight: 1.25, paddingBlock: "0.05em" }}
           >
             {t.hero.name3}
           </motion.span>
@@ -371,7 +371,7 @@ export default function Hero() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.4 }}
-          className="flex items-center justify-center gap-3 mb-6 sm:mb-8"
+          className="flex items-center justify-center gap-3 mb-4 sm:mb-6"
         >
           <div className="h-px w-20 bg-gradient-to-r from-transparent to-amber-400/50" />
           <span className="text-amber-400 text-xl">✦</span>
@@ -383,7 +383,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35 }}
-          className="font-hindi text-base sm:text-xl lg:text-2xl text-amber-200/80 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed"
+          className="font-hindi text-base sm:text-xl lg:text-2xl text-amber-200/80 max-w-2xl mx-auto mb-5 sm:mb-8 leading-snug"
           lang={lang}
         >
           {t.hero.tagline}
@@ -394,7 +394,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-10 sm:mb-16"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8"
         >
           <Magnetic className="w-full sm:w-auto" strength={0.28}>
             <button

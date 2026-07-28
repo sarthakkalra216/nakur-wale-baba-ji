@@ -66,16 +66,16 @@ export default function Header() {
                 sizes="56px"
               />
             </span>
-            <div className="hidden sm:block leading-tight min-w-0">
+            <div className="leading-tight min-w-0">
               <div
-                className="font-hindi font-bold gold-text text-xl md:text-2xl truncate"
+                className="font-hindi font-bold gold-text text-base sm:text-xl md:text-2xl truncate"
                 lang={lang}
                 style={{ lineHeight: 1.35, paddingBottom: "0.06em" }}
               >
                 {t.footer.brand}
               </div>
               <div
-                className="font-hindi text-[10px] text-muted-themed tracking-[0.18em] truncate"
+                className="font-hindi text-[9px] sm:text-[10px] text-muted-themed tracking-[0.18em] truncate"
                 lang={lang}
               >
                 {t.footer.location}
