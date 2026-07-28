@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Utensils, BookOpen, HeartPulse, Home, Leaf, IndianRupee, ArrowRight, Copy, Check } from "lucide-react"
@@ -184,50 +185,70 @@ export default function Seva() {
 
         {/* Donation */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 mx-auto max-w-lg rounded-2xl p-8 text-center"
-          style={{
-            background: "var(--surface)",
-            border: "1px solid var(--border-gold)",
-            boxShadow: "var(--card-shadow)",
-          }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="text-center mt-16"
         >
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-heading" lang={lang}>
-            {t.seva.donationTitle}
-          </h3>
-          <p className="mt-2 text-sm text-muted-themed" lang={lang}>
-            {t.seva.donationNote}
-          </p>
-
-          <div
-            className="mt-6 flex items-center justify-between gap-3 rounded-xl px-4 py-3"
-            style={{ background: "var(--surface-2)", border: "1px solid var(--border)" }}
+          <motion.span
+            variants={fadeUp}
+            className="text-xs font-semibold uppercase tracking-[0.25em]"
+            style={{ color: "var(--gold)" }}
+            lang={lang}
           >
-            <div className="text-left">
-              <div className="text-[10px] uppercase tracking-[0.15em] text-muted-themed" lang={lang}>
-                {t.seva.upiLabel}
-              </div>
-              <div className="font-mono text-sm sm:text-base font-semibold text-heading">
-                {t.seva.upiId}
-              </div>
-            </div>
+            {t.seva.donationTitle}
+          </motion.span>
+          <motion.h3
+            variants={fadeUp}
+            className="mt-3 font-serif text-2xl sm:text-3xl font-bold text-heading"
+            lang={lang}
+          >
+            {t.seva.donationHeading}
+          </motion.h3>
+
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 mx-auto max-w-sm rounded-2xl p-6 flex flex-col items-center gap-5"
+            style={{ background: "#5a1a1a" }}
+          >
             <button
               type="button"
               onClick={copyUpiId}
-              className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full transition-colors cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-mono font-semibold px-4 py-2.5 rounded-lg transition-colors cursor-pointer"
               style={{
-                background: copied ? "rgba(16,185,129,0.15)" : "var(--surface-strong)",
-                color: copied ? "#0f9b6e" : "var(--gold)",
-                border: `1px solid ${copied ? "rgba(16,185,129,0.3)" : "var(--border-gold)"}`,
+                background: copied ? "rgba(16,185,129,0.25)" : "rgba(255,255,255,0.12)",
+                color: "#fdf6e9",
               }}
               lang={lang}
             >
+              {t.seva.upiLabel}: {t.seva.upiId}
               {copied ? <Check size={14} /> : <Copy size={14} />}
-              {copied ? t.seva.copied : t.seva.copy}
             </button>
-          </div>
+
+            <div className="w-56 rounded-lg overflow-hidden bg-white p-3">
+              <div className="relative w-full aspect-square">
+                <Image
+                  src="/images/upi-qr.jpg"
+                  alt={`${t.seva.upiLabel}: ${t.seva.upiId}`}
+                  fill
+                  className="object-contain"
+                  sizes="224px"
+                />
+              </div>
+              <div className="mt-2 text-center text-[11px] font-serif font-semibold text-black">
+                {t.seva.upiLabel}: {t.seva.upiId}
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-sm text-muted-themed"
+            lang={lang}
+          >
+            {t.seva.donationNote}
+          </motion.p>
         </motion.div>
 
         {/* Bottom quote */}
