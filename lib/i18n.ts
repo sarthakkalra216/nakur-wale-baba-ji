@@ -10,7 +10,9 @@ const hi = {
   nav: {
     home: "होम",
     about: "परिचय",
+    events: "ताज़ा कार्यक्रम",
     gallery: "गैलरी",
+    ashrams: "आश्रम",
     videos: "वीडियो",
     seva: "सेवा",
     contact: "संपर्क",
@@ -42,6 +44,40 @@ const hi = {
     knowMore: "और जानें",
     tabJourney: "नकुड़ वाले बाबा जी के बारे में",
     tabDevi: "देवी जी के बारे में",
+  },
+
+  wisdom: {
+    eyebrow: "आज का ज्ञान",
+    title: "रामायण की एक चौपाई, सरल भाषा में",
+  },
+
+  teachings: {
+    eyebrow: "उन्हीं के शब्दों में",
+    title: "नकुड़ वाले बाबा जी की शिक्षाएं",
+  },
+
+  events: {
+    eyebrow: "क्या हो रहा है",
+    title: "ताज़ा कार्यक्रम",
+    subtitle: "आश्रम में सत्संग, प्रवचन और उत्सव।",
+    viewAll: "सभी कार्यक्रम देखें",
+    watchVideo: "पूरा वीडियो देखें →",
+    scheduleTag: "नियमित कार्यक्रम — पंत विहार आश्रम",
+    scheduleTime: "दैनिक आरती और सत्संग — प्रातः 7:00 एवं सायं 7:00 बजे",
+    scheduleDesc:
+      "यह प्रतिदिन पंत विहार आश्रम में होता है। सभी भक्त प्रातः एवं सायं इसमें सम्मिलित होने के लिए सादर आमंत्रित हैं।",
+  },
+
+  ashrams: {
+    eyebrow: "हमारे केंद्र",
+    title: "आश्रम (केंद्र)",
+    subtitle: "जहां आश्रम समुदाय सत्संग, सेवा और दर्शन के लिए एकत्र होता है।",
+    viewAll: "सभी केंद्र देखें",
+    getDirections: "दिशा-निर्देश प्राप्त करें",
+    moreCentres: "अन्य केंद्र",
+    otherAshrams: "अन्य आश्रम",
+    dailyAartiLabel: "दैनिक आरती एवं सत्संग:",
+    dailyAartiTime: "प्रातः 7:00 एवं सायं 7:00 बजे",
   },
 
   journey: {
@@ -173,7 +209,9 @@ const en: typeof hi = {
   nav: {
     home: "Home",
     about: "About",
+    events: "Latest Events",
     gallery: "Gallery",
+    ashrams: "Ashrams",
     videos: "Videos",
     seva: "Seva",
     contact: "Contact",
@@ -205,6 +243,40 @@ const en: typeof hi = {
     knowMore: "Know More",
     tabJourney: "About Nakur Wale Baba Ji",
     tabDevi: "About Devi Ji",
+  },
+
+  wisdom: {
+    eyebrow: "Today's Wisdom",
+    title: "A verse from the Ramayana, explained simply",
+  },
+
+  teachings: {
+    eyebrow: "In His Own Words",
+    title: "Teachings by Nakur Wale Baba Ji",
+  },
+
+  events: {
+    eyebrow: "What's Happening",
+    title: "Latest Events",
+    subtitle: "Satsang, discourses and celebrations at the ashram.",
+    viewAll: "View All Events",
+    watchVideo: "Watch full video →",
+    scheduleTag: "Regular Schedule — Pant Vihar Ashram",
+    scheduleTime: "Daily Aarti & Satsang — 7:00 AM & 7:00 PM",
+    scheduleDesc:
+      "Held every day at the Pant Vihar ashram. All devotees are welcome to join morning and evening.",
+  },
+
+  ashrams: {
+    eyebrow: "Our Centres",
+    title: "Ashrams (Centres)",
+    subtitle: "Where the ashram community gathers for satsang, seva and darshan.",
+    viewAll: "View All Centres",
+    getDirections: "Get Directions",
+    moreCentres: "More Centres",
+    otherAshrams: "Other Ashrams",
+    dailyAartiLabel: "Daily Aarti & Satsang:",
+    dailyAartiTime: "7:00 AM & 7:00 PM",
   },
 
   journey: {

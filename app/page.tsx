@@ -1,5 +1,9 @@
 import Hero from "@/components/sections/Hero"
+import TodaysWisdom from "@/components/sections/TodaysWisdom"
 import About from "@/components/sections/About"
+import Teachings from "@/components/sections/Teachings"
+import LatestEvents from "@/components/sections/LatestEvents"
+import Ashrams from "@/components/sections/Ashrams"
 
 const SITE_URL = "https://nakurwalebabaji.com"
 
@@ -48,7 +52,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Hero />
+      <TodaysWisdom />
       <About />
+      <Teachings />
+      <LatestEvents />
+      <Ashrams />
     </main>
   )
 }

@@ -14,7 +14,9 @@ import SettingsToggles from "@/components/layout/SettingsToggles"
 const navLinks: { key: keyof ReturnType<typeof useSite>["t"]["nav"]; href: string }[] = [
   { key: "home", href: "/" },
   { key: "about", href: "/about" },
+  { key: "events", href: "/events" },
   { key: "gallery", href: "/gallery" },
+  { key: "ashrams", href: "/ashrams" },
   { key: "videos", href: "/videos" },
   { key: "seva", href: "/seva" },
   { key: "contact", href: "/contact" },
