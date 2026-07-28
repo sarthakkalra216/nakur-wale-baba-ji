@@ -181,17 +181,17 @@ export default function Successor() {
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="w-full flex items-center justify-between gap-4 cursor-pointer"
+              className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer"
             >
               <span
-                className="font-hindi gold-text font-bold text-4xl sm:text-5xl lg:text-6xl inline-block"
+                className="font-hindi gold-text font-bold text-3xl sm:text-5xl lg:text-6xl inline-block"
                 lang={lang}
                 style={{ lineHeight: 1.6, paddingTop: "0.18em", paddingBottom: "0.14em" }}
               >
                 {t.successor.samarpan}
               </span>
               <span
-                className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2.5 rounded-full transition-colors"
+                className="self-start sm:self-auto shrink-0 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-colors whitespace-nowrap"
                 style={{
                   background: "var(--surface-2)",
                   border: "1px solid var(--border-gold)",

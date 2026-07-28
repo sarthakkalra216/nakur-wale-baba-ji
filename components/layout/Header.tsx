@@ -50,12 +50,12 @@ export default function Header() {
         )}
         style={{ background: "var(--header-bg)", borderColor: "var(--header-border)" }}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
           {/* Logo — जय श्री राम */}
-          <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer min-w-0 flex-1 lg:flex-initial">
             {/* Ashram emblem */}
             <span
-              className="relative grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-full shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105"
+              className="relative grid place-items-center w-11 h-11 sm:w-14 sm:h-14 rounded-full shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105"
               style={{ boxShadow: "0 4px 16px rgba(212,168,67,0.4)" }}
             >
               <Image
@@ -66,16 +66,16 @@ export default function Header() {
                 sizes="56px"
               />
             </span>
-            <div className="leading-tight">
+            <div className="leading-tight min-w-0">
               <div
-                className="font-hindi font-bold gold-text text-xl sm:text-2xl"
+                className="font-hindi font-bold gold-text text-base sm:text-xl md:text-2xl truncate"
                 lang={lang}
                 style={{ lineHeight: 1.35, paddingBottom: "0.06em" }}
               >
                 {t.footer.brand}
               </div>
               <div
-                className="font-hindi text-[9px] sm:text-[10px] text-muted-themed tracking-[0.18em]"
+                className="font-hindi text-[9px] sm:text-[10px] text-muted-themed tracking-[0.18em] truncate"
                 lang={lang}
               >
                 {t.footer.location}
@@ -107,7 +107,7 @@ export default function Header() {
           </ul>
 
           {/* Right cluster: toggles + CTA + hamburger */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <SettingsToggles />
 
             <Magnetic className="hidden lg:block" strength={0.25}>
