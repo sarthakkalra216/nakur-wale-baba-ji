@@ -126,19 +126,10 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       onPointerMove={onSpotlightMove}
-      className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden"
+      className="relative h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden"
     >
-      {/* Base background — a blurred, darkened still pulled from the hero
-          video itself, covering the section's *full* height. The sharp
-          video (below) is capped to 100vh, so on any render where the
-          section grows taller than one viewport, this still shows through
-          beneath it instead of flat black — reads as a continuation of the
-          same scene rather than a dead gap. */}
+      {/* Base background */}
       <div className="absolute inset-0 bg-[#04000c]" />
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/hero-bg-still.jpg')" }}
-      />
 
       {/* Video background — capped to a single viewport height (100vh) and
           never grows with the section, so it never spans more than one
