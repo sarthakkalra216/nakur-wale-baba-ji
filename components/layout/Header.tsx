@@ -91,10 +91,13 @@ export default function Header() {
                   href={link.href}
                   className={cn(
                     "px-3 py-2 text-sm transition-colors rounded-lg cursor-pointer",
-                    isActive(link.href) ? "font-semibold" : ""
+                    isActive(link.href)
+                      ? "font-semibold underline decoration-2 underline-offset-8"
+                      : ""
                   )}
                   style={{
-                    color: isActive(link.href) ? "var(--gold)" : "var(--text-muted)",
+                    color: isActive(link.href) ? "var(--heading)" : "var(--text)",
+                    textDecorationColor: isActive(link.href) ? "var(--gold)" : undefined,
                   }}
                 >
                   {t.nav[link.key]}
