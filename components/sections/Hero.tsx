@@ -54,7 +54,7 @@ const COLORS = [
 export default function Hero() {
   const { t, lang } = useSite()
   const [particles, setParticles] = useState<Particle[]>([])
-  const [isMuted, setIsMuted] = useState(true)
+  const [isMuted, setIsMuted] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -111,12 +111,24 @@ export default function Hero() {
     )
   }, [])
 
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted
-      setIsMuted(videoRef.current.muted)
-    }
-  }
+  // Try to autoplay with sound on; browsers that block unmuted autoplay
+  // reject the play() promise (no error event fires), so that's the only
+  // reliable hook to detect it and fall back to muted playback instead of
+  // the video silently staying paused.
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.play().catch(() => {
+      v.muted = true
+      setIsMuted(true)
+      v.play().catch(() => {})
+    })
+  }, [])
+
+  // The <video> element's `muted` prop below is bound to isMuted (not a
+  // hardcoded attribute), so toggling state here is the single source of
+  // truth — React keeps the DOM in sync on every render.
+  const toggleMute = () => setIsMuted((v) => !v)
 
   const scrollTo = (id: string) =>
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" })
@@ -155,8 +167,7 @@ export default function Hero() {
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: "center 30%" }}
-            autoPlay
-            muted
+            muted={isMuted}
             loop
             playsInline
             preload="auto"
@@ -278,7 +289,7 @@ export default function Hero() {
           transition={{ delay: 1.8 }}
           onClick={toggleMute}
           aria-label={isMuted ? "Unmute video" : "Mute video"}
-          className="absolute top-24 right-4 sm:right-6 z-20 w-10 h-10 rounded-full flex items-center justify-center border border-white/20 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-amber-400/50 transition-all duration-300 cursor-pointer"
+          className="absolute top-24 right-4 sm:right-6 z-30 w-10 h-10 rounded-full flex items-center justify-center border border-white/20 bg-black/40 backdrop-blur-sm text-white/70 hover:text-white hover:border-amber-400/50 transition-all duration-300 cursor-pointer"
         >
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </motion.button>
