@@ -34,7 +34,7 @@ export default function Teachings() {
   const row = [...teachings, ...teachings]
 
   return (
-    <section id="teachings" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="teachings" className="relative py-16 sm:py-20 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

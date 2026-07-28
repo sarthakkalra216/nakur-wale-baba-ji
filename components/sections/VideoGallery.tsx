@@ -158,7 +158,7 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
 export default function VideoGallery({ videos }: { videos: VideoItem[] }) {
   const { t, lang } = useSite()
   return (
-    <section id="videos" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="videos" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Ambient video backdrop above the gallery — blends into page */}
       <div className="absolute top-0 inset-x-0 h-[78vh] z-0">
         <AmbientVideo src="/background%20effect/gallery-bg.mp4" />

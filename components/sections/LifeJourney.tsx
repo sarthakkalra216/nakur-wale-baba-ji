@@ -179,7 +179,7 @@ export default function LifeJourney() {
   const chapters: Chapter[] = t.journey.chapters.map((c, i) => ({ ...c, ...META[i] }))
 
   return (
-    <section id="life-journey" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="life-journey" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Section glow */}
       <div
         className="absolute inset-0 pointer-events-none"

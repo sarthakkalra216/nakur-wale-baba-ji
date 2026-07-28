@@ -63,7 +63,7 @@ export default function Gallery({ sections }: { sections: GallerySection[] }) {
   const activeImg = active !== null ? flat[active] : null
 
   return (
-    <section id="gallery" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="gallery" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Ambient video backdrop above the gallery — blends into page */}
       <div className="absolute top-0 inset-x-0 h-[78vh] z-0">
         <AmbientVideo src="/background%20effect/gallery-bg.mp4" />

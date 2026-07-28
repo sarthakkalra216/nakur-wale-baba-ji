@@ -21,7 +21,7 @@ export default function Successor() {
   const { t, lang } = useSite()
   const [expanded, setExpanded] = useState(false)
   return (
-    <section id="successor" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="successor" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Section glow */}
       <div
         className="absolute inset-0 pointer-events-none"

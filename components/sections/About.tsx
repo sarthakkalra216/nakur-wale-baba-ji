@@ -20,7 +20,7 @@ const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.11 } } }
 export default function About() {
   const { t, lang } = useSite()
   return (
-    <section id="about" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="about" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Section glow */}
       <div
         className="absolute inset-0 pointer-events-none"

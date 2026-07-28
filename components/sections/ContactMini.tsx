@@ -18,7 +18,7 @@ export default function ContactMini() {
   const { t, lang, theme } = useSite()
 
   return (
-    <section id="contact-mini" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="contact-mini" className="relative py-16 sm:py-20 overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

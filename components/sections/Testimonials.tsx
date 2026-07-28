@@ -110,7 +110,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-24 sm:py-32 overflow-hidden"
+      className="relative py-16 sm:py-20 overflow-hidden"
     >
       <div
         className="absolute inset-0 pointer-events-none"
