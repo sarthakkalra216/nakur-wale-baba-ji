@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import {
   motion,
-  useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -96,17 +95,22 @@ export default function Hero() {
 
   // Mouse-follow spotlight — a soft gold/violet glow trailing the cursor.
   // Starts far offscreen so nothing shows until the mouse enters.
-  const mx = useMotionValue(-1000)
-  const my = useMotionValue(-1000)
+  // Previously this recomputed a `background: radial-gradient(...)` string
+  // every frame via useMotionTemplate — background-position changes force a
+  // full repaint (not GPU-compositable), which was a real cause of the lag.
+  // Now the gradient itself is static and only x/y transform moves it, so
+  // the browser can composite it on the GPU with zero repaint.
+  const spotSize = 1120
+  const mx = useMotionValue(-spotSize)
+  const my = useMotionValue(-spotSize)
   const spotX = useSpring(mx, { stiffness: 60, damping: 20 })
   const spotY = useSpring(my, { stiffness: 60, damping: 20 })
-  const spotlight = useMotionTemplate`radial-gradient(560px circle at ${spotX}px ${spotY}px, rgba(245,185,66,0.09), rgba(124,58,237,0.05) 45%, transparent 70%)`
 
   const onSpotlightMove = (e: React.PointerEvent<HTMLElement>) => {
     if (reduced || e.pointerType !== "mouse") return
     const rect = e.currentTarget.getBoundingClientRect()
-    mx.set(e.clientX - rect.left)
-    my.set(e.clientY - rect.top)
+    mx.set(e.clientX - rect.left - spotSize / 2)
+    my.set(e.clientY - rect.top - spotSize / 2)
   }
 
   useEffect(() => {
@@ -233,11 +237,19 @@ export default function Hero() {
         transition={{ duration: 27, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Mouse-follow spotlight (desktop only) */}
+      {/* Mouse-follow spotlight (desktop only) — fixed-size gradient, moved
+          with transform only (x/y), never repainted. */}
       <motion.div
         aria-hidden
-        className="absolute inset-0 pointer-events-none hidden md:block"
-        style={{ background: spotlight }}
+        className="absolute top-0 left-0 pointer-events-none hidden md:block rounded-full"
+        style={{
+          width: spotSize,
+          height: spotSize,
+          x: spotX,
+          y: spotY,
+          background:
+            "radial-gradient(circle, rgba(245,185,66,0.09), rgba(124,58,237,0.05) 45%, transparent 70%)",
+        }}
       />
 
       {/* Subtle grid */}
