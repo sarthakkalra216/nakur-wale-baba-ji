@@ -138,7 +138,7 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       onPointerMove={onSpotlightMove}
-      className="relative h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden"
+      className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Base background */}
       <div className="absolute inset-0 bg-[#04000c]" />
