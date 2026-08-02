@@ -9,7 +9,7 @@ import Ashrams from "@/components/sections/Ashrams"
 import ContactMini from "@/components/sections/ContactMini"
 import { getGalleryEvents } from "@/lib/media"
 
-const SITE_URL = "https://nakurwalebabaji.com"
+const SITE_URL = "https://www.nakurwalebabaji.com"
 
 const structuredData = {
   "@context": "https://schema.org",
