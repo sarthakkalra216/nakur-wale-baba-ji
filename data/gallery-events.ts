@@ -17,11 +17,13 @@ export const galleryEventTitles: Record<string, GalleryEventTitle> = {
   "Nakud wale baba ji": { hi: "नकुड़ वाले बाबा जी", en: "Nakud Wale Baba Ji" },
   "Different events": { hi: "विभिन्न कार्यक्रम", en: "Different Events" },
   "Devi ji": { hi: "देवी जी", en: "Devi Ji" },
+  "Guru Purnima 2026": { hi: "गुरु पूर्णिमा 2026", en: "Guru Purnima 2026" },
 }
 
 export const galleryEventOrder: string[] = [
   "Nakud wale baba ji",
   "Devi ji",
+  "Guru Purnima 2026",
   "Different events",
 ]
 

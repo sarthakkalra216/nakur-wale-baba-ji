@@ -7,6 +7,8 @@ import { RamBackground } from "@/components/decor/SacredBackground"
 import { AmbientVideo } from "@/components/decor/AmbientVideo"
 import { TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
+import type { VideoSection } from "@/lib/media"
+import { slugifyId } from "@/lib/slug"
 
 export interface VideoItem {
   src: string
@@ -155,8 +157,9 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
   )
 }
 
-export default function VideoGallery({ videos }: { videos: VideoItem[] }) {
+export default function VideoGallery({ sections }: { sections: VideoSection[] }) {
   const { t, lang } = useSite()
+  const count = sections.reduce((n, s) => n + s.videos.length, 0)
   return (
     <section id="videos" className="relative py-16 sm:py-20 overflow-hidden">
       {/* Ambient video backdrop above the gallery — blends into page */}
@@ -206,23 +209,51 @@ export default function VideoGallery({ videos }: { videos: VideoItem[] }) {
           <motion.div variants={fadeUp} className="section-divider" />
         </motion.div>
 
-        {videos.length === 0 ? (
+        {count === 0 ? (
           <div className="flex flex-col items-center gap-3 py-20 text-muted-themed">
             <VideoOff size={36} />
             <p className="text-sm" lang={lang}>{t.videos.empty} <code>public/videos</code>.</p>
           </div>
         ) : (
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto"
-          >
-            {videos.map((v, i) => (
-              <VideoCard key={v.src} video={v} index={i} />
+          <div className="space-y-16 sm:space-y-20 max-w-6xl mx-auto">
+            {sections.map((section) => (
+              <div key={section.slug} id={slugifyId(section.slug)}>
+                {sections.length > 1 && (
+                  <motion.div
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-60px" }}
+                    variants={stagger}
+                    className="mb-6 sm:mb-8"
+                  >
+                    <motion.h3
+                      variants={fadeUp}
+                      className="font-serif text-xl sm:text-2xl font-bold text-heading"
+                      lang={lang}
+                    >
+                      {section.title[lang]}
+                    </motion.h3>
+                    <motion.div
+                      variants={fadeUp}
+                      className="mt-3 h-px w-full"
+                      style={{ background: "linear-gradient(90deg, var(--border-gold), transparent)" }}
+                    />
+                  </motion.div>
+                )}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  variants={stagger}
+                  className="columns-1 sm:columns-2 lg:columns-3 gap-4"
+                >
+                  {section.videos.map((v, i) => (
+                    <VideoCard key={v.src} video={v} index={i} />
+                  ))}
+                </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

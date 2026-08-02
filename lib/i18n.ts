@@ -62,6 +62,8 @@ const hi = {
     subtitle: "आश्रम में सत्संग, प्रवचन और उत्सव।",
     viewAll: "सभी कार्यक्रम देखें",
     watchVideo: "पूरा वीडियो देखें →",
+    viewPhotos: "तस्वीरें देखें",
+    viewVideos: "वीडियो देखें",
     scheduleTag: "नियमित कार्यक्रम — पंत विहार आश्रम",
     scheduleTime: "दैनिक आरती और सत्संग — प्रातः 7:00 एवं सायं 7:00 बजे",
     scheduleDesc:
@@ -275,6 +277,8 @@ const en: typeof hi = {
     subtitle: "Satsang, discourses and celebrations at the ashram.",
     viewAll: "View All Events",
     watchVideo: "Watch full video →",
+    viewPhotos: "View Photos",
+    viewVideos: "View Videos",
     scheduleTag: "Regular Schedule — Pant Vihar Ashram",
     scheduleTime: "Daily Aarti & Satsang — 7:00 AM & 7:00 PM",
     scheduleDesc:

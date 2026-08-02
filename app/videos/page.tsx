@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import VideoGallery from "@/components/sections/VideoGallery"
-import { getVideos } from "@/lib/media"
+import { getVideoSections } from "@/lib/media"
 
 export const metadata: Metadata = {
   title: "Videos | Nakur Wale Baba Ji",
@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function VideosPage() {
-  const videos = getVideos()
+  const sections = getVideoSections()
   return (
     <main className="pt-16">
-      <VideoGallery videos={videos} />
+      <VideoGallery sections={sections} />
     </main>
   )
 }

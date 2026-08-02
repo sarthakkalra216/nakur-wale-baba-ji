@@ -6,6 +6,9 @@ export interface AshramEvent {
   title: { hi: string; en: string }
   description: { hi: string; en: string }
   youtubeUrl: string
+  /** deep-links to this event's own section on /gallery and /videos, e.g. "/gallery#guru-purnima-2026" */
+  galleryUrl?: string
+  videosUrl?: string
 }
 
 export const events: AshramEvent[] = [
@@ -18,5 +21,7 @@ export const events: AshramEvent[] = [
       en: "A five-day Ram Katha discourse delivered by Sant Devi Sudiksha Saraswati Ji at Pant Vihar ashram, drawing devotees from across the region.",
     },
     youtubeUrl: "https://www.youtube.com/watch?v=sif52bqb5RY",
+    galleryUrl: "/gallery#guru-purnima-2026",
+    videosUrl: "/videos#guru-purnima-2026",
   },
 ]

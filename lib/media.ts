@@ -24,12 +24,14 @@ import {
   galleryImageCaptions,
   galleryImagePinLast,
 } from "@/data/gallery-events"
+import { videoEventOrder, videoEventTitles } from "@/data/video-events"
 
 const PUBLIC_DIR = join(process.cwd(), "public")
 
 const IMAGE_RE = /^photo.*\.(jpe?g|png|webp|avif)$/i
 const IMAGE_EXT_RE = /\.(jpe?g|png|webp|avif)$/i
 const VIDEO_RE = /^video.*\.(mp4|webm|mov|ogg)$/i
+const VIDEO_EXT_RE = /\.(mp4|webm|mov|ogg)$/i
 
 // "photo2" sorts before "photo10" (natural/numeric ordering)
 function naturalSort(a: string, b: string): number {
@@ -101,6 +103,7 @@ function humanizeSlug(slug: string): string {
     .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
+
 /**
  * Event-based gallery: the flat photo*.ext files directly in public/images/
  * form the "Nakur Wale Baba Ji" section; every subfolder is a separate event section.
@@ -160,7 +163,69 @@ export function getGalleryEvents(): GallerySection[] {
   return [...ordered, ...remaining]
 }
 
-/** All videos (video*). */
+/** All videos (video*), flat — kept for any callers that just want a flat list. */
 export function getVideos(): MediaFile[] {
   return scan("videos", "/videos", VIDEO_RE)
+}
+
+export interface VideoSection {
+  /** folder name under public/videos/, or "main" for the flat video*.ext files */
+  slug: string
+  /** bilingual title — from data/video-events.ts, or auto-formatted from the slug */
+  title: { hi: string; en: string }
+  videos: MediaFile[]
+}
+
+/**
+ * Event-based videos, same convention as getGalleryEvents(): the flat
+ * video*.ext files directly in public/videos/ form the "main" section;
+ * every subfolder is a separate event section.
+ */
+export function getVideoSections(): VideoSection[] {
+  const bySlug = new Map<string, VideoSection>()
+
+  const main = scan("videos", "/videos", VIDEO_RE)
+  if (main.length) {
+    const title = videoEventTitles["main"] ?? { hi: "पावन वीडियो", en: "Videos" }
+    bySlug.set("main", { slug: "main", title, videos: main })
+  }
+
+  const videosDir = join(PUBLIC_DIR, "videos")
+  let entries: import("fs").Dirent[] = []
+  try {
+    entries = readdirSync(videosDir, { withFileTypes: true })
+  } catch {
+    entries = []
+  }
+
+  const folders = entries
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .sort(naturalSort)
+
+  for (const folder of folders) {
+    const videos = scan(
+      `videos/${folder}`,
+      `/videos/${encodeURIComponent(folder)}`,
+      VIDEO_EXT_RE,
+      folder
+    )
+    if (!videos.length) continue
+    const title = videoEventTitles[folder] ?? {
+      hi: humanizeSlug(folder),
+      en: humanizeSlug(folder),
+    }
+    bySlug.set(folder, { slug: folder, title, videos })
+  }
+
+  const ordered: VideoSection[] = []
+  for (const slug of videoEventOrder) {
+    const section = bySlug.get(slug)
+    if (section) {
+      ordered.push(section)
+      bySlug.delete(slug)
+    }
+  }
+  const remaining = [...bySlug.values()].sort((a, b) => naturalSort(a.slug, b.slug))
+  return [...ordered, ...remaining]
 }

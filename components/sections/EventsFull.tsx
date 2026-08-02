@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 import { RamBackground, Lotus } from "@/components/decor/SacredBackground"
 import { ImageReveal, TiltCard } from "@/components/motion"
 import { useSite } from "@/components/providers/SiteProvider"
@@ -122,16 +123,38 @@ export default function EventsFull() {
                   <p className="text-sm leading-relaxed text-muted-themed" lang={lang}>
                     {event.description[lang]}
                   </p>
-                  <a
-                    href={event.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
-                    style={{ color: "var(--gold)" }}
-                    lang={lang}
-                  >
-                    {t.events.watchVideo}
-                  </a>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                    <a
+                      href={event.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
+                      style={{ color: "var(--gold)" }}
+                      lang={lang}
+                    >
+                      {t.events.watchVideo}
+                    </a>
+                    {event.galleryUrl && (
+                      <Link
+                        href={event.galleryUrl}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
+                        style={{ color: "var(--gold)" }}
+                        lang={lang}
+                      >
+                        {t.events.viewPhotos}
+                      </Link>
+                    )}
+                    {event.videosUrl && (
+                      <Link
+                        href={event.videosUrl}
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
+                        style={{ color: "var(--gold)" }}
+                        lang={lang}
+                      >
+                        {t.events.viewVideos}
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </TiltCard>
             </motion.div>

@@ -7,6 +7,7 @@ import { RamBackground } from "@/components/decor/SacredBackground"
 import { AmbientVideo } from "@/components/decor/AmbientVideo"
 import { useSite } from "@/components/providers/SiteProvider"
 import type { GallerySection } from "@/lib/media"
+import { slugifyId } from "@/lib/slug"
 
 const ALT = "Nakur Wale Baba Ji — sacred moment at the Nakur ashram"
 
@@ -120,7 +121,7 @@ export default function Gallery({ sections }: { sections: GallerySection[] }) {
         ) : (
           <div className="space-y-16 sm:space-y-20">
             {sectionsWithOffset.map(({ section, offset: sectionOffset }) => (
-              <div key={section.slug}>
+              <div key={section.slug} id={slugifyId(section.slug)}>
                 {/* Event heading */}
                 <motion.div
                   initial="hidden"

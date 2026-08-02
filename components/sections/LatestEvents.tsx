@@ -94,16 +94,38 @@ export default function LatestEvents() {
               <p className="text-sm leading-relaxed text-muted-themed" lang={lang}>
                 {latest.description[lang]}
               </p>
-              <a
-                href={latest.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold transition-colors group/link cursor-pointer"
-                style={{ color: "var(--gold)" }}
-                lang={lang}
-              >
-                {t.events.watchVideo}
-              </a>
+              <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                <a
+                  href={latest.youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors group/link cursor-pointer"
+                  style={{ color: "var(--gold)" }}
+                  lang={lang}
+                >
+                  {t.events.watchVideo}
+                </a>
+                {latest.galleryUrl && (
+                  <Link
+                    href={latest.galleryUrl}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
+                    style={{ color: "var(--gold)" }}
+                    lang={lang}
+                  >
+                    {t.events.viewPhotos}
+                  </Link>
+                )}
+                {latest.videosUrl && (
+                  <Link
+                    href={latest.videosUrl}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer"
+                    style={{ color: "var(--gold)" }}
+                    lang={lang}
+                  >
+                    {t.events.viewVideos}
+                  </Link>
+                )}
+              </div>
             </div>
           </TiltCard>
         </motion.div>
